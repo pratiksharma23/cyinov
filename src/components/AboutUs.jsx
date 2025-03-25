@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode, 
          FaHandshake, FaGlobe, FaStar, FaRocket } from 'react-icons/fa';
 import CountUp from 'react-countup';
@@ -315,13 +316,13 @@ const CallToAction = () => {
             enterprise seeking transformation, we offer the expertise, resources, and commitment 
             to help you achieve your business objectives.
           </p>
-          <a
-            href="#contact"
+          <Link
+            to="/contact"
             className="inline-flex items-center bg-white text-blue-600 font-bold py-4 px-8 rounded-full 
                      hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             Connect With Us Today
-          </a>
+          </Link>
         </div>
       </div>
     </section>
