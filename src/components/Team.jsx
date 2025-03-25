@@ -118,26 +118,43 @@ const Team = () => {
   ];
 
   return (
-    <div>
-      <div className="relative h-[50vh] mb-16">
-        <div 
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: `url(${teamHero})` }}
-        >
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-        </div>
-        <div className="relative h-full flex flex-col justify-center items-center text-white px-4 text-center">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Team</h1>
-          <p className="text-xl max-w-2xl">
-            Meet the experts behind Cyinov's success in transforming businesses
-          </p>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 pb-16">
+    <div className="py-16 bg-gray-50">
+      <div className="container mx-auto px-4">
+        <h2 className="text-4xl font-bold text-center mb-12">Our Team</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {teamMembers.map((member, index) => (
-            <TeamMember key={index} {...member} />
+            <div key={index} className="bg-white rounded-lg shadow-lg overflow-hidden">
+              <img 
+                src={member.image} 
+                alt={member.name} 
+                className="w-full h-64 object-cover"
+              />
+              <div className="p-6">
+                <h3 className="text-xl font-semibold mb-2">{member.name}</h3>
+                <p className="text-blue-600 mb-3">{member.position}</p>
+                <p className="text-gray-600 mb-4">{member.description}</p>
+                <div className="flex space-x-4">
+                  {member.social.linkedin && (
+                    <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" 
+                       className="text-gray-600 hover:text-blue-600">
+                      <FaLinkedin size={20} />
+                    </a>
+                  )}
+                  {member.social.twitter && (
+                    <a href={member.social.twitter} target="_blank" rel="noopener noreferrer"
+                       className="text-gray-600 hover:text-blue-600">
+                      <FaTwitter size={20} />
+                    </a>
+                  )}
+                  {member.social.email && (
+                    <a href={`mailto:${member.social.email}`}
+                       className="text-gray-600 hover:text-blue-600">
+                      <FaEnvelope size={20} />
+                    </a>
+                  )}
+                </div>
+              </div>
+            </div>
           ))}
         </div>
       </div>

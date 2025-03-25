@@ -6,12 +6,21 @@ import LegalCompliance from './components/services/LegalCompliance';
 import TaxAdvisory from './components/services/TaxAdvisory';
 import MarketResearch from './components/services/MarketResearch';
 import HumanCapital from './components/services/HumanCapital';
+import Hero from './components/Hero';
+import AboutUs from './components/AboutUs';
+import Team from './components/Team';
+import FAQ from './components/FAQ';
+import Contact from './components/Contact';
 
 function App() {
   return (
     <Layout>
       <Routes>
-        <Route path="/" element={<div>Home Page</div>} />
+        <Route path="/" element={<Hero />} />
+        <Route path="/about" element={<AboutUs />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/legal-compliance" element={<LegalCompliance />} />
         <Route path="/services/tax-advisory" element={<TaxAdvisory />} />

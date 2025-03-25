@@ -1,95 +1,86 @@
-import React from 'react';
-import Slider from 'react-slick';
+import React, { useState } from 'react';
 import testimonial1 from '../assets/testimonial1.jpg';
 import testimonial2 from '../assets/testimonial2.jpg';
 import testimonial3 from '../assets/testimonial3.jpg';
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-const TestimonialCard = ({ image, name, position, company, quote }) => (
-  <div className="px-4">
-    <div className="bg-white rounded-lg shadow-lg p-8 mx-2">
-      <div className="flex items-center mb-6">
-        <img 
-          src={image} 
-          alt={name} 
-          className="w-16 h-16 rounded-full object-cover mr-4"
-        />
-        <div>
-          <h3 className="text-xl font-bold text-gray-900">{name}</h3>
-          <p className="text-blue-600">{position}</p>
-          <p className="text-gray-600">{company}</p>
-        </div>
-      </div>
-      <p className="text-gray-700 italic">{quote}</p>
-    </div>
-  </div>
-);
+import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Testimonials = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+
   const testimonials = [
     {
+      id: 1,
+      name: "Robert Miller",
+      position: "CEO, Tech Solutions Inc.",
       image: testimonial1,
-      name: "Alex Thompson",
-      position: "CEO",
-      company: "Tech Innovations Inc.",
-      quote: "Cyinov's strategic guidance transformed our operations and helped us achieve unprecedented growth."
+      text: "Cyinov Consulting transformed our business operations. Their market research insights were invaluable in helping us expand into new markets."
     },
     {
+      id: 2,
+      name: "Jennifer Adams",
+      position: "CFO, Global Traders Ltd.",
       image: testimonial2,
-      name: "Maria Garcia",
-      position: "CFO",
-      company: "Global Solutions Ltd.",
-      quote: "Their tax advisory services saved us significant resources while ensuring complete compliance."
+      text: "The tax advisory services provided by Cyinov helped us optimize our financial structure and achieve significant savings."
     },
     {
+      id: 3,
+      name: "Marcus Chen",
+      position: "Director, Innovation Labs",
       image: testimonial3,
-      name: "James Wilson",
-      position: "HR Director",
-      company: "Future Enterprises",
-      quote: "The human capital management solutions provided by Cyinov revolutionized our workforce management."
+      text: "Their human capital management solutions helped us build a stronger, more efficient team. Highly recommended!"
     }
   ];
 
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 2,
-    slidesToScroll: 1,
-    autoplay: true,
-    autoplaySpeed: 5000,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
-        }
-      },
-      {
-        breakpoint: 768,
-        settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1
-        }
-      }
-    ]
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % testimonials.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
   return (
-    <section className="py-16 bg-gray-50">
+    <div className="bg-white py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-          What Our Clients Say
-        </h2>
-        <Slider {...settings}>
-          {testimonials.map((testimonial, index) => (
-            <TestimonialCard key={index} {...testimonial} />
-          ))}
-        </Slider>
+        <h2 className="text-4xl font-bold text-center mb-12">What Our Clients Say</h2>
+        <div className="relative max-w-4xl mx-auto">
+          <div className="relative">
+            <div className="flex items-center justify-center mb-8">
+              <img
+                src={testimonials[currentSlide].image}
+                alt={testimonials[currentSlide].name}
+                className="w-24 h-24 rounded-full object-cover"
+              />
+            </div>
+            <div className="text-center">
+              <FaQuoteLeft className="mx-auto text-4xl text-blue-600 mb-6" />
+              <p className="text-xl text-gray-600 mb-6">
+                {testimonials[currentSlide].text}
+              </p>
+              <h3 className="text-xl font-semibold text-gray-900">
+                {testimonials[currentSlide].name}
+              </h3>
+              <p className="text-blue-600">
+                {testimonials[currentSlide].position}
+              </p>
+            </div>
+          </div>
+          
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+          >
+            <FaChevronLeft className="text-gray-600" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+          >
+            <FaChevronRight className="text-gray-600" />
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 
