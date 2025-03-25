@@ -1,10 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode, 
-         FaHandshake, FaGlobe, FaStar, FaRocket } from 'react-icons/fa';
+         FaHandshake, FaGlobe, FaStar, FaRocket, FaUserTie, FaClipboardCheck } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
 import aboutHero from '../assets/about-hero.jpg';
+import missionImg from '../assets/vision.jpeg';
+import valuesImg from '../assets/team.jpeg';
+import approachImg from '../assets/company.jpeg';
+import techImg from '../assets/market.jpg';
+import industryImg from '../assets/legal.jpg';
+import whyUsImg from '../assets/tax.jpg';
 
 const AboutHero = () => {
   return (
@@ -33,39 +39,36 @@ const MissionVision = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid md:grid-cols-2 gap-12">
-          <div className="bg-blue-50 p-8 rounded-lg">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4">Our Mission</h2>
-            <p className="text-gray-700">
-              To revolutionize business consulting by providing integrated, technology-driven solutions 
-              that enable organizations to thrive in a rapidly evolving business landscape while maintaining 
-              the highest standards of compliance and operational excellence.
-            </p>
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission & Vision</h2>
+            <div className="mb-8">
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">Our Mission</h3>
+              <p className="text-gray-700 mb-6">
+                To revolutionize business consulting by providing integrated, technology-driven solutions 
+                that enable organizations to thrive in a rapidly evolving business landscape while maintaining 
+                the highest standards of compliance and operational excellence.
+              </p>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold text-blue-800 mb-4">Our Vision</h3>
+              <p className="text-gray-700">
+                To be the most trusted and innovative consulting partner for businesses across sectors, 
+                known for our transformative solutions and commitment to client success.
+              </p>
+            </div>
           </div>
-          <div className="bg-blue-50 p-8 rounded-lg">
-            <h2 className="text-2xl font-bold text-blue-800 mb-4">Our Vision</h2>
-            <p className="text-gray-700">
-              To be the most trusted and innovative consulting partner for businesses across sectors, 
-              known for our transformative solutions and commitment to client success.
-            </p>
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={missionImg} alt="Our Mission and Vision" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
+            </div>
           </div>
         </div>
       </div>
     </section>
   );
 };
-
-const CoreValue = ({ icon: Icon, title, description }) => (
-  <div className="flex items-start space-x-4 p-6 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-    <div className="text-blue-600 flex-shrink-0">
-      <Icon className="w-8 h-8" />
-    </div>
-    <div>
-      <h3 className="text-xl font-bold text-gray-800 mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-    </div>
-  </div>
-);
 
 const CoreValues = () => {
   const values = [
@@ -99,11 +102,29 @@ const CoreValues = () => {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Core Values</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {values.map((value, index) => (
-            <CoreValue key={index} {...value} />
-          ))}
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={valuesImg} alt="Our Core Values" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-l from-blue-600/30 to-transparent"></div>
+            </div>
+          </div>
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Core Values</h2>
+            <div className="space-y-4">
+              {values.map((value, index) => (
+                <div key={index} className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="text-blue-600 flex-shrink-0">
+                    <value.icon className="w-6 h-6" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">{value.title}</h3>
+                    <p className="text-gray-600">{value.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -137,19 +158,29 @@ const ApproachSection = () => {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Our Approach</h2>
-        <div className="max-w-4xl mx-auto">
-          {approaches.map((approach, index) => (
-            <div key={index} className="flex items-center mb-8">
-              <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-6">
-                {index + 1}
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-gray-800 mb-2">{approach.title}</h3>
-                <p className="text-gray-600">{approach.description}</p>
-              </div>
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Approach</h2>
+            <div className="space-y-6">
+              {approaches.map((approach, index) => (
+                <div key={index} className="flex items-center">
+                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-6 flex-shrink-0">
+                    {index + 1}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-gray-800 mb-2">{approach.title}</h3>
+                    <p className="text-gray-600">{approach.description}</p>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          </div>
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={approachImg} alt="Our Approach" className="w-full h-[500px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -166,30 +197,31 @@ const TechnologyIntegration = () => {
   ];
 
   return (
-    <section className="py-16 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Technology Integration</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          {technologies.map((tech, index) => (
-            <div key={index} className="flex items-center space-x-4 bg-white/10 p-6 rounded-lg">
-              <FaLaptopCode className="w-8 h-8 flex-shrink-0" />
-              <span className="text-lg">{tech}</span>
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={techImg} alt="Technology Integration" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-l from-blue-600/30 to-transparent"></div>
             </div>
-          ))}
+          </div>
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Technology Integration</h2>
+            <div className="grid grid-cols-1 gap-4">
+              {technologies.map((tech, index) => (
+                <div key={index} className="flex items-center space-x-4 bg-blue-600 text-white p-4 rounded-lg">
+                  <FaLaptopCode className="w-6 h-6 flex-shrink-0" />
+                  <span className="text-lg">{tech}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
   );
 };
-
-const Industry = ({ name }) => (
-  <div className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-    <div className="text-blue-600 mb-2">
-      <FaCogs className="w-6 h-6" />
-    </div>
-    <h3 className="font-semibold text-gray-800">{name}</h3>
-  </div>
-);
 
 const IndustryExpertise = () => {
   const industries = [
@@ -203,12 +235,129 @@ const IndustryExpertise = () => {
   ];
 
   return (
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Industry Expertise</h2>
+            <div className="grid grid-cols-2 gap-4">
+              {industries.map((industry, index) => (
+                <div key={index} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="text-blue-600 mb-2">
+                    <FaCogs className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-semibold text-gray-800">{industry}</h3>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={industryImg} alt="Industry Expertise" className="w-full h-[500px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ClientSuccessCommitment = () => {
+  const commitments = [
+    "Dedicated Account Managers",
+    "24/7 Support System",
+    "Regular Progress Reviews",
+    "Quarterly Strategy Sessions",
+    "Annual Performance Assessments"
+  ];
+
+  return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Industry Expertise</h2>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-          {industries.map((industry, index) => (
-            <Industry key={index} name={industry} />
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={missionImg} alt="Client Success Commitment" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-l from-blue-600/30 to-transparent"></div>
+            </div>
+          </div>
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Client Success Commitment</h2>
+            <div className="space-y-4">
+              {commitments.map((commitment, index) => (
+                <div key={index} className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md">
+                  <div className="bg-blue-600 rounded-full p-2">
+                    <FaUserTie className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-lg font-medium text-gray-800">{commitment}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const QualityAssurance = () => {
+  const qualityProcesses = [
+    "Rigorous Quality Control Processes",
+    "Regular Service Audits",
+    "Client Feedback Integration",
+    "Continuous Service Enhancement",
+    "Professional Standards Compliance"
+  ];
+
+  return (
+    <section className="py-16 bg-white">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Quality Assurance</h2>
+            <p className="text-lg text-gray-700 mb-8">Our quality management system ensures:</p>
+            <div className="space-y-4">
+              {qualityProcesses.map((process, index) => (
+                <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
+                  <div className="bg-blue-600 rounded-full p-2">
+                    <FaClipboardCheck className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-lg font-medium text-gray-800">{process}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={approachImg} alt="Quality Assurance" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const GlobalStandards = () => {
+  const standards = [
+    "ISO-aligned Processes",
+    "Industry-specific Frameworks",
+    "Global Compliance Standards",
+    "Sustainable Business Practices"
+  ];
+
+  return (
+    <section className="py-16 bg-gray-900 text-white">
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12">Global Best Practices</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {standards.map((standard, index) => (
+            <div key={index} className="flex items-center space-x-4 bg-gray-800 p-6 rounded-lg">
+              <FaGlobe className="w-8 h-8 text-blue-400 flex-shrink-0" />
+              <span className="text-lg">{standard}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -278,25 +427,38 @@ const WhyChooseUs = () => {
   );
 };
 
-const GlobalStandards = () => {
-  const standards = [
-    "ISO-aligned Processes",
-    "Industry-specific Frameworks",
-    "Global Compliance Standards",
-    "Sustainable Business Practices"
+const FutureReady = () => {
+  const futureStrategies = [
+    "Embracing Emerging Technologies",
+    "Sustainable Business Practices",
+    "Global Market Expansion",
+    "Continuous Learning and Development",
+    "Client-Centric Innovations"
   ];
 
   return (
-    <section className="py-16 bg-gray-900 text-white">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center mb-12">Global Best Practices</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {standards.map((standard, index) => (
-            <div key={index} className="flex items-center space-x-4 bg-gray-800 p-6 rounded-lg">
-              <FaGlobe className="w-8 h-8 text-blue-400 flex-shrink-0" />
-              <span className="text-lg">{standard}</span>
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
+          <div className="lg:w-1/2">
+            <div className="relative rounded-xl overflow-hidden shadow-2xl">
+              <img src={whyUsImg} alt="Future Ready" className="w-full h-[400px] object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-l from-blue-600/30 to-transparent"></div>
             </div>
-          ))}
+          </div>
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-900 mb-8">Future Ready</h2>
+            <div className="space-y-4">
+              {futureStrategies.map((strategy, index) => (
+                <div key={index} className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md">
+                  <div className="bg-blue-600 rounded-full p-2">
+                    <FaClipboardCheck className="w-5 h-5 text-white" />
+                  </div>
+                  <span className="text-lg font-medium text-gray-800">{strategy}</span>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -338,8 +500,11 @@ const AboutUs = () => {
       <ApproachSection />
       <TechnologyIntegration />
       <IndustryExpertise />
-      <WhyChooseUs />
+      <ClientSuccessCommitment />
+      <QualityAssurance />
       <GlobalStandards />
+      <WhyChooseUs />
+      <FutureReady />
       <CallToAction />
     </div>
   );
