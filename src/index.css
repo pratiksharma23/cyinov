@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Header styles */
+.header {
+  @apply sticky top-0 bg-white shadow-md z-50;
+}
+.header-top {
+  @apply flex justify-between items-center px-4 py-2 bg-gray-100 text-sm;
+}
+.header-top .left {
+  @apply flex space-x-4;
+}
+.header-top .right {
+  @apply flex space-x-4;
+}
+.header-bottom {
+  @apply flex justify-between items-center px-6 py-4;
+}
+.nav-links {
+  @apply flex items-center space-x-6;
+}
+.nav-links a {
+  @apply text-gray-700 hover:text-blue-500 transition-colors duration-200 text-sm font-medium;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    @apply hidden;
+  }
+  .header-bottom {
+    @apply relative;
+  }
+}
+
+/* Hero styles */
+.bg-fixed {
+  background-attachment: fixed;
+}
+
+@media (max-width: 768px) {
+  .bg-fixed {
+    background-attachment: scroll;
+  }
+}
+
+/* Services styles */
+.service-card {
+  @apply relative overflow-hidden border border-transparent;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.service-card::after {
+  content: '';
+  @apply absolute inset-0 opacity-0 transition-opacity duration-300 ease-in-out
+         bg-gradient-to-br from-blue-50 to-transparent;
+}
+
+.service-card:hover::after {
+  @apply opacity-100;
+}
+
+.service-card > * {
+  @apply relative z-10;
+}
