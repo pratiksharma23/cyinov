@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { HiOutlineScale, HiOutlineChartBar } from 'react-icons/hi';
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri';
@@ -7,20 +7,30 @@ import { FaArrowRight } from 'react-icons/fa';
 import Testimonials from './Testimonials';
 
 // Import background images
-import heroBg from '../assets/hero-bg.jpeg';
-import teamBg from '../assets/team-hero.jpg';
-import aboutBg from '../assets/about-hero.jpg';
+import heroBg from '../assets/hero-bg.jpg';
+import teamBg from '../assets/team.jpeg';
+import companyBg from '../assets/company.jpeg';
+import visionBg from '../assets/vision.jpeg';
+import servicesBg from '../assets/services.jpg';
 import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';
 import humanCapitalBg from '../assets/hcm.jpg';
+
+const defaultHeroContent = {
+  id: 'default',
+  title: "Welcome to Cyinov Consulting",
+  description: "Empowering businesses with innovative solutions and strategic excellence",
+  background: heroBg,
+  buttonText: "Explore Our Services"
+};
 
 const heroContent = [
   {
     id: 'company',
     title: "Leading Business Transformation",
     description: "Cyinov Consulting - Your trusted partner in navigating the complexities of modern business landscape",
-    background: aboutBg,
+    background: companyBg,
     icon: BsBuilding,
     buttonText: "Our Company"
   },
@@ -36,7 +46,7 @@ const heroContent = [
     id: 'vision',
     title: "Shaping Tomorrow's Success",
     description: "Driving innovation and excellence through strategic partnerships and forward-thinking solutions",
-    background: heroBg,
+    background: visionBg,
     icon: BsEye,
     buttonText: "Our Vision"
   },
@@ -44,25 +54,16 @@ const heroContent = [
     id: 'services',
     title: "Comprehensive Business Solutions",
     description: "Tailored services to meet your unique business challenges and opportunities",
-    background: marketBg,
+    background: servicesBg,
     icon: HiOutlineChartBar,
     buttonText: "Our Services"
   }
 ];
 
 const Hero = () => {
-  const [activeSection, setActiveSection] = useState(0);
+  const [activeSection, setActiveSection] = useState('default');
   const [isTransitioning, setIsTransitioning] = useState(false);
-  const [prevSection, setPrevSection] = useState(0);
-
-  const handleSectionChange = (index) => {
-    if (index !== activeSection) {
-      setIsTransitioning(true);
-      setPrevSection(activeSection);
-      setActiveSection(index);
-      setTimeout(() => setIsTransitioning(false), 500);
-    }
-  };
+  const [prevSection, setPrevSection] = useState('default');
 
   const services = [
     {
@@ -95,21 +96,52 @@ const Hero = () => {
     }
   ];
 
+  const handleSectionChange = (sectionId) => {
+    if (sectionId !== activeSection) {
+      setIsTransitioning(true);
+      setPrevSection(activeSection);
+      setActiveSection(sectionId);
+      setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const getCurrentContent = () => {
+    if (activeSection === 'default') return defaultHeroContent;
+    return heroContent.find(content => content.id === activeSection) || defaultHeroContent;
+  };
+
+  const currentContent = getCurrentContent();
+
   return (
     <>
       <div className="relative h-screen">
-        {/* Background Images with Transition */}
-        {heroContent.map((content, index) => (
+        {/* Default Background Image */}
+        <div
+          className={`absolute inset-0 transition-opacity duration-700 ease-in-out
+            ${activeSection === 'default' ? 'opacity-100' : 'opacity-0'}`}
+          style={{
+            backgroundImage: `url(${defaultHeroContent.background})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            zIndex: activeSection === 'default' ? 1 : 0
+          }}
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 
+            transition-opacity duration-700" />
+        </div>
+
+        {/* Section Background Images */}
+        {heroContent.map((content) => (
           <div
             key={content.id}
             className={`absolute inset-0 transition-opacity duration-700 ease-in-out
-              ${index === activeSection ? 'opacity-100' : 'opacity-0'}`}
+              ${content.id === activeSection ? 'opacity-100' : 'opacity-0'}`}
             style={{
               backgroundImage: `url(${content.background})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
-              zIndex: index === activeSection ? 1 : 
-                     index === prevSection ? 0 : -1
+              zIndex: content.id === activeSection ? 1 : 
+                     content.id === prevSection ? 0 : -1
             }}
           >
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 
@@ -124,11 +156,11 @@ const Hero = () => {
             <div className="text-center mt-32">
               <h1 className={`text-5xl md:text-6xl font-bold text-white mb-6 transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
-                {heroContent[activeSection].title}
+                {currentContent.title}
               </h1>
               <p className={`text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
-                {heroContent[activeSection].description}
+                {currentContent.description}
               </p>
               <Link
                 to="/contact"
@@ -142,20 +174,20 @@ const Hero = () => {
 
             {/* Navigation Buttons */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-auto">
-              {heroContent.map((content, index) => (
+              {heroContent.map((content) => (
                 <button
                   key={content.id}
-                  onClick={() => handleSectionChange(index)}
+                  onClick={() => handleSectionChange(content.id)}
                   className={`group p-4 rounded-lg transition-all duration-300 backdrop-blur-sm
-                    ${index === activeSection 
+                    ${content.id === activeSection 
                       ? 'bg-white/20 border-b-2 border-blue-500' 
                       : 'bg-black/40 hover:bg-white/10'}`}
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <content.icon className={`text-2xl 
-                      ${index === activeSection ? 'text-blue-300' : 'text-gray-300'}`} />
+                      ${content.id === activeSection ? 'text-blue-300' : 'text-gray-300'}`} />
                     <span className={`text-sm md:text-base font-medium 
-                      ${index === activeSection ? 'text-white' : 'text-gray-300'}`}>
+                      ${content.id === activeSection ? 'text-white' : 'text-gray-300'}`}>
                       {content.buttonText}
                     </span>
                   </div>
