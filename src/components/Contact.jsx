@@ -44,15 +44,15 @@ const Contact = () => {
   };
 
   return (
-    <div className="bg-gray-50 py-16">
-      <ToastContainer />
+    <div className="bg-gray-900 py-16">
+      <ToastContainer theme="dark" />
       <div className="container mx-auto px-4">
-        <h1 className="text-4xl font-bold text-center mb-12">Contact Us</h1>
+        <h1 className="text-4xl font-bold text-center mb-12 text-white">Contact Us</h1>
         
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-semibold mb-6">Send us a Message</h2>
+          <div className="bg-gray-800 rounded-lg shadow-lg shadow-black/20 p-8 border border-gray-700">
+            <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Send us a Message</h2>
             <Formik
               initialValues={{
                 name: '',
@@ -67,72 +67,72 @@ const Contact = () => {
               {({ isSubmitting, touched, errors }) => (
                 <Form className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-gray-700 mb-2">Full Name</label>
+                    <label htmlFor="name" className="block text-gray-200 mb-2">Full Name</label>
                     <Field
                       type="text"
                       id="name"
                       name="name"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent
-                        ${touched.name && errors.name ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full px-4 py-2 rounded-lg bg-gray-700 border focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 placeholder-gray-400
+                        ${touched.name && errors.name ? 'border-red-500' : 'border-gray-600'}`}
                     />
-                    <ErrorMessage name="name" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage name="name" component="div" className="text-red-400 text-sm mt-1" />
                   </div>
                   
                   <div>
-                    <label htmlFor="email" className="block text-gray-700 mb-2">Email Address</label>
+                    <label htmlFor="email" className="block text-gray-200 mb-2">Email Address</label>
                     <Field
                       type="email"
                       id="email"
                       name="email"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent
-                        ${touched.email && errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full px-4 py-2 rounded-lg bg-gray-700 border focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 placeholder-gray-400
+                        ${touched.email && errors.email ? 'border-red-500' : 'border-gray-600'}`}
                     />
-                    <ErrorMessage name="email" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage name="email" component="div" className="text-red-400 text-sm mt-1" />
                   </div>
                   
                   <div>
-                    <label htmlFor="phone" className="block text-gray-700 mb-2">Phone Number (optional)</label>
+                    <label htmlFor="phone" className="block text-gray-200 mb-2">Phone Number (optional)</label>
                     <Field
                       type="tel"
                       id="phone"
                       name="phone"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent
-                        ${touched.phone && errors.phone ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full px-4 py-2 rounded-lg bg-gray-700 border focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 placeholder-gray-400
+                        ${touched.phone && errors.phone ? 'border-red-500' : 'border-gray-600'}`}
                     />
-                    <ErrorMessage name="phone" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage name="phone" component="div" className="text-red-400 text-sm mt-1" />
                   </div>
                   
                   <div>
-                    <label htmlFor="subject" className="block text-gray-700 mb-2">Subject</label>
+                    <label htmlFor="subject" className="block text-gray-200 mb-2">Subject</label>
                     <Field
                       type="text"
                       id="subject"
                       name="subject"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent
-                        ${touched.subject && errors.subject ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full px-4 py-2 rounded-lg bg-gray-700 border focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 placeholder-gray-400
+                        ${touched.subject && errors.subject ? 'border-red-500' : 'border-gray-600'}`}
                     />
-                    <ErrorMessage name="subject" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage name="subject" component="div" className="text-red-400 text-sm mt-1" />
                   </div>
                   
                   <div>
-                    <label htmlFor="message" className="block text-gray-700 mb-2">Message</label>
+                    <label htmlFor="message" className="block text-gray-200 mb-2">Message</label>
                     <Field
                       as="textarea"
                       id="message"
                       name="message"
                       rows="4"
-                      className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-600 focus:border-transparent
-                        ${touched.message && errors.message ? 'border-red-500' : 'border-gray-300'}`}
+                      className={`w-full px-4 py-2 rounded-lg bg-gray-700 border focus:ring-2 focus:ring-indigo-500 focus:border-transparent text-gray-100 placeholder-gray-400
+                        ${touched.message && errors.message ? 'border-red-500' : 'border-gray-600'}`}
                     />
-                    <ErrorMessage name="message" component="div" className="text-red-500 text-sm mt-1" />
+                    <ErrorMessage name="message" component="div" className="text-red-400 text-sm mt-1" />
                   </div>
                   
                   <button
                     type="submit"
                     disabled={isSubmitting}
-                    className={`w-full bg-blue-600 text-white py-3 px-6 rounded-lg 
-                      ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-700'} 
-                      transition-colors duration-300`}
+                    className={`w-full bg-indigo-600 text-white py-3 px-6 rounded-lg 
+                      ${isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-indigo-700'} 
+                      transition-colors duration-300 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-800`}
                   >
                     {isSubmitting ? 'Sending...' : 'Send Message'}
                   </button>
@@ -143,46 +143,46 @@ const Contact = () => {
           
           {/* Contact Information */}
           <div className="space-y-8">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6">Contact Information</h2>
+            <div className="bg-gray-800 rounded-lg shadow-lg shadow-black/20 p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Contact Information</h2>
               <div className="space-y-4">
                 <div className="flex items-start space-x-4">
-                  <FaMapMarkerAlt className="text-blue-600 text-xl mt-1" />
+                  <FaMapMarkerAlt className="text-indigo-400 text-xl mt-1" />
                   <div>
-                    <h3 className="font-semibold">Office Address</h3>
-                    <p className="text-gray-600">123 Business Avenue<br />Suite 456<br />Mumbai, Maharashtra 400001</p>
+                    <h3 className="font-semibold text-gray-100">Office Address</h3>
+                    <p className="text-gray-300">123 Business Avenue<br />Suite 456<br />Mumbai, Maharashtra 400001</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-4">
-                  <FaPhone className="text-blue-600 text-xl" />
+                  <FaPhone className="text-indigo-400 text-xl" />
                   <div>
-                    <h3 className="font-semibold">Phone</h3>
-                    <p className="text-gray-600">+91 (022) 1234-5678</p>
+                    <h3 className="font-semibold text-gray-100">Phone</h3>
+                    <p className="text-gray-300">+91 (022) 1234-5678</p>
                   </div>
                 </div>
                 
                 <div className="flex items-center space-x-4">
-                  <FaEnvelope className="text-blue-600 text-xl" />
+                  <FaEnvelope className="text-indigo-400 text-xl" />
                   <div>
-                    <h3 className="font-semibold">Email</h3>
-                    <p className="text-gray-600">info@cyinov.com</p>
+                    <h3 className="font-semibold text-gray-100">Email</h3>
+                    <p className="text-gray-300">info@cyinov.com</p>
                   </div>
                 </div>
               </div>
             </div>
             
             {/* Social Media */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-semibold mb-6">Connect With Us</h2>
+            <div className="bg-gray-800 rounded-lg shadow-lg shadow-black/20 p-8 border border-gray-700">
+              <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Connect With Us</h2>
               <div className="flex space-x-6">
-                <a href="https://linkedin.com/company/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                <a href="https://linkedin.com/company/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
                   <FaLinkedin size={24} />
                 </a>
-                <a href="https://twitter.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-400">
+                <a href="https://twitter.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
                   <FaTwitter size={24} />
                 </a>
-                <a href="https://facebook.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600">
+                <a href="https://facebook.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
                   <FaFacebook size={24} />
                 </a>
               </div>

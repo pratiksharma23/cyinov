@@ -40,27 +40,27 @@ const Testimonials = () => {
   };
 
   return (
-    <div className="bg-white py-16">
+    <div className="bg-gray-900 py-16">
       <div className="container mx-auto px-4">
-        <h2 className="text-4xl font-bold text-center mb-12">What Our Clients Say</h2>
+        <h2 className="text-4xl font-bold text-center mb-12 text-gray-100">What Our Clients Say</h2>
         <div className="relative max-w-4xl mx-auto">
           <div className="relative">
             <div className="flex items-center justify-center mb-8">
               <img
                 src={testimonials[currentSlide].image}
                 alt={testimonials[currentSlide].name}
-                className="w-24 h-24 rounded-full object-cover"
+                className="w-24 h-24 rounded-full object-cover border-2 border-blue-400"
               />
             </div>
             <div className="text-center">
-              <FaQuoteLeft className="mx-auto text-4xl text-blue-600 mb-6" />
-              <p className="text-xl text-gray-600 mb-6">
+              <FaQuoteLeft className="mx-auto text-4xl text-blue-400 mb-6" />
+              <p className="text-xl text-gray-300 mb-6">
                 {testimonials[currentSlide].text}
               </p>
-              <h3 className="text-xl font-semibold text-gray-900">
+              <h3 className="text-xl font-semibold text-gray-100">
                 {testimonials[currentSlide].name}
               </h3>
-              <p className="text-blue-600">
+              <p className="text-blue-400">
                 {testimonials[currentSlide].position}
               </p>
             </div>
@@ -68,15 +68,15 @@ const Testimonials = () => {
           
           <button
             onClick={prevSlide}
-            className="absolute left-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+            className="absolute left-0 top-1/2 -translate-y-1/2 bg-gray-800 p-2 rounded-full shadow-lg hover:bg-gray-700 transition-colors"
           >
-            <FaChevronLeft className="text-gray-600" />
+            <FaChevronLeft className="text-gray-300" />
           </button>
           <button
             onClick={nextSlide}
-            className="absolute right-0 top-1/2 -translate-y-1/2 bg-white p-2 rounded-full shadow-lg hover:bg-gray-100"
+            className="absolute right-0 top-1/2 -translate-y-1/2 bg-gray-800 p-2 rounded-full shadow-lg hover:bg-gray-700 transition-colors"
           >
-            <FaChevronRight className="text-gray-600" />
+            <FaChevronRight className="text-gray-300" />
           </button>
         </div>
       </div>

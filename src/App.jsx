@@ -6,6 +6,7 @@ import LegalCompliance from './components/services/LegalCompliance';
 import TaxAdvisory from './components/services/TaxAdvisory';
 import MarketResearch from './components/services/MarketResearch';
 import HumanCapital from './components/services/HumanCapital';
+import TrademarkRegistration from './components/services/TrademarkRegistration';
 import Hero from './components/Hero';
 import AboutUs from './components/AboutUs';
 import Team from './components/Team';
@@ -26,6 +27,7 @@ function App() {
         <Route path="/services/tax-advisory" element={<TaxAdvisory />} />
         <Route path="/services/market-research" element={<MarketResearch />} />
         <Route path="/services/human-capital" element={<HumanCapital />} />
+        <Route path="/services/legal-compliance/trademark-registration" element={<TrademarkRegistration />} />
       </Routes>
     </Layout>
   );

@@ -4,7 +4,7 @@ import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode,
          FaHandshake, FaGlobe, FaStar, FaRocket, FaUserTie, FaClipboardCheck } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
-import aboutHero from '../assets/about-hero.jpg';
+import aboutHero from '../assets/about-hero.jpeg';
 import missionImg from '../assets/vision.jpeg';
 import valuesImg from '../assets/team.jpeg';
 import approachImg from '../assets/company.jpeg';
@@ -16,14 +16,14 @@ const AboutHero = () => {
   return (
     <section className="relative h-[60vh] w-full overflow-hidden">
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
+        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
         style={{
           backgroundImage: `url(${aboutHero})`,
         }}
       ></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-black/50"></div>
+      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50"></div>
       
-      <div className="relative h-full flex flex-col justify-center items-center text-white px-4 text-center">
+      <div className="relative h-full flex flex-col justify-center items-center text-gray-100 px-4 text-center">
         <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight max-w-4xl">
           Transforming Business Landscapes Through Strategic Excellence
         </h1>
@@ -37,22 +37,22 @@ const AboutHero = () => {
 
 const MissionVision = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Our Mission & Vision</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-4">Our Mission & Vision</h2>
             <div className="mb-8">
-              <h3 className="text-2xl font-bold text-blue-800 mb-4">Our Mission</h3>
-              <p className="text-gray-700 mb-6">
+              <h3 className="text-2xl font-bold text-blue-400 mb-4">Our Mission</h3>
+              <p className="text-gray-300 mb-6">
                 To revolutionize business consulting by providing integrated, technology-driven solutions 
                 that enable organizations to thrive in a rapidly evolving business landscape while maintaining 
                 the highest standards of compliance and operational excellence.
               </p>
             </div>
             <div>
-              <h3 className="text-2xl font-bold text-blue-800 mb-4">Our Vision</h3>
-              <p className="text-gray-700">
+              <h3 className="text-2xl font-bold text-blue-400 mb-4">Our Vision</h3>
+              <p className="text-gray-300">
                 To be the most trusted and innovative consulting partner for businesses across sectors, 
                 known for our transformative solutions and commitment to client success.
               </p>
@@ -100,7 +100,7 @@ const CoreValues = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
@@ -110,16 +110,16 @@ const CoreValues = () => {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Core Values</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Core Values</h2>
             <div className="space-y-4">
               {values.map((value, index) => (
-                <div key={index} className="flex items-start space-x-4 p-4 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="text-blue-600 flex-shrink-0">
+                <div key={index} className="flex items-start space-x-4 p-4 bg-gray-900 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="text-blue-400 flex-shrink-0">
                     <value.icon className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{value.title}</h3>
-                    <p className="text-gray-600">{value.description}</p>
+                    <h3 className="text-xl font-bold text-gray-100 mb-2">{value.title}</h3>
+                    <p className="text-gray-300">{value.description}</p>
                   </div>
                 </div>
               ))}
@@ -156,20 +156,20 @@ const ApproachSection = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Our Approach</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Our Approach</h2>
             <div className="space-y-6">
               {approaches.map((approach, index) => (
                 <div key={index} className="flex items-center">
-                  <div className="w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center text-white font-bold mr-6 flex-shrink-0">
+                  <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-gray-900 font-bold mr-6 flex-shrink-0">
                     {index + 1}
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-2">{approach.title}</h3>
-                    <p className="text-gray-600">{approach.description}</p>
+                    <h3 className="text-xl font-bold text-gray-100 mb-2">{approach.title}</h3>
+                    <p className="text-gray-300">{approach.description}</p>
                   </div>
                 </div>
               ))}
@@ -197,7 +197,7 @@ const TechnologyIntegration = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
@@ -207,10 +207,10 @@ const TechnologyIntegration = () => {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Technology Integration</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Technology Integration</h2>
             <div className="grid grid-cols-1 gap-4">
               {technologies.map((tech, index) => (
-                <div key={index} className="flex items-center space-x-4 bg-blue-600 text-white p-4 rounded-lg">
+                <div key={index} className="flex items-center space-x-4 bg-blue-600 text-gray-100 p-4 rounded-lg">
                   <FaLaptopCode className="w-6 h-6 flex-shrink-0" />
                   <span className="text-lg">{tech}</span>
                 </div>
@@ -235,18 +235,18 @@ const IndustryExpertise = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Industry Expertise</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Industry Expertise</h2>
             <div className="grid grid-cols-2 gap-4">
               {industries.map((industry, index) => (
-                <div key={index} className="bg-white p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
-                  <div className="text-blue-600 mb-2">
+                <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300">
+                  <div className="text-blue-400 mb-2">
                     <FaCogs className="w-6 h-6" />
                   </div>
-                  <h3 className="font-semibold text-gray-800">{industry}</h3>
+                  <h3 className="font-semibold text-gray-100">{industry}</h3>
                 </div>
               ))}
             </div>
@@ -273,7 +273,7 @@ const ClientSuccessCommitment = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
@@ -283,14 +283,14 @@ const ClientSuccessCommitment = () => {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Client Success Commitment</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Client Success Commitment</h2>
             <div className="space-y-4">
               {commitments.map((commitment, index) => (
-                <div key={index} className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md">
-                  <div className="bg-blue-600 rounded-full p-2">
-                    <FaUserTie className="w-5 h-5 text-white" />
+                <div key={index} className="flex items-center space-x-4 p-4 bg-gray-900 rounded-lg shadow-md">
+                  <div className="bg-blue-400 rounded-full p-2">
+                    <FaUserTie className="w-5 h-5 text-gray-900" />
                   </div>
-                  <span className="text-lg font-medium text-gray-800">{commitment}</span>
+                  <span className="text-lg font-medium text-gray-100">{commitment}</span>
                 </div>
               ))}
             </div>
@@ -311,19 +311,19 @@ const QualityAssurance = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="flex flex-col lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Quality Assurance</h2>
-            <p className="text-lg text-gray-700 mb-8">Our quality management system ensures:</p>
+            <h2 className="text-3xl font-bold text-gray-100 mb-4">Quality Assurance</h2>
+            <p className="text-lg text-gray-300 mb-8">Our quality management system ensures:</p>
             <div className="space-y-4">
               {qualityProcesses.map((process, index) => (
-                <div key={index} className="flex items-center space-x-4 p-4 bg-gray-50 rounded-lg shadow-md">
-                  <div className="bg-blue-600 rounded-full p-2">
-                    <FaClipboardCheck className="w-5 h-5 text-white" />
+                <div key={index} className="flex items-center space-x-4 p-4 bg-gray-800 rounded-lg shadow-md">
+                  <div className="bg-blue-400 rounded-full p-2">
+                    <FaClipboardCheck className="w-5 h-5 text-gray-900" />
                   </div>
-                  <span className="text-lg font-medium text-gray-800">{process}</span>
+                  <span className="text-lg font-medium text-gray-100">{process}</span>
                 </div>
               ))}
             </div>
@@ -349,7 +349,7 @@ const GlobalStandards = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-900 text-white">
+    <section className="py-16 bg-gray-900 text-gray-100">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl font-bold text-center mb-12">Global Best Practices</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -402,20 +402,20 @@ const WhyChooseUs = () => {
   ];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-gray-900">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
+        <h2 className="text-3xl font-bold text-center text-gray-100 mb-12">
           Why Partner with Cyinov Consulting?
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {reasons.map((reason, index) => (
-            <div key={index} className="bg-gray-50 p-6 rounded-lg">
-              <h3 className="text-xl font-bold text-blue-600 mb-4">{reason.title}</h3>
+            <div key={index} className="bg-gray-800 p-6 rounded-lg">
+              <h3 className="text-xl font-bold text-blue-400 mb-4">{reason.title}</h3>
               <ul className="space-y-3">
                 {reason.points.map((point, idx) => (
                   <li key={idx} className="flex items-start space-x-2">
                     <FaCheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                    <span className="text-gray-700">{point}</span>
+                    <span className="text-gray-300">{point}</span>
                   </li>
                 ))}
               </ul>
@@ -437,7 +437,7 @@ const FutureReady = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="py-16 bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
@@ -447,14 +447,14 @@ const FutureReady = () => {
             </div>
           </div>
           <div className="lg:w-1/2">
-            <h2 className="text-3xl font-bold text-gray-900 mb-8">Future Ready</h2>
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Future Ready</h2>
             <div className="space-y-4">
               {futureStrategies.map((strategy, index) => (
-                <div key={index} className="flex items-center space-x-4 p-4 bg-white rounded-lg shadow-md">
-                  <div className="bg-blue-600 rounded-full p-2">
-                    <FaClipboardCheck className="w-5 h-5 text-white" />
+                <div key={index} className="flex items-center space-x-4 p-4 bg-gray-900 rounded-lg shadow-md">
+                  <div className="bg-blue-400 rounded-full p-2">
+                    <FaClipboardCheck className="w-5 h-5 text-gray-900" />
                   </div>
-                  <span className="text-lg font-medium text-gray-800">{strategy}</span>
+                  <span className="text-lg font-medium text-gray-100">{strategy}</span>
                 </div>
               ))}
             </div>
@@ -467,21 +467,21 @@ const FutureReady = () => {
 
 const CallToAction = () => {
   return (
-    <section className="py-20 bg-gradient-to-r from-blue-600 to-blue-800">
+    <section className="py-20 bg-gradient-to-r from-blue-800 to-blue-900">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-6">
             Ready to Transform Your Business?
           </h2>
-          <p className="text-xl text-blue-100 mb-8">
+          <p className="text-xl text-blue-200 mb-8">
             Whether you're a startup looking to establish strong foundations or an established 
             enterprise seeking transformation, we offer the expertise, resources, and commitment 
             to help you achieve your business objectives.
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center bg-white text-blue-600 font-bold py-4 px-8 rounded-full 
-                     hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+            className="inline-flex items-center bg-blue-400 text-gray-900 font-bold py-4 px-8 rounded-full 
+                     hover:bg-blue-500 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
           >
             Connect With Us Today
           </Link>

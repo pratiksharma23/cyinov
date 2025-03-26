@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers } from 'react-icons/fa';
+import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaArrowRight } from 'react-icons/fa';
 
 const ServiceCard = ({ icon: Icon, title, description, link }) => (
   <Link to={link} className="block p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
@@ -49,10 +49,24 @@ const Services = () => {
             Comprehensive business solutions to help your organization thrive
           </p>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-20">
           {services.map((service, index) => (
             <ServiceCard key={index} {...service} />
           ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="max-w-4xl mx-auto text-center py-16 border-t border-gray-200">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Let's discuss about how we can help make your business better
+          </h2>
+          <Link
+            to="/contact"
+            className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-colors duration-300"
+          >
+            Contact Us
+            <FaArrowRight className="ml-2" />
+          </Link>
         </div>
       </div>
     </div>

@@ -126,7 +126,7 @@ const Hero = () => {
             zIndex: activeSection === 'default' ? 1 : 0
           }}
         >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90 
             transition-opacity duration-700" />
         </div>
 
@@ -144,7 +144,7 @@ const Hero = () => {
                      content.id === prevSection ? 0 : -1
             }}
           >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/50 to-black/70 
+            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90 
               transition-opacity duration-700" />
           </div>
         ))}
@@ -164,9 +164,9 @@ const Hero = () => {
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center bg-blue-600 text-white px-8 py-3 rounded-full 
-                  text-lg font-semibold hover:bg-blue-700 hover:scale-105 transform 
-                  transition-all duration-300 hover:shadow-lg"
+                className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
+                  text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
+                  transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
               >
                 Get Started
               </Link>
@@ -180,12 +180,12 @@ const Hero = () => {
                   onClick={() => handleSectionChange(content.id)}
                   className={`group p-4 rounded-lg transition-all duration-300 backdrop-blur-sm
                     ${content.id === activeSection 
-                      ? 'bg-white/20 border-b-2 border-blue-500' 
-                      : 'bg-black/40 hover:bg-white/10'}`}
+                      ? 'bg-indigo-900/50 border-b-2 border-indigo-400' 
+                      : 'bg-black/60 hover:bg-indigo-900/30'}`}
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <content.icon className={`text-2xl 
-                      ${content.id === activeSection ? 'text-blue-300' : 'text-gray-300'}`} />
+                      ${content.id === activeSection ? 'text-indigo-300' : 'text-gray-300'}`} />
                     <span className={`text-sm md:text-base font-medium 
                       ${content.id === activeSection ? 'text-white' : 'text-gray-300'}`}>
                       {content.buttonText}
@@ -199,10 +199,10 @@ const Hero = () => {
       </div>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4">Our Services</h2>
-          <p className="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-4 text-white">Our Services</h2>
+          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
             Comprehensive business solutions tailored to your needs
           </p>
           
@@ -211,7 +211,7 @@ const Hero = () => {
               <Link 
                 key={index} 
                 to={service.link} 
-                className="group relative overflow-hidden rounded-xl"
+                className="group relative overflow-hidden rounded-xl border border-gray-800"
               >
                 <div 
                   className="relative h-[400px] w-full overflow-hidden rounded-xl"
@@ -222,14 +222,14 @@ const Hero = () => {
                   }}
                 >
                   <div className="absolute inset-0 bg-gradient-to-t 
-                    from-black/80 via-black/65 to-black/35 
-                    group-hover:from-black/75 group-hover:via-black/65 group-hover:to-black/25 
+                    from-black/90 via-black/75 to-black/45 
+                    group-hover:from-indigo-900/90 group-hover:via-indigo-900/70 group-hover:to-black/50 
                     transition-all duration-300" />
 
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-6 transform transition-transform duration-300 
                       group-hover:scale-110 group-hover:translate-y-[-10px]">
-                      <service.icon className="text-5xl text-gray-300 group-hover:text-gray-100" />
+                      <service.icon className="text-5xl text-indigo-300 group-hover:text-indigo-200" />
                     </div>
                     
                     <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md
@@ -237,14 +237,14 @@ const Hero = () => {
                       {service.title}
                     </h3>
                     
-                    <p className="text-gray-100 mb-6 transform transition-all duration-300 
+                    <p className="text-gray-300 mb-6 transform transition-all duration-300 
                       group-hover:translate-y-[-10px] text-base leading-relaxed drop-shadow-md">
                       {service.description}
                     </p>
                     
-                    <div className="flex items-center text-gray-300 font-semibold 
+                    <div className="flex items-center text-indigo-300 font-semibold 
                       opacity-0 transform translate-y-4 transition-all duration-300
-                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:text-gray-100">
+                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:text-indigo-200">
                       <span className="mr-2">Learn More</span>
                       <FaArrowRight className="transition-transform duration-300 
                         group-hover:translate-x-2" />

@@ -7,10 +7,10 @@ import Breadcrumb from './Breadcrumb';
 
 const Layout = ({ children, currentPath = [] }) => {
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-900 text-gray-100">
       <Header />
       <div className="container mx-auto px-4">
-        <Breadcrumb paths={currentPath} />
+        {/* <Breadcrumb paths={currentPath} /> */}
         <div className="flex flex-col lg:flex-row gap-8 py-8">
           <main className="flex-1">{children}</main>
           {/* <Sidebar /> */}
