@@ -31,6 +31,12 @@ const Header = () => {
       title: "Human Capital",
       description: "Strategic workforce management and development",
       link: "/services/human-capital"
+    },
+    {
+      icon: FaTrademark,
+      title: "Trademark",
+      description: "Trademark registration and protection services",
+      link: "/services/trademark"
     }
   ];
 

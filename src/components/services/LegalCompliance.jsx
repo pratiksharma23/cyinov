@@ -72,7 +72,7 @@ const LegalCompliance = () => {
       }],
       actionButton: {
         text: "Register Trademark",
-        link: "/services/legal-compliance/trademark-registration"
+        link: "/services/trademark/trademark-registration"
       }
     },
     {
