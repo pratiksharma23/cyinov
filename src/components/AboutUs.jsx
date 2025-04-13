@@ -22,13 +22,17 @@ const AboutHero = () => {
         }}
       ></div>
       <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50"></div>
-      
-      <div className="relative h-full flex flex-col justify-center items-center text-gray-100 px-4 text-center">
-        <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight max-w-4xl">
-          Transforming Business Landscapes Through Strategic Excellence
-        </h1>
+        <div className="relative h-full flex flex-col justify-center items-center text-gray-100 px-4 text-center">
+        <div className="mb-4">
+          <h1 className="text-5xl md:text-7xl font-extrabold text-blue-400 mb-2 tracking-tight">
+            Cyinov Consulting
+          </h1>
+          <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight max-w-4xl">
+            Transforming Business Landscapes Through Strategic Excellence
+          </h2>
+        </div>
         <p className="text-xl md:text-2xl mb-12 max-w-3xl">
-          Redefining business consulting with comprehensive solutions that bridge vision and execution
+          At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2025, we've established ourselves as a dynamic force in the consulting industry.
         </p>
       </div>
     </section>
@@ -124,6 +128,79 @@ const CoreValues = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const ExpertiseSection = () => {
+  const expertiseAreas = [
+    { name: "LEGAL AND REGULATORY COMPLIANCE", percentage: 100 },
+    { name: "HUMAN CAPITAL MANAGEMENT", percentage: 90 },
+    { name: "TAX ADVISORY", percentage: 80 },
+    { name: "MARKET AND PRODUCT RESEARCH", percentage: 80 }
+  ];
+
+  return (
+    <section className="py-16 bg-gray-900">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-12">
+          <div className="lg:w-1/2">
+            <h2 className="text-3xl font-bold text-gray-100 mb-8">Our Expertise</h2>
+            <div className="space-y-8">
+              {expertiseAreas.map((area, index) => (
+                <div key={index} className="w-full">
+                  <div className="flex justify-between mb-2">
+                    <span className="text-lg font-medium text-gray-100">{area.name}</span>
+                    <span className="text-lg font-medium text-blue-400">{area.percentage}%</span>
+                  </div>
+                  <div className="h-3 bg-gray-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-red-800 rounded-full" 
+                      style={{ width: `${Math.min(area.percentage, 100)}%` }}
+                    ></div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="lg:w-1/2 flex items-center">
+            <div className="bg-gray-800 p-8 rounded-lg shadow-xl">
+              <p className="text-lg text-gray-100 leading-relaxed">
+                Whether you're a startup looking to establish strong foundations or an established enterprise seeking transformation, Cyinov Consulting offers the expertise, resources, and commitment to help you achieve your business objectives.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+const StatsSection = () => {
+  return (
+    <section className="py-16 bg-gradient-to-r from-blue-800 to-blue-600">
+      <div className="container mx-auto px-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="text-center p-6">
+            <div className="text-5xl font-bold text-white mb-2">
+              <CountUp end={20} suffix="+" duration={2.5} />
+            </div>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">Clients</p>
+          </div>
+          <div className="text-center p-6">
+            <div className="text-5xl font-bold text-white mb-2">
+              <CountUp end={5} suffix="+" duration={2.5} />
+            </div>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">Clients this month</p>
+          </div>
+          <div className="text-center p-6">
+            <div className="text-5xl font-bold text-white mb-2">
+              <CountUp end={50} duration={2.5} />
+            </div>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">New Projects</p>
           </div>
         </div>
       </div>
@@ -398,6 +475,14 @@ const WhyChooseUs = () => {
         "Technology Integration",
         "Process Optimization"
       ]
+    },
+    {
+      title: "Value Addition",
+      points: [
+        "Cost-Effective Solutions",
+        "Measurable Outcomes",
+        "Long-term Partnership Focus"
+      ]
     }
   ];
 
@@ -429,11 +514,11 @@ const WhyChooseUs = () => {
 
 const FutureReady = () => {
   const futureStrategies = [
-    "Embracing Emerging Technologies",
-    "Sustainable Business Practices",
-    "Global Market Expansion",
-    "Continuous Learning and Development",
-    "Client-Centric Innovations"
+    "Expanding our service portfolio",
+    "Strengthening technological capabilities",
+    "Enhancing delivery mechanisms",
+    "Building stronger client relationships",
+    "Contributing to sustainable business practices"
   ];
 
   return (
@@ -497,6 +582,8 @@ const AboutUs = () => {
       <AboutHero />
       <MissionVision />
       <CoreValues />
+      <ExpertiseSection />
+      <StatsSection />
       <ApproachSection />
       <TechnologyIntegration />
       <IndustryExpertise />
