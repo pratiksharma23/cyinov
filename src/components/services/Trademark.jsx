@@ -1,5 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import {
   FaTrademark, 
   FaCopyright,
@@ -13,6 +16,17 @@ import {
   FaCheckCircle,
   FaArrowRight
 } from 'react-icons/fa';
+
+// Import trademark service images
+import tmRegistrationImg from '../../assets/tmregistration.jpg';
+import tmObjectionImg from '../../assets/tmobjection.jpg';
+import tmOppositionImg from '../../assets/tmopposition.jpg';
+import tmRenewalImg from '../../assets/tmrenewal.jpg';
+import tmSearchImg from '../../assets/tmsearch.jpg';
+import tmTransferImg from '../../assets/tmtransfer.jpg';
+import tmRectificationImg from '../../assets/tmrectification.jpg';
+import showcaseHearingImg from '../../assets/showcausehearing.jpg';
+import servicesImg from '../../assets/services.jpg';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -71,7 +85,131 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
   </motion.div>
 );
 
+// Service Card component for carousel items
+const ServiceCard = ({ title, description, image, link }) => (
+  <motion.div
+    variants={fadeInUp}
+    whileHover={{ scale: 1.05 }}
+    className="p-3"
+  >
+    <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700 h-full">
+      <div className="relative h-48">
+        <img 
+          src={image} 
+          alt={title} 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+      </div>
+      <div className="p-5">
+        <h3 className="text-lg font-bold text-gray-100 mb-2">{title}</h3>
+        <p className="text-gray-300 text-sm mb-4">{description}</p>
+        <a 
+          href={link || "#"} 
+          className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
+        >
+          Learn more <FaArrowRight className="ml-1" />
+        </a>
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Service Carousel component for horizontal scrolling
+const ServiceCarousel = ({ services }) => {
+  const settings = {
+    dots: true,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 2,
+        }
+      },
+      {
+        breakpoint: 640,
+        settings: {
+          slidesToShow: 1,
+        }
+      }
+    ]
+  };
+
+  return (
+    <div className="service-carousel">
+      <Slider {...settings}>
+        {services.map((service, index) => (
+          <ServiceCard 
+            key={index}
+            title={service.title}
+            description={service.description}
+            image={service.image}
+            link={service.link}
+          />
+        ))}
+      </Slider>
+    </div>
+  );
+};
+
 const Trademark = () => {
+  // Trademark services that will be shown in the carousel
+  const trademarkServices = [
+    {
+      title: "Trademark Registration",
+      description: "Comprehensive trademark search and application filing under one class",
+      image: tmRegistrationImg,
+      link: "/services/trademark-registration"
+    },
+    {
+      title: "Trademark Objection",
+      description: "Drafting and filing responses to objections raised by the Trademark Registry",
+      image: tmObjectionImg,
+      link: "/services/trademark-objection"
+    },
+    {
+      title: "Trademark Opposition",
+      description: "Filing and defending trademark opposition proceedings",
+      image: tmOppositionImg,
+      link: "/services/trademark-opposition"
+    },
+    {
+      title: "Trademark Renewal",
+      description: "Drafting and filing trademark renewal applications",
+      image: tmRenewalImg,
+      link: "/services/trademark-renewal"
+    },
+    {
+      title: "Trademark Search",
+      description: "Comprehensive trademark search to identify existing similar marks",
+      image: tmSearchImg,
+      link: "/services/trademark-search"
+    },
+    {
+      title: "Trademark Transfer",
+      description: "Legally transferring trademark ownership to another party",
+      image: tmTransferImg,
+      link: "/services/trademark-transfer"
+    },
+    {
+      title: "Trademark Rectification",
+      description: "Filing rectifications for wrongly registered or objected trademarks",
+      image: tmRectificationImg,
+      link: "/services/trademark-rectification"
+    },
+    {
+      title: "Trademark Hearing",
+      description: "Legal representation before the Trademark Office in hearings",
+      image: showcaseHearingImg,
+      link: "/services/trademark-hearing"
+    }
+  ];
+
+  // Main service categories
   const services = [
     {
       icon: FaTrademark,
@@ -191,14 +329,26 @@ const Trademark = () => {
             ></path>
           </svg>
         </div>
-      </motion.div>
-
-      {/* Services Section */}
+      </motion.div>      {/* Services Section */}
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12">Our Services</h2>
+          
+          {/* Trademark Services Carousel */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
+              <FaTrademark className="text-xl text-blue-400 mr-3" />
+              Trademark Services
+            </h3>
+            <p className="text-gray-300 text-lg mb-8">
+              Secure exclusive rights to your brand identity with our comprehensive trademark services
+            </p>
+            <ServiceCarousel services={trademarkServices} />
+          </div>
+          
+          {/* Other Service Categories */}
           <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="flex flex-col space-y-8"
             initial="hidden"
             animate="visible"
             variants={{
@@ -209,7 +359,7 @@ const Trademark = () => {
               }
             }}
           >
-            {services.map((service, index) => (
+            {services.slice(1).map((service, index) => (
               <ServiceCategory key={index} {...service} />
             ))}
           </motion.div>
