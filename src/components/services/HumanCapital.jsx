@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FaUserTie, 
   FaChartLine, 
@@ -8,26 +8,95 @@ import {
   FaSearch,
   FaCog,
   FaRocket,
-  FaChartBar
+  FaChartBar,
+  FaCheckCircle
 } from 'react-icons/fa';
 
-const ServiceCategory = ({ icon: Icon, title, description, items }) => (
-  <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700">
-    <div className="text-blue-400 mb-4">
-      <Icon className="w-12 h-12" />
+// Tab Navigation Component
+const TabNavigation = ({ categories, activeTab, setActiveTab }) => {
+  return (
+    <div className="w-full overflow-x-auto mb-8">
+      <div className="flex min-w-full border-b border-gray-700">
+        {categories.map((category, index) => (
+          <button 
+            key={index}
+            onClick={() => setActiveTab(index)}
+            className={`flex-1 min-w-[180px] px-6 py-4 flex items-center justify-center space-x-2 transition-all duration-300
+              ${activeTab === index 
+                ? 'text-blue-400 border-b-2 border-blue-400' 
+                : 'text-gray-400 hover:text-gray-200'
+              }
+            `}
+          >
+            <category.icon className="text-xl" />
+            <span className="font-medium whitespace-nowrap">{category.title}</span>
+          </button>
+        ))}
+      </div>
     </div>
-    <h3 className="text-xl font-bold text-gray-100 mb-3">{title}</h3>
-    <p className="text-gray-300 mb-4">{description}</p>
-    <ul className="space-y-2">
-      {items.map((item, index) => (
-        <li key={index} className="flex items-start space-x-2">
-          <span className="text-blue-400 font-bold">•</span>
-          <span className="text-gray-300">{item}</span>
-        </li>
-      ))}
-    </ul>
-  </div>
-);
+  );
+};
+
+// Tab Content Component
+const TabContent = ({ category }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700"
+    >
+      <div className="flex items-start mb-6">
+        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
+          <category.icon className="text-3xl text-blue-400" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h3>
+          <p className="text-gray-300">{category.description}</p>
+        </div>
+      </div>
+      
+      <div className="mt-8">
+        <ul className="space-y-6">
+          {category.items.map((item, itemIndex) => (
+            <li key={itemIndex} className="flex items-start">
+              <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+              <div>
+                {typeof item === 'string' && item.includes('–') ? (
+                  <>
+                    <div className="font-medium text-gray-100">{item.split('–')[0]}</div>
+                    <div className="text-gray-400 mt-1">{item.split('–')[1]}</div>
+                  </>
+                ) : (
+                  <span className="text-gray-300">{item}</span>
+                )}
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </motion.div>
+  );
+};
+
+// Main Tabs Section Component
+const TabsSection = ({ categories }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div>
+      <TabNavigation 
+        categories={categories} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
+      <AnimatePresence mode="wait">
+        <TabContent key={activeTab} category={categories[activeTab]} />
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const ProcessStep = ({ number, title, items }) => (
   <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700">
@@ -53,41 +122,37 @@ const HumanCapital = () => {
     {
       icon: FaUserTie,
       title: "Recruitment and Talent Acquisition",
-      description: "Strategic talent acquisition and seamless onboarding processes",
+      description: "Attract and retain top talent with strategic hiring solutions",
       items: [
-        "Streamlined recruitment processes through efficient strategies and technologies",
-        "Smooth integration of new hires into organizational culture",
-        "Enhanced early employee experiences"
+        "Streamlined Recruitment Processes – Leveraging technology and expertise to identify and hire the right candidates efficiently",
+        "Onboarding & Integration – Ensuring seamless adaptation of new hires into the company culture, enhancing early employee experiences"
       ]
     },
     {
       icon: FaChartLine,
       title: "Workforce Management",
-      description: "Comprehensive solutions for operational efficiency",
+      description: "Maximize employee productivity with structured workforce solutions",
       items: [
-        "Time and attendance tracking systems",
-        "Employee productivity monitoring",
-        "Performance management and regular feedback systems"
+        "Time & Attendance Tracking – Implementing systems to monitor employee work hours, attendance, and productivity",
+        "Performance Management – Developing frameworks for regular appraisals, goal-setting, and employee feedback"
       ]
     },
     {
       icon: FaMoneyBillWave,
       title: "Payroll and Compensation Management",
-      description: "Efficient payroll processing and competitive compensation frameworks",
+      description: "Ensuring seamless payroll operations and competitive compensation structures",
       items: [
-        "Accurate and timely payroll processing",
-        "Competitive compensation structures",
-        "Benefits administration and management"
+        "Payroll Processing – Managing payroll operations to ensure accurate and timely employee payments",
+        "Compensation Structures & Benefits – Designing competitive pay frameworks to attract and retain high-performing employees"
       ]
     },
     {
       icon: FaGraduationCap,
       title: "Training and Development",
-      description: "Continuous learning and leadership development programs",
+      description: "Fostering continuous learning and professional growth",
       items: [
-        "Comprehensive training programs for skill enhancement",
-        "Career growth opportunities",
-        "Succession planning for future leadership"
+        "Skill Development & Training Programs – Providing structured training initiatives for career growth and enhanced productivity",
+        "Succession Planning – Identifying and grooming future leaders to ensure organizational sustainability"
       ]
     }
   ];
@@ -178,34 +243,225 @@ const HumanCapital = () => {
             ></path>
           </svg>
         </div>
-      </motion.div>
-
-      <div className="py-16">
+      </motion.div>      <div className="py-16">
         <div className="container mx-auto px-4">
           <div className="mb-20">
-            <h2 className="text-3xl font-bold text-center text-gray-100 mb-12">
-              HUMAN CAPITAL MANAGEMENT
+            <h2 className="text-3xl font-bold text-center text-gray-100 mb-4">
+              Our HCM Services
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {categories.map((category, index) => (
-                <ServiceCategory key={index} {...category} />
-              ))}
+            <p className="text-center text-gray-300 mb-12 max-w-3xl mx-auto">
+              Explore our comprehensive human capital management solutions below.
+            </p>
+            <div className="max-w-6xl mx-auto">
+              <TabsSection categories={categories} />
             </div>
-          </div>
-
-          <div className="mt-20">
+          </div>          <div className="mt-20">
             <h2 className="text-3xl font-bold text-center text-gray-100 mb-12">
-              Our HCM Process
+              OUR HCM PROCESS
             </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {process.map((step, index) => (
-                <ProcessStep 
-                  key={index} 
-                  number={index + 1} 
-                  title={step.title} 
-                  items={step.items} 
-                />
-              ))}
+            <div className="max-w-6xl mx-auto bg-gray-800 rounded-xl p-8 border border-gray-700">
+              {/* Horizontal Timeline */}
+              <div className="relative">
+                {/* Timeline Connector Line */}
+                <div className="hidden md:block absolute top-20 left-0 right-0 h-1 bg-gray-600 z-0"></div>
+                
+                {/* Timeline Steps */}
+                <div className="flex flex-col md:flex-row items-center justify-between">
+                  {/* Start Point */}
+                  <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/12">
+                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                      <span className="text-xl">📍</span>
+                    </div>
+                    <div className="text-center mt-5 font-bold text-blue-400">Start</div>
+                  </div>
+                  
+                  {/* Arrow */}
+                  <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
+                    <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  
+                  {/* Process Steps Container */}
+                  <div className="flex flex-col md:flex-row items-center justify-between w-full md:w-10/12">
+                    {/* Assessment */}
+                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
+                      <div className="flex-shrink-0 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                        <span className="text-xl">🟢</span>
+                      </div>
+                      <div className="text-center mt-5">
+                        <h3 className="font-bold text-gray-100">Assessment</h3>
+                        <p className="text-sm text-gray-400 mt-2">Understanding your workforce</p>
+                      </div>
+                      
+                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📊</span>
+                            <span className="text-gray-300 text-sm">Workforce Analysis</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📋</span>
+                            <span className="text-gray-300 text-sm">Process Evaluation</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🔍</span>
+                            <span className="text-gray-300 text-sm">Gap Identification</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">✅</span>
+                            <span className="text-gray-300 text-sm">Needs Assessment</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    {/* Arrow */}
+                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
+                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                      </svg>
+                    </div>
+                    
+                    {/* Strategy */}
+                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
+                      <div className="flex-shrink-0 w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                        <span className="text-xl">🟡</span>
+                      </div>
+                      <div className="text-center mt-5">
+                        <h3 className="font-bold text-gray-100">Strategy</h3>
+                        <p className="text-sm text-gray-400 mt-2">Developing a roadmap</p>
+                      </div>
+                      
+                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🏗️</span>
+                            <span className="text-gray-300 text-sm">Solution Design</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📅</span>
+                            <span className="text-gray-300 text-sm">Resource Planning</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">⏳</span>
+                            <span className="text-gray-300 text-sm">Timeline Development</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📈</span>
+                            <span className="text-gray-300 text-sm">ROI Projections</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    {/* Arrow */}
+                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
+                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                      </svg>
+                    </div>
+                    
+                    {/* Implementation */}
+                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
+                      <div className="flex-shrink-0 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                        <span className="text-xl">🟠</span>
+                      </div>
+                      <div className="text-center mt-5">
+                        <h3 className="font-bold text-gray-100">Implementation</h3>
+                        <p className="text-sm text-gray-400 mt-2">Seamless execution</p>
+                      </div>
+                      
+                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">⚙️</span>
+                            <span className="text-gray-300 text-sm">System Setup</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🔗</span>
+                            <span className="text-gray-300 text-sm">Process Integration</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🎓</span>
+                            <span className="text-gray-300 text-sm">Team Training</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🔄</span>
+                            <span className="text-gray-300 text-sm">Change Management</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    {/* Arrow */}
+                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
+                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                      </svg>
+                    </div>
+                    
+                    {/* Optimization */}
+                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
+                      <div className="flex-shrink-0 w-16 h-16 bg-red-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                        <span className="text-xl">🔴</span>
+                      </div>
+                      <div className="text-center mt-5">
+                        <h3 className="font-bold text-gray-100">Optimization</h3>
+                        <p className="text-sm text-gray-400 mt-2">Continuous improvement</p>
+                      </div>
+                      
+                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
+                        <ul className="space-y-2">
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📡</span>
+                            <span className="text-gray-300 text-sm">Performance Monitoring</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">📊</span>
+                            <span className="text-gray-300 text-sm">Data Analysis</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🔄</span>
+                            <span className="text-gray-300 text-sm">Continuous Improvement</span>
+                          </li>
+                          <li className="flex items-start">
+                            <span className="text-xl mr-2">🔁</span>
+                            <span className="text-gray-300 text-sm">Regular Reviews</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Arrow */}
+                  <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
+                    <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                    </svg>
+                  </div>
+                  
+                  {/* End Point */}
+                  <div className="flex flex-col items-center w-full md:w-1/12">
+                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                      <span className="text-xl">🏁</span>
+                    </div>
+                    <div className="text-center mt-5 font-bold text-blue-400">
+                    Optimized Workforce & Business Growth
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Arrow Indicators for Mobile */}
+                <div className="flex flex-col items-center md:hidden space-y-6 my-8">
+                  <div className="flex items-center justify-center w-full">
+                    <div className="w-1 h-12 bg-blue-400"></div>
+                  </div>
+                  <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
+                  </svg>
+                </div>
+              </div>
             </div>
           </div>
 
