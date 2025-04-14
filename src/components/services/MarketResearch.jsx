@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaChartLine,
   FaClipboardCheck,
@@ -47,7 +47,15 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start space-x-2">
                   <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
-                  <span className="text-gray-300 text-sm">{item}</span>
+                  <span className="text-gray-300 text-sm">
+                    {typeof item === 'object' ? (
+                      <>
+                        <span className="font-medium">{item.title}</span> – {item.description}
+                      </>
+                    ) : (
+                      item
+                    )}
+                  </span>
                 </li>
               ))}
             </ul>
@@ -66,6 +74,87 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
     )}
   </motion.div>
 );
+
+// Tab Navigation Component
+const TabNavigation = ({ services, activeTab, setActiveTab }) => {
+  return (
+    <div className="flex flex-wrap justify-center mb-8 border-b border-gray-700">
+      {services.map((service, index) => (
+        <button 
+          key={index}
+          onClick={() => setActiveTab(index)}
+          className={`px-6 py-4 flex items-center space-x-2 transition-all duration-300
+            ${activeTab === index 
+              ? 'text-blue-400 border-b-2 border-blue-400' 
+              : 'text-gray-400 hover:text-gray-200'
+            }
+          `}
+        >
+          <service.icon className="text-xl" />
+          <span className="font-medium">{service.title}</span>
+        </button>
+      ))}
+    </div>
+  );
+};
+
+// Tab Content Component
+const TabContent = ({ service }) => {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700"
+    >
+      <div className="flex items-start mb-6">
+        <service.icon className="text-3xl text-blue-400 mr-4" />
+        <div>
+          <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
+          <p className="text-gray-300">{service.description}</p>
+        </div>
+      </div>
+      
+      <div className="grid md:grid-cols-2 gap-8 mt-8">
+        {service.sections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="bg-gray-900 rounded-lg p-6">
+            <h4 className="font-semibold text-xl text-blue-300 mb-4">{section.title}</h4>
+            <ul className="space-y-4">
+              {section.items.map((item, itemIndex) => (
+                <li key={itemIndex} className="flex items-start">
+                  <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    <div className="font-medium text-gray-100">{item.title}</div>
+                    <div className="text-gray-400 text-sm">{item.description}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </motion.div>
+  );
+};
+
+// Main Tabs Section Component
+const TabsSection = ({ services }) => {
+  const [activeTab, setActiveTab] = useState(0);
+
+  return (
+    <div>
+      <TabNavigation 
+        services={services} 
+        activeTab={activeTab} 
+        setActiveTab={setActiveTab} 
+      />
+      <AnimatePresence mode="wait">
+        <TabContent key={activeTab} service={services[activeTab]} />
+      </AnimatePresence>
+    </div>
+  );
+};
 
 const MarketResearch = () => {
   const process = [
@@ -90,29 +179,28 @@ const MarketResearch = () => {
       description: "Delivering clear, actionable recommendations"
     }
   ];
-
   const services = [
     {
       icon: FaChartLine,
       title: "Forecasting Studies",
-      description: "Comprehensive market forecasting and trend analysis",
+      description: "Anticipate market trends and plan for future growth",
       sections: [
         {
           title: "Market Forecasting",
           items: [
-            "Volume & demand estimation",
-            "Market size analysis",
-            "Growth trend prediction",
-            "Competitive landscape assessment"
+            { title: "Volume & Demand Estimation", description: "Predicting future product/service demand" },
+            { title: "Market Size Analysis", description: "Evaluating potential market reach" },
+            { title: "Growth Trend Prediction", description: "Identifying key industry growth patterns" },
+            { title: "Competitive Landscape Assessment", description: "Analyzing competitor positioning and strategies" }
           ]
         },
         {
           title: "Industry Analysis",
           items: [
-            "Sector-specific forecasting",
-            "Economic impact studies",
-            "Technology adoption trends",
-            "Risk assessment"
+            { title: "Sector-Specific Forecasting", description: "Understanding industry-specific opportunities and challenges" },
+            { title: "Economic Impact Studies", description: "Assessing market influence on business and policy decisions" },
+            { title: "Technology Adoption Trends", description: "Evaluating emerging technologies in various sectors" },
+            { title: "Risk Assessment", description: "Identifying potential threats and mitigating business risks" }
           ]
         }
       ]
@@ -120,24 +208,24 @@ const MarketResearch = () => {
     {
       icon: FaClipboardCheck,
       title: "Product & Concept Testing",
-      description: "In-depth testing and validation services",
+      description: "Ensure product success through rigorous testing and consumer validation",
       sections: [
         {
           title: "Product Testing",
           items: [
-            "Usage & attitude studies",
-            "Product satisfaction analysis",
-            "Competitive product benchmarking",
-            "Package testing"
+            { title: "Usage & Attitude Studies", description: "Understanding consumer interaction with products" },
+            { title: "Product Satisfaction Analysis", description: "Measuring customer experience and preferences" },
+            { title: "Competitive Product Benchmarking", description: "Comparing products with competitors for strategic advantage" },
+            { title: "Package Testing", description: "Evaluating packaging effectiveness and appeal" }
           ]
         },
         {
           title: "Concept Testing",
           items: [
-            "Concept evaluation",
-            "Price sensitivity testing",
-            "Brand concept validation",
-            "Market acceptance studies"
+            { title: "Concept Evaluation", description: "Testing new ideas before launch" },
+            { title: "Price Sensitivity Testing", description: "Determining optimal pricing strategies" },
+            { title: "Brand Concept Validation", description: "Assessing how well new brand concepts resonate with the market" },
+            { title: "Market Acceptance Studies", description: "Measuring consumer acceptance of new products" }
           ]
         }
       ]
@@ -145,24 +233,24 @@ const MarketResearch = () => {
     {
       icon: FaUsers,
       title: "Consumer Research",
-      description: "Deep insights into consumer behavior and preferences",
+      description: "Gain deep insights into consumer behavior and market trends",
       sections: [
         {
           title: "Consumer Insights",
           items: [
-            "Consumer behavior analysis",
-            "Purchase decision mapping",
-            "Brand perception studies",
-            "Customer satisfaction tracking"
+            { title: "Consumer Behavior Analysis", description: "Understanding buying motivations and habits" },
+            { title: "Purchase Decision Mapping", description: "Tracking factors influencing purchase choices" },
+            { title: "Brand Perception Studies", description: "Assessing how consumers perceive your brand" },
+            { title: "Customer Satisfaction Tracking", description: "Measuring ongoing customer experience" }
           ]
         },
         {
           title: "Market Tracking",
           items: [
-            "Sales leakage analysis",
-            "Market share tracking",
-            "Distribution audit",
-            "Retail audit services"
+            { title: "Sales Leakage Analysis", description: "Identifying gaps in sales performance" },
+            { title: "Market Share Tracking", description: "Monitoring competitor market positions" },
+            { title: "Distribution Audit", description: "Assessing efficiency of distribution channels" },
+            { title: "Retail Audit Services", description: "Analyzing retail performance and consumer trends" }
           ]
         }
       ]
@@ -170,24 +258,24 @@ const MarketResearch = () => {
     {
       icon: FaSearchLocation,
       title: "Specialized Research",
-      description: "Focused research for specific sectors and needs",
+      description: "Customized research solutions tailored to unique industry needs",
       sections: [
         {
           title: "Rural Research",
           items: [
-            "Rural market assessment",
-            "Agricultural sector studies",
-            "Rural consumer behavior",
-            "Distribution channel analysis"
+            { title: "Rural Market Assessment", description: "Understanding market dynamics in rural regions" },
+            { title: "Agricultural Sector Studies", description: "Analyzing agricultural production and trade" },
+            { title: "Rural Consumer Behavior", description: "Identifying buying patterns in non-urban markets" },
+            { title: "Distribution Channel Analysis", description: "Optimizing supply chains for rural reach" }
           ]
         },
         {
           title: "Social Research",
           items: [
-            "Social impact assessment",
-            "Community needs analysis",
-            "Policy research",
-            "Development sector studies"
+            { title: "Social Impact Assessment", description: "Evaluating the effect of policies and programs" },
+            { title: "Community Needs Analysis", description: "Understanding social and economic development needs" },
+            { title: "Policy Research", description: "Supporting evidence-based policymaking" },
+            { title: "Development Sector Studies", description: "Analyzing impact and opportunities in the development sector" }
           ]
         }
       ]
@@ -235,28 +323,13 @@ const MarketResearch = () => {
             ></path>
           </svg>
         </div>
-      </motion.div>
-
-      {/* Services Section */}
+      </motion.div>      {/* Services Section - Interactive Tabs */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12">Our Research Services</h2>
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.2
-                }
-              }
-            }}
-          >
-            {services.map((service, index) => (
-              <ServiceCategory key={index} {...service} />
-            ))}
-          </motion.div>
+          
+          {/* Tab Navigation */}
+          <TabsSection services={services} />
         </div>
       </section>
 
