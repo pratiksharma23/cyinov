@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaBalanceScale,
   FaShieldAlt,
@@ -14,7 +14,8 @@ import {
   FaHome,
   FaGavel as FaGavelAlt,
   FaCheckCircle,
-  FaArrowRight
+  FaArrowRight,
+  FaChevronRight
 } from 'react-icons/fa';
 
 const fadeInUp = {
@@ -38,7 +39,15 @@ const ServiceCategory = ({ icon: Icon, title, description, sections, actionButto
             {section.items.map((item, itemIndex) => (
               <li key={itemIndex} className="flex items-start space-x-2">
                 <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
-                <span className="text-gray-300 text-sm">{item}</span>
+                <span className="text-gray-300 text-sm">
+                  {typeof item === 'object' ? (
+                    <>
+                      <span className="font-medium">{item.title}</span> – {item.description}
+                    </>
+                  ) : (
+                    item
+                  )}
+                </span>
               </li>
             ))}
           </ul>
@@ -56,18 +65,102 @@ const ServiceCategory = ({ icon: Icon, title, description, sections, actionButto
   </motion.div>
 );
 
+// Service Detail Panel Component
+const ServiceDetailPanel = ({ service }) => {
+  if (!service) return null;
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-800 rounded-lg shadow-lg p-6 lg:p-8 border border-gray-700"
+    >
+      <div className="flex items-start mb-6">
+        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
+          <service.icon className="text-3xl text-blue-400" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
+          <p className="text-gray-300">{service.description}</p>
+        </div>
+      </div>
+      
+      <div className="space-y-6 mt-8">
+        {service.sections && service.sections.map((section, sectionIndex) => (
+          <div key={sectionIndex} className="bg-gray-900/50 rounded-lg p-5">
+            {section.title && <h4 className="font-semibold text-xl text-blue-300 mb-4">{section.title}</h4>}
+            <ul className="space-y-4">
+              {section.items.map((item, itemIndex) => (
+                <li key={itemIndex} className="flex items-start">
+                  <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                  <div>
+                    {typeof item === 'object' ? (
+                      <>
+                        <div className="font-medium text-gray-100">{item.title}</div>
+                        <div className="text-gray-400 text-sm mt-1">{item.description}</div>
+                      </>
+                    ) : (
+                      <span className="text-gray-300">{item}</span>
+                    )}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+      
+      {service.actionButton && (
+        <motion.a
+          href={service.actionButton.link}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center px-5 py-3 mt-8 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"
+        >
+          {service.actionButton.text}
+          <FaArrowRight className="ml-2" />
+        </motion.a>
+      )}
+    </motion.div>
+  );
+};
+
+// Service Nav Item Component
+const ServiceNavItem = ({ service, isActive, onClick }) => {
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`flex items-center w-full text-left p-4 transition-all duration-300 rounded-lg mb-2 ${
+        isActive 
+          ? 'bg-blue-700/20 border-l-4 border-blue-400' 
+          : 'bg-gray-800 hover:bg-gray-700/50'
+      }`}
+      whileHover={{ x: isActive ? 0 : 5 }}
+    >
+      <service.icon className={`text-xl mr-3 ${isActive ? 'text-blue-400' : 'text-gray-400'}`} />
+      <span className={`font-medium ${isActive ? 'text-blue-400' : 'text-gray-300'}`}>
+        {service.title}
+      </span>
+      {isActive && <FaChevronRight className="ml-auto text-blue-400" />}
+    </motion.button>
+  );
+};
+
 const LegalCompliance = () => {
+  const [activeService, setActiveService] = useState(0);
   const services = [
     {
       icon: FaTrademark,
-      title: "Intellectual Property",
-      description: "Comprehensive IP protection and management services",
+      title: "Intellectual Property Compliance",
+      description: "Protect and manage your intellectual assets effectively",
       sections: [{
         items: [
-          "IP Prosecution & Registration- TRADEMARK AND PATENTS",
-          "IP Litigation & Enforcement",
-          "IP Licensing, Commercialization & Technology Transfer",
-          "IP Audits & Protection Strategies"
+          { title: "IP Prosecution & Registration", description: "Trademark and patent filings and registrations" },
+          { title: "IP Litigation & Enforcement", description: "Protecting your intellectual property rights through legal action" },
+          { title: "IP Licensing, Commercialization & Technology Transfer", description: "Structuring IP agreements for business growth" },
+          { title: "IP Audits & Protection Strategies", description: "Ensuring robust intellectual property safeguards" }
         ]
       }],
       actionButton: {
@@ -77,94 +170,94 @@ const LegalCompliance = () => {
     },
     {
       icon: FaLaptopCode,
-      title: "Technology & Cybersecurity Law",
-      description: "Digital age legal protection and compliance",
+      title: "Technology & Cybersecurity Compliance",
+      description: "Stay secure and compliant in the digital age",
       sections: [{
         items: [
-          "Data Protection & Privacy Compliance",
-          "IT Contracts & Technology Transactions",
-          "Cybersecurity & Risk Management Advisory",
-          "Digital Forensics & Cyber Crime Advisory"
+          { title: "Data Protection & Privacy Compliance", description: "Compliance with data protection laws and regulations" },
+          { title: "IT Contracts & Technology Transactions", description: "Drafting and negotiating technology-related agreements" },
+          { title: "Cybersecurity & Risk Management Advisory", description: "Mitigating cyber threats and ensuring compliance" },
+          { title: "Digital Forensics & Cyber Crime Advisory", description: "Assisting in cybercrime investigations and legal responses" }
         ]
       }]
     },
     {
       icon: FaHandshake,
-      title: "Commercial Law",
-      description: "Business legal support and compliance",
+      title: "Commercial Law Compliance",
+      description: "Comprehensive legal support for businesses",
       sections: [{
         items: [
-          "Contract Drafting & Negotiation",
-          "Regulatory Compliance",
-          "Banking & Finance Advisory"
+          { title: "Contract Drafting & Negotiation", description: "Creating legally sound agreements for business transactions" },
+          { title: "Regulatory Compliance", description: "Ensuring adherence to business and commercial legal frameworks" },
+          { title: "Banking & Finance Advisory", description: "Guidance on financial regulations and transactions" }
         ]
       }]
     },
     {
       icon: FaUsers,
-      title: "Employment & Labor Laws",
-      description: "Workplace legal compliance and advisory",
+      title: "Employment & Labor Law Compliance",
+      description: "Ensure workplace legal compliance and protect your business",
       sections: [{
         items: [
-          "Employment Contracts & Policies",
-          "Labor Law Compliance & Advisory",
-          "Regulatory Representation",
-          "Workplace Investigations"
+          { title: "Employment Contracts & Policies", description: "Drafting and reviewing employment-related agreements" },
+          { title: "Labor Law Compliance & Advisory", description: "Ensuring adherence to labor laws and employee rights" },
+          { title: "Regulatory Representation", description: "Representation before labor authorities" },
+          { title: "Workplace Investigations", description: "Addressing workplace disputes and misconduct" }
         ]
       }]
     },
     {
       icon: FaBuilding,
-      title: "General Corporate Advisory",
-      description: "Comprehensive business legal support",
+      title: "Corporate Legal Compliance",
+      description: "Expert legal support for businesses at every stage",
       sections: [{
         items: [
-          "Business Formation & Set-up",
-          "Legal Risk Assessments",
-          "Regulatory Compliance Audits",
-          "General Legal Advisory & Opinions"
+          { title: "Business Formation & Set-up Compliance", description: "Legal structuring of new businesses" },
+          { title: "Legal Risk Assessments", description: "Identifying and mitigating business risks" },
+          { title: "Regulatory Compliance Audits", description: "Ensuring adherence to industry-specific regulations" },
+          { title: "General Legal Advisory & Opinions", description: "Providing expert legal insights and opinions" }
         ]
       }]
     },
     {
       icon: FaUniversity,
-      title: "Banking & Finance Laws",
-      description: "Financial sector legal compliance and advisory",
+      title: "Financial & Banking Compliance",
+      description: "Ensuring adherence to financial regulations and requirements",
       sections: [{
         items: [
-          "SARFAESI Act Compliance and Proceedings",
-          "Debt Recovery Tribunal (DRT) Representation",
-          "Banking Regulation Act Advisory",
-          "Financial Institution Regulatory Compliance",
-          "Banking Fraud Investigation and Litigation",
-          "Negotiable Instruments Act Matters",
-          "Anti-Money Laundering (AML) Compliance"
+          { title: "SARFAESI Act Compliance and Proceedings", description: "Handling secured asset recovery matters" },
+          { title: "Debt Recovery Tribunal (DRT) Representation", description: "Legal representation in debt recovery cases" },
+          { title: "Banking Regulation Act Compliance", description: "Adherence to banking laws and regulations" },
+          { title: "Financial Institution Regulatory Compliance", description: "Ensuring compliance with financial laws" },
+          { title: "Banking Fraud Investigation and Litigation", description: "Handling financial fraud cases" },
+          { title: "Negotiable Instruments Act Compliance", description: "Legal support for negotiable instruments disputes" },
+          { title: "Anti-Money Laundering (AML) Compliance", description: "Ensuring adherence to AML regulations" }
         ]
       }]
     },
     {
       icon: FaHome,
-      title: "Real Estate & Property Laws",
-      description: "Property law and transaction services",
+      title: "Real Estate & Property Compliance",
+      description: "Comprehensive legal assistance in real estate matters",
       sections: [{
         items: [
-          "Property Transactions & Conveyancing",
-          "Land Acquisition & Environmental Clearances",
-          "Property Disputes & Litigation",
-          "Real Estate Due Diligence"
+          { title: "Property Transactions & Conveyancing Compliance", description: "Facilitating smooth real estate transactions" },
+          { title: "Land Acquisition & Environmental Compliance", description: "Legal support in property acquisitions" },
+          { title: "Property Disputes & Litigation Compliance", description: "Resolving real estate disputes" },
+          { title: "Real Estate Due Diligence Compliance", description: "Conducting thorough property legal assessments" }
         ]
       }]
     },
     {
       icon: FaGavelAlt,
-      title: "Litigation & Dispute Resolution",
-      description: "Comprehensive dispute resolution services",
+      title: "Litigation & Dispute Resolution Compliance",
+      description: "Effective legal representation in disputes and litigations",
       sections: [{
         items: [
-          "Civil & Commercial Litigation",
-          "Criminal Litigation",
-          "Arbitration & Mediation",
-          "Debt Recovery & Enforcement Proceedings"
+          { title: "Civil & Commercial Litigation Compliance", description: "Handling legal disputes in courts" },
+          { title: "Criminal Litigation Compliance", description: "Defending against criminal charges" },
+          { title: "Arbitration & Mediation Compliance", description: "Alternative dispute resolution methods" },
+          { title: "Debt Recovery & Enforcement Compliance", description: "Legal action for recovering dues" }
         ]
       }]
     }
@@ -181,7 +274,7 @@ const LegalCompliance = () => {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Legal & Regulatory Services</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-6">Legal & Regulatory Compliances</h1>
             <p className="text-xl text-blue-200">
               Comprehensive legal solutions for businesses and individuals. Navigate complex legal landscapes with confidence.
             </p>
@@ -211,27 +304,37 @@ const LegalCompliance = () => {
             ></path>
           </svg>
         </div>
-      </motion.div>
-
-      {/* Services Section */}
+      </motion.div>      {/* Services Section - Two-Panel Layout */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.2
-                }
-              }
-            }}
-          >
-            {services.map((service, index) => (
-              <ServiceCategory key={index} {...service} />
-            ))}
-          </motion.div>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12">Legal Compliance</h2>
+          <h4 className="text-1xl md:text-1xl font-semibold text-center text-gray-100 mb-12">Ensuring adherence to legal frameworks and mitigating risks across various domains</h4>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Panel - Service Navigation */}
+            <div className="w-full lg:w-1/3 bg-gray-900/50 p-5 rounded-lg">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-blue-400">Our Services</h3>
+              <div className="space-y-1">
+                {services.map((service, index) => (
+                  <ServiceNavItem 
+                    key={index}
+                    service={service}
+                    isActive={activeService === index}
+                    onClick={() => setActiveService(index)}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Panel - Service Details */}
+            <div className="w-full lg:w-2/3">
+              <AnimatePresence mode="wait">
+                <ServiceDetailPanel 
+                  key={activeService}
+                  service={services[activeService]} 
+                />
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 

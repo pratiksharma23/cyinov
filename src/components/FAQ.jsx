@@ -48,7 +48,7 @@ const FAQ = () => {
       items: [
         {
           question: "What makes Cyinov Consulting different from other consulting firms?",
-          answer: "Our integrated approach sets us apart - we provide comprehensive solutions across legal, tax, market research, compliance, and HCM under one roof. This ensures seamless coordination and consistent quality across all business functions while saving you time and resources."
+          answer: "Our integrated approach sets us apart - we provide comprehensive solutions across legal, tax, market & product research, compliance, and HCM under one roof. This ensures seamless coordination and consistent quality across all business functions while saving you time and resources."
         },
         {
           question: "Do you work with businesses of all sizes?",
@@ -87,10 +87,10 @@ const FAQ = () => {
       ]
     },
     {
-      title: "Market Research",
+      title: "Market & Product Research",
       items: [
         {
-          question: "How long does a typical market research project take?",
+          question: "How long does a typical market or product research project take?",
           answer: "Project timelines vary based on scope and complexity, typically ranging from 2-8 weeks. We'll provide a detailed timeline during initial consultation."
         },
         {

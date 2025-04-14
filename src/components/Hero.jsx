@@ -82,7 +82,7 @@ const Hero = () => {
     },
     {
       icon: HiOutlineChartBar,
-      title: "Market Research",
+      title: "Market & Product Research",
       description: "In-depth market analysis and research solutions",
       link: "/services/market-research",
       bgImage: marketBg

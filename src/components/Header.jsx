@@ -22,7 +22,7 @@ const Header = () => {
     },
     {
       icon: FaChartLine,
-      title: "Market Research",
+      title: "Market & Product Research",
       description: "In-depth market analysis and research solutions",
       link: "/services/market-research"
     },
