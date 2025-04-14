@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaBook,
   FaFileInvoiceDollar,
@@ -7,7 +7,8 @@ import {
   FaBuilding,
   FaMoneyBillAlt,
   FaCheckCircle,
-  FaArrowRight
+  FaArrowRight,
+  FaChevronRight
 } from 'react-icons/fa';
 
 const fadeInUp = {
@@ -29,26 +30,80 @@ const ProcessStep = ({ number, title, description }) => (
   </motion.div>
 );
 
-const ServiceCategory = ({ icon: Icon, title, items }) => (
-  <motion.div
-    variants={fadeInUp}
-    whileHover={{ scale: 1.02 }}
-    className="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-700"
-  >
-    <Icon className="text-2xl text-blue-400 mb-3" />
-    <h3 className="text-xl font-bold text-gray-100 mb-3">{title}</h3>
-    <ul className="space-y-2">
-      {items.map((item, index) => (
-        <li key={index} className="flex items-start space-x-2">
-          <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
-          <span className="text-gray-300 text-sm">{item}</span>
-        </li>
-      ))}
-    </ul>
-  </motion.div>
-);
+// Service Detail Panel Component
+const ServiceDetailPanel = ({ service }) => {
+  if (!service) return null;
+  
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: 20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: -20 }}
+      transition={{ duration: 0.3 }}
+      className="bg-gray-800 rounded-lg shadow-lg p-6 lg:p-8 border border-gray-700"
+    >
+      <div className="flex items-start mb-6">
+        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
+          <service.icon className="text-3xl text-blue-400" />
+        </div>
+        <div>
+          <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
+          <p className="text-gray-300">{service.description}</p>
+        </div>
+      </div>
+      
+      <div className="space-y-6 mt-8">
+        <div className="bg-gray-900/50 rounded-lg p-5">
+          <ul className="space-y-4">
+            {service.items.map((item, itemIndex) => (
+              <li key={itemIndex} className="flex items-start">
+                <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                <span className="text-gray-300">{item}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      
+      {service.actionButton && (
+        <motion.a
+          href={service.actionButton.link}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="inline-flex items-center px-5 py-3 mt-8 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"
+        >
+          {service.actionButton.text}
+          <FaArrowRight className="ml-2" />
+        </motion.a>
+      )}
+    </motion.div>
+  );
+};
+
+// Service Nav Item Component
+const ServiceNavItem = ({ service, isActive, onClick }) => {
+  return (
+    <motion.button
+      onClick={onClick}
+      className={`flex items-center w-full text-left p-4 transition-all duration-300 rounded-lg mb-2 ${
+        isActive 
+          ? 'bg-blue-700/20 border-l-4 border-blue-400' 
+          : 'bg-gray-800 hover:bg-gray-700/50'
+      }`}
+      whileHover={{ x: isActive ? 0 : 5 }}
+    >
+      <service.icon className={`text-xl mr-3 ${isActive ? 'text-blue-400' : 'text-gray-400'}`} />
+      <span className={`font-medium ${isActive ? 'text-blue-400' : 'text-gray-300'}`}>
+        {service.title}
+      </span>
+      {isActive && <FaChevronRight className="ml-auto text-blue-400" />}
+    </motion.button>
+  );
+};
 
 const TaxAdvisory = () => {
+  const [activeService, setActiveService] = useState(0);
+  
   const process = [
     {
       number: "1",
@@ -76,16 +131,22 @@ const TaxAdvisory = () => {
     {
       icon: FaBook,
       title: "Book-keeping and Compliance",
+      description: "Comprehensive book-keeping and compliance services to keep your business records organized and compliant",
       items: [
         "Book-keeping",
         "Secretarial Compliance",
         "TDS/GST/MCA Compliance",
         "Other Regulatory Compliance"
-      ]
+      ],
+      actionButton: {
+        text: "Learn More",
+        link: "/contact"
+      }
     },
     {
       icon: FaFileInvoiceDollar,
       title: "GST Compliance",
+      description: "Complete GST compliance solutions to ensure your business meets all requirements",
       items: [
         "Registration",
         "Monthly/Quarterly Return Filing",
@@ -93,11 +154,16 @@ const TaxAdvisory = () => {
         "Modification in Existing Registration",
         "LUT",
         "E-Way Bill/E-Invoices"
-      ]
+      ],
+      actionButton: {
+        text: "Get GST Support",
+        link: "/contact"
+      }
     },
     {
       icon: FaUsers,
       title: "Payroll Compliance",
+      description: "End-to-end payroll processing and compliance solutions for businesses of all sizes",
       items: [
         "Salary Structure & Pay Slips",
         "Monthly Payroll Processing",
@@ -107,18 +173,32 @@ const TaxAdvisory = () => {
         "ESI & PF Registration",
         "ESI & PF Challan Preparation",
         "Other Regulatory Compliance"
-      ]
+      ],
+      actionButton: {
+        text: "Outsource Payroll",
+        link: "/contact"
+      }
     },
     {
       icon: FaBuilding,
       title: "Corporate Laws & MCA Compliance",
+      description: "Expert assistance in corporate law compliance and MCA regulations",
       items: [
-        "Registration of Company/LLP"
-      ]
+        "Registration of Company/LLP",
+        "Annual Compliance",
+        "ROC Filings",
+        "Corporate Governance Advisory",
+        "Legal Documentation"
+      ],
+      actionButton: {
+        text: "Corporate Support",
+        link: "/contact"
+      }
     },
     {
       icon: FaMoneyBillAlt,
       title: "Income Tax & TDS Compliance",
+      description: "Comprehensive income tax and TDS compliance services for businesses and individuals",
       items: [
         "Income Tax Return Filing",
         "Any Other Form of IT Filing",
@@ -126,7 +206,11 @@ const TaxAdvisory = () => {
         "TDS Compliance & Return Filing",
         "Reply to Notices Received",
         "Low Deduction of Income Tax Certificate"
-      ]
+      ],
+      actionButton: {
+        text: "Tax Filing Support",
+        link: "/contact"
+      }
     }
   ];
 
@@ -179,6 +263,43 @@ const TaxAdvisory = () => {
         </div>
       </motion.div>
 
+      {/* Services Section - Two-Panel Layout */}
+      <section className="py-20 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-6">Our Services</h2>
+          <h4 className="text-1xl md:text-1xl font-semibold text-center text-blue-300 mb-12">
+            Comprehensive tax advisory and compliance solutions tailored for your business
+          </h4>
+          
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Left Panel - Service Navigation */}
+            <div className="w-full lg:w-1/3 bg-gray-800/50 p-5 rounded-lg shadow-lg">
+              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-blue-400">Tax Services</h3>
+              <div className="space-y-1">
+                {services.map((service, index) => (
+                  <ServiceNavItem 
+                    key={index}
+                    service={service}
+                    isActive={activeService === index}
+                    onClick={() => setActiveService(index)}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Right Panel - Service Details */}
+            <div className="w-full lg:w-2/3">
+              <AnimatePresence mode="wait">
+                <ServiceDetailPanel 
+                  key={activeService}
+                  service={services[activeService]} 
+                />
+              </AnimatePresence>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Process Section */}
       <section className="py-20 bg-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -197,28 +318,6 @@ const TaxAdvisory = () => {
           >
             {process.map((step) => (
               <ProcessStep key={step.number} {...step} />
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 bg-gray-900">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
-            initial="hidden"
-            animate="visible"
-            variants={{
-              visible: {
-                transition: {
-                  staggerChildren: 0.2
-                }
-              }
-            }}
-          >
-            {services.map((service, index) => (
-              <ServiceCategory key={index} {...service} />
             ))}
           </motion.div>
         </div>
