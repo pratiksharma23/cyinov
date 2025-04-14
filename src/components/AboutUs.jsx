@@ -27,11 +27,11 @@ const AboutHero = () => {
           <h1 className="text-5xl md:text-7xl font-extrabold text-blue-400 mb-2 tracking-tight">
             Cyinov Consulting
           </h1>
-          <h2 className="text-3xl md:text-4xl font-medium text-white leading-tight max-w-4xl">
+          <h2 className="text-3xl md:text-3xl font-medium text-white leading-tight max-w-4xl">
             Transforming Business Landscapes Through Strategic Excellence
           </h2>
         </div>
-        <p className="text-xl md:text-2xl mb-12 max-w-3xl">
+        <p className="text-xl md:text-xl mb-12 max-w-3xl">
           At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2025, we've established ourselves as a dynamic force in the consulting industry.
         </p>
       </div>
@@ -492,9 +492,24 @@ const WhyChooseUs = () => {
         <h2 className="text-3xl font-bold text-center text-gray-100 mb-12">
           Why Partner with Cyinov Consulting?
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {reasons.map((reason, index) => (
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {reasons.slice(0, 3).map((reason, index) => (
             <div key={index} className="bg-gray-800 p-6 rounded-lg">
+              <h3 className="text-xl font-bold text-blue-400 mb-4">{reason.title}</h3>
+              <ul className="space-y-3">
+                {reason.points.map((point, idx) => (
+                  <li key={idx} className="flex items-start space-x-2">
+                    <FaCheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
+                    <span className="text-gray-300">{point}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-8 max-w-3xl mx-auto">
+          {reasons.slice(3).map((reason, index) => (
+            <div key={index + 3} className="bg-gray-800 p-6 rounded-lg">
               <h3 className="text-xl font-bold text-blue-400 mb-4">{reason.title}</h3>
               <ul className="space-y-3">
                 {reason.points.map((point, idx) => (
