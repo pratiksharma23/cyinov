@@ -8,13 +8,23 @@ import team4 from '../assets/team4.jpg';
 import team5 from '../assets/team5.jpg';
 import team6 from '../assets/team6.jpg';
 
-const TeamMember = ({ image, name, position, description, social }) => (
+const TeamMember = ({ image, name, position, description, expertise, social }) => (
   <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-700">
     <img src={image} alt={name} className="w-full h-64 object-cover" />
     <div className="p-6">
       <h3 className="text-xl font-bold text-gray-100 mb-2">{name}</h3>
       <p className="text-blue-400 mb-4">{position}</p>
       <p className="text-gray-300 mb-4">{description}</p>
+      
+      <div className="mb-4">
+        <h4 className="text-md font-semibold text-gray-100 mb-2">Key Expertise:</h4>
+        <ul className="list-disc pl-5 text-gray-300 space-y-1">
+          {expertise.map((item, idx) => (
+            <li key={idx}>{item}</li>
+          ))}
+        </ul>
+      </div>
+      
       <div className="flex space-x-4">
         {social.linkedin && (
           <a 
@@ -53,118 +63,101 @@ const Team = () => {
   const teamMembers = [
     {
       image: team1,
-      name: "John Smith",
-      position: "CEO & Founder",
-      description: "Over 20 years of experience in business consulting and strategic management.",
+      name: "Shauryanker Kaushik",
+      position: "Founder & Head - Legal & Regulatory Compliance (L&R)",
+      description: "An accomplished Advocate at the Supreme Court of India and a renowned Trademark Attorney, Shauryanker specializes in intellectual property law, cybersecurity law, and regulatory compliance. With vast experience in litigation, IP portfolio management, and strategic brand protection, he has worked extensively on cross-border trademark issues. His expertise in legal tech and cybersecurity law further enhances Cyinov's commitment to offering cutting-edge legal solutions.",
+      expertise: [
+        "Intellectual Property Rights (IPR)",
+        "Cybersecurity & Digital Forensics",
+        "Trademark & Brand Protection",
+        "Legal Tech Innovations",
+        "Regulatory Compliance & Litigation"
+      ],
       social: {
-        linkedin: "https://linkedin.com/in/john-smith",
-        twitter: "https://twitter.com/johnsmith",
-        email: "john.smith@cyinov.com"
+        linkedin: "https://linkedin.com/in/shauryanker-kaushik",
+        email: "shauryanker@cyinov.com"
       }
     },
     {
       image: team2,
-      name: "Sarah Johnson",
-      position: "Legal Compliance Director",
-      description: "Expert in regulatory compliance and corporate law with 15 years experience.",
+      name: "Ankur",
+      position: "Head - Human Capital Management (HCM)",
+      description: "Ankur is a seasoned Human Capital Management expert with a strong background in workforce planning, talent acquisition, and HR compliance. With years of experience in corporate HR strategy, he specializes in building high-performance teams and optimizing organizational structures. His expertise helps businesses navigate complex labor laws while fostering a positive work environment.",
+      expertise: [
+        "Talent Acquisition & Retention",
+        "Workforce Planning",
+        "HR Compliance & Employee Relations",
+        "Performance Management & Leadership Development"
+      ],
       social: {
-        linkedin: "https://linkedin.com/in/sarah-johnson",
-        email: "sarah.johnson@cyinov.com"
+        linkedin: "https://linkedin.com/in/ankur-hcm",
+        email: "ankur@cyinov.com"
       }
     },
     {
       image: team3,
-      name: "Michael Chen",
-      position: "Tax Advisory Lead",
-      description: "Certified tax expert with extensive experience in international taxation.",
+      name: "Anuj",
+      position: "Head - Tax Advisory (TA)",
+      description: "Anuj is a highly skilled tax consultant with extensive experience in corporate taxation, indirect taxes, and financial compliance. His deep understanding of national and international tax regulations allows him to craft effective tax strategies that minimize liabilities and ensure compliance. His work includes structuring financial models for businesses, offering strategic tax planning, and ensuring regulatory adherence.",
+      expertise: [
+        "Corporate Tax Planning",
+        "Indirect Taxation",
+        "Financial Compliance",
+        "International Taxation & Transfer Pricing"
+      ],
       social: {
-        linkedin: "https://linkedin.com/in/michael-chen",
-        twitter: "https://twitter.com/michaelchen",
-        email: "michael.chen@cyinov.com"
+        linkedin: "https://linkedin.com/in/anuj-tax",
+        email: "anuj@cyinov.com"
       }
     },
     {
       image: team4,
-      name: "Emily Brown",
-      position: "Market Research Head",
-      description: "Specialized in market analysis and consumer behavior research.",
+      name: "Rajeev",
+      position: "Head - Market & Product Research (MPR)",
+      description: "With over two decades of experience in market and product research, Rajeev specializes in data-driven business insights that empower organizations to make informed decisions. He has worked with diverse industries, analyzing trends, customer behaviors, and competitive landscapes to provide actionable strategies. His analytical acumen helps businesses optimize their product positioning and market entry strategies.",
+      expertise: [
+        "Market & Consumer Research",
+        "Competitive Intelligence",
+        "Business Analytics & Strategy",
+        "Product Positioning & Go-To-Market Planning"
+      ],
       social: {
-        linkedin: "https://linkedin.com/in/emily-brown",
-        twitter: "https://twitter.com/emilybrown",
-        email: "emily.brown@cyinov.com"
-      }
-    },
-    {
-      image: team5,
-      name: "David Wilson",
-      position: "HR Director",
-      description: "Leading human capital management and organizational development.",
-      social: {
-        linkedin: "https://linkedin.com/in/david-wilson",
-        email: "david.wilson@cyinov.com"
-      }
-    },
-    {
-      image: team6,
-      name: "Lisa Rodriguez",
-      position: "Client Relations Manager",
-      description: "Dedicated to ensuring exceptional client service and satisfaction.",
-      social: {
-        linkedin: "https://linkedin.com/in/lisa-rodriguez",
-        twitter: "https://twitter.com/lisarodriguez",
-        email: "lisa.rodriguez@cyinov.com"
+        linkedin: "https://linkedin.com/in/rajeev-mpr",
+        email: "rajeev@cyinov.com"
       }
     }
   ];
 
   return (
     <div className="py-16 bg-gray-900">
-      <div className="relative w-full h-64 mb-12 overflow-hidden">
+      <div className="relative w-full h-[400px] mb-12 overflow-hidden">
         <img 
           src={teamHero} 
           alt="Our Team" 
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50"></div>
-        <div className="relative h-full flex items-center justify-center">
-          <h2 className="text-4xl font-bold text-center text-gray-100">Our Team</h2>
+        <div className="relative h-full flex flex-col items-center justify-center px-4 text-center">
+          <h2 className="text-4xl font-bold text-gray-100 mb-4">Our Team</h2>
+          <h3 className="text-2xl font-semibold text-blue-400 mb-6">Meet the Experts Behind Cyinov Consulting</h3>
+          <p className="text-lg text-gray-200 max-w-3xl">
+            At Cyinov Consulting, our team of dedicated professionals brings expertise across multiple domains to provide comprehensive business solutions.
+          </p>
         </div>
       </div>
+
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           {teamMembers.map((member, index) => (
-            <div key={index} className="bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-700">
-              <img 
-                src={member.image} 
-                alt={member.name} 
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-semibold mb-2 text-gray-100">{member.name}</h3>
-                <p className="text-blue-400 mb-3">{member.position}</p>
-                <p className="text-gray-300 mb-4">{member.description}</p>
-                <div className="flex space-x-4">
-                  {member.social.linkedin && (
-                    <a href={member.social.linkedin} target="_blank" rel="noopener noreferrer" 
-                       className="text-gray-400 hover:text-blue-400">
-                      <FaLinkedin size={20} />
-                    </a>
-                  )}
-                  {member.social.twitter && (
-                    <a href={member.social.twitter} target="_blank" rel="noopener noreferrer"
-                       className="text-gray-400 hover:text-blue-300">
-                      <FaTwitter size={20} />
-                    </a>
-                  )}
-                  {member.social.email && (
-                    <a href={`mailto:${member.social.email}`}
-                       className="text-gray-400 hover:text-red-400">
-                      <FaEnvelope size={20} />
-                    </a>
-                  )}
-                </div>
-              </div>
-            </div>
+            <TeamMember
+              key={index}
+              image={member.image}
+              name={member.name}
+              position={member.position}
+              description={member.description}
+              expertise={member.expertise}
+              social={member.social}
+            />
           ))}
         </div>
       </div>
