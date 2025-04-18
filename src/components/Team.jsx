@@ -8,7 +8,6 @@ import team4 from '../assets/team4.jpg';
 
 const TeamMember = ({ image, name, position, description, expertise, social }) => (
   <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-700">
-    {/* <img src={image} alt={name} className="w-full h-64 object-cover" /> */}
     <div className="p-6">
       <h3 className="text-xl font-bold text-gray-100 mb-2">{name}</h3>
       <p className="text-blue-400 mb-4">{position}</p>
@@ -23,13 +22,13 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
         </ul>
       </div>
       
-      <div className="flex space-x-4">
-        {social.linkedin && (
+      <div className="flex space-x-4">        {social.linkedin && (
           <a 
             href={social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-400 transition-colors"
+            aria-label={`${name}'s LinkedIn Profile`}
           >
             <FaLinkedin size={20} />
           </a>
@@ -40,14 +39,19 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
             target="_blank"
             rel="noopener noreferrer"
             className="text-gray-400 hover:text-blue-300 transition-colors"
+            aria-label={`${name}'s Twitter Profile`}
           >
             <FaTwitter size={20} />
           </a>
-        )}
-        {social.email && (
+        )}        {social.email && (
           <a 
-            href={`mailto:${social.email}`}
+            href={`mailto:${social.email.replace('@', '[at]')}`}
             className="text-gray-400 hover:text-red-400 transition-colors"
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href = `mailto:${social.email}`;
+            }}
+            aria-label={`Email ${name}`}
           >
             <FaEnvelope size={20} />
           </a>
@@ -127,12 +131,12 @@ const Team = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-900">
-      <div className="relative w-full h-[400px] mb-12 overflow-hidden">
+    <div className="py-16 bg-gray-900">      <div className="relative w-full h-[400px] mb-12 overflow-hidden">
         <img 
           src={teamHero} 
-          alt="Our Team" 
+          alt="Cyinov Consulting Team Members" 
           className="absolute inset-0 w-full h-full object-cover"
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50"></div>
         <div className="relative h-full flex flex-col items-center justify-center px-4 text-center">

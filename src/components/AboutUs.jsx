@@ -33,9 +33,8 @@ const AboutHero = () => {
           <h2 className="text-3xl md:text-3xl font-medium text-white leading-tight max-w-4xl">
             Transforming Business Landscapes Through Strategic Excellence
           </h2>
-        </div>
-        <p className="text-xl md:text-lg mb-12 max-w-3xl">
-          At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2025, we've established ourselves as a dynamic force in the consulting industry, combining innovative methodologies with deep industry expertise to deliver exceptional results for our clients.
+        </div>        <p className="text-xl md:text-lg mb-12 max-w-3xl">
+          At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2023, we've established ourselves as a dynamic force in the consulting industry, combining innovative methodologies with deep industry expertise to deliver exceptional results for our clients.
         </p>
       </div>
     </section>
@@ -113,10 +112,14 @@ const MissionVision = () => {
                 known for our transformative solutions and commitment to client success.
               </p>
             </div>
-          </div>
-          <div className="lg:w-1/2">
+          </div>          <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img src={missionImg} alt="Our Mission and Vision" className="w-full h-[400px] object-cover" />
+              <img 
+                src={missionImg} 
+                alt="Our Mission and Vision at Cyinov Consulting" 
+                className="w-full h-[400px] object-cover" 
+                loading="lazy" 
+              />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
             </div>
           </div>
@@ -240,19 +243,19 @@ const StatsSection = () => {
             <div className="text-5xl font-bold text-white mb-2">
               <CountUp end={20} suffix="+" duration={2.5} />
             </div>
-            <p className="text-xl text-blue-200 uppercase tracking-wide">Clients</p>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">Happy Clients</p>
           </div>
           <div className="text-center p-6">
             <div className="text-5xl font-bold text-white mb-2">
               <CountUp end={5} suffix="+" duration={2.5} />
             </div>
-            <p className="text-xl text-blue-200 uppercase tracking-wide">Clients this month</p>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">Years Experience</p>
           </div>
           <div className="text-center p-6">
             <div className="text-5xl font-bold text-white mb-2">
               <CountUp end={50} duration={2.5} />
             </div>
-            <p className="text-xl text-blue-200 uppercase tracking-wide">New Projects</p>
+            <p className="text-xl text-blue-200 uppercase tracking-wide">Completed Projects</p>
           </div>
         </div>
       </div>
@@ -306,7 +309,7 @@ const ApproachSection = () => {
           </div>
           <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img src={approachImg} alt="Our Approach" className="w-full h-[500px] object-cover" />
+              <img src={approachImg} alt="Our Approach to Business Consulting" className="w-full h-[500px] object-cover" loading="lazy" />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
             </div>
           </div>

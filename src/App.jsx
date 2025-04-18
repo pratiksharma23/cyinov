@@ -13,6 +13,8 @@ import AboutUs from './components/AboutUs';
 import Team from './components/Team';
 import FAQ from './components/FAQ';
 import Contact from './components/Contact';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsOfService from './components/TermsOfService';
 
 function App() {
   return (
@@ -25,11 +27,12 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
         <Route path="/services/legal-compliance" element={<LegalCompliance />} />
-        <Route path="/services/tax-advisory" element={<TaxAdvisory />} />
-        <Route path="/services/market-research" element={<MarketResearch />} />
+        <Route path="/services/tax-advisory" element={<TaxAdvisory />} />        <Route path="/services/market-research" element={<MarketResearch />} />
         <Route path="/services/human-capital" element={<HumanCapital />} />
         <Route path="/services/trademark" element={<Trademark />} />
         <Route path="/services/trademark/trademark-registration" element={<TrademarkRegistration />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="/terms-of-service" element={<TermsOfService />} />
       </Routes>
     </Layout>
   );

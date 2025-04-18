@@ -43,9 +43,13 @@ const Footer = () => {
             </div>
           </div>
         </div>
-        
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; {new Date().getFullYear()} Cyinov. All rights reserved.</p>
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <p className="mb-2">&copy; {new Date().getFullYear()} Cyinov. All rights reserved.</p>
+          <div className="flex justify-center space-x-4 mt-2">
+            <Link to="/privacy-policy" className="hover:text-white text-sm">Privacy Policy</Link>
+            <span className="text-gray-600">|</span>
+            <Link to="/terms-of-service" className="hover:text-white text-sm">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>

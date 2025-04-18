@@ -6,26 +6,25 @@ import { FaQuoteLeft, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 
 const Testimonials = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
-
   const testimonials = [
     {
       id: 1,
-      name: "Robert Miller",
-      position: "CEO, Tech Solutions Inc.",
+      name: "Rajesh Sharma",
+      position: "Director, Infotech Solutions Pvt. Ltd.",
       image: testimonial1,
       text: "Cyinov Consulting transformed our business operations. Their market research insights were invaluable in helping us expand into new markets."
     },
     {
       id: 2,
-      name: "Jennifer Adams",
-      position: "CFO, Global Traders Ltd.",
+      name: "Vikram Patel",
+      position: "CFO, Ashoka Enterprises",
       image: testimonial2,
       text: "The tax advisory services provided by Cyinov helped us optimize our financial structure and achieve significant savings."
     },
     {
       id: 3,
-      name: "Marcus Chen",
-      position: "Director, Innovation Labs",
+      name: "Sunil Mehta",
+      position: "Head of HR, Orbit Technologies",
       image: testimonial3,
       text: "Their human capital management solutions helped us build a stronger, more efficient team. Highly recommended!"
     }
