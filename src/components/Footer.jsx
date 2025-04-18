@@ -37,10 +37,9 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-semibold mb-4">Connect With Us</h4>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-white"><FaFacebook size={24} /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><FaTwitter size={24} /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><FaLinkedin size={24} /></a>
-              <a href="#" className="text-gray-400 hover:text-white"><FaInstagram size={24} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61574960935041" className="text-gray-400 hover:text-white"><FaFacebook size={24} /></a>
+              <a href="https://www.linkedin.com/company/cyinovconsulting" className="text-gray-400 hover:text-white"><FaLinkedin size={24} /></a>
+              <a href="https://www.instagram.com/cyinovconsulting" className="text-gray-400 hover:text-white"><FaInstagram size={24} /></a>
             </div>
           </div>
         </div>

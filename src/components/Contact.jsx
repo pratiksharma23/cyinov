@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
-import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaTwitter, FaFacebook } from 'react-icons/fa';
+import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaLinkedin, FaInstagram, FaFacebook } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -149,8 +149,8 @@ const Contact = () => {
                 <div className="flex items-start space-x-4">
                   <FaMapMarkerAlt className="text-indigo-400 text-xl mt-1" />
                   <div>
-                    <h3 className="font-semibold text-gray-100">Office Address</h3>
-                    <p className="text-gray-300">123 Business Avenue<br />Suite 456<br />Mumbai, Maharashtra 400001</p>
+                    <h3 className="font-semibold text-gray-100">Office Locations</h3>
+                    <p className="text-gray-300">Gurgaon, Delhi, Mumbai & Jaipur</p>
                   </div>
                 </div>
                 
@@ -158,7 +158,7 @@ const Contact = () => {
                   <FaPhone className="text-indigo-400 text-xl" />
                   <div>
                     <h3 className="font-semibold text-gray-100">Phone</h3>
-                    <p className="text-gray-300">+91 (022) 1234-5678</p>
+                    <p className="text-gray-300">+91 8800203969</p>
                   </div>
                 </div>
                 
@@ -176,13 +176,13 @@ const Contact = () => {
             <div className="bg-gray-800 rounded-lg shadow-lg shadow-black/20 p-8 border border-gray-700">
               <h2 className="text-2xl font-semibold mb-6 text-indigo-300">Connect With Us</h2>
               <div className="flex space-x-6">
-                <a href="https://linkedin.com/company/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                <a href="https://www.linkedin.com/company/cyinovconsulting/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
                   <FaLinkedin size={24} />
                 </a>
-                <a href="https://twitter.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
-                  <FaTwitter size={24} />
+                <a href="https://www.instagram.com/cyinovconsulting" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                  <FaInstagram size={24} />
                 </a>
-                <a href="https://facebook.com/cyinov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
+                <a href="https://www.facebook.com/profile.php?id=61574960935041" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-indigo-400 transition-colors">
                   <FaFacebook size={24} />
                 </a>
               </div>
