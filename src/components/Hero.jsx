@@ -32,7 +32,8 @@ const heroContent = [
     description: "Cyinov Consulting - Your trusted partner in navigating the complexities of modern business landscape",
     background: companyBg,
     icon: BsBuilding,
-    buttonText: "Our Company"
+    buttonText: "Our Company",
+    link: "/about"
   },
   {
     id: 'team',
@@ -40,7 +41,8 @@ const heroContent = [
     description: "Meet our diverse team of industry experts committed to your success",
     background: teamBg,
     icon: BsPeople,
-    buttonText: "Our Team"
+    buttonText: "Our Team",
+    link: "/team"
   },
   {
     id: 'vision',
@@ -48,7 +50,8 @@ const heroContent = [
     description: "Driving innovation and excellence through strategic partnerships and forward-thinking solutions",
     background: visionBg,
     icon: BsEye,
-    buttonText: "Our Vision"
+    buttonText: "Our Vision",
+    link: "/about"
   },
   {
     id: 'services',
@@ -56,7 +59,8 @@ const heroContent = [
     description: "Tailored services to meet your unique business challenges and opportunities",
     background: servicesBg,
     icon: HiOutlineChartBar,
-    buttonText: "Our Services"
+    buttonText: "Our Services",
+    link: "#services"
   }
 ];
 
@@ -96,12 +100,26 @@ const Hero = () => {
     }
   ];
 
+  // Function to handle scrolling to services section
+  const scrollToServices = () => {
+    const servicesSection = document.getElementById('services');
+    if (servicesSection) {
+      servicesSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   const handleSectionChange = (sectionId) => {
     if (sectionId !== activeSection) {
       setIsTransitioning(true);
       setPrevSection(activeSection);
       setActiveSection(sectionId);
       setTimeout(() => setIsTransitioning(false), 500);
+    }
+  };
+
+  const handleButtonClick = () => {
+    if (activeSection === 'services') {
+      scrollToServices();
     }
   };
 
@@ -162,14 +180,35 @@ const Hero = () => {
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.description}
               </p>
-              <Link
-                to="/contact"
-                className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
-                  text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
-                  transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
-              >
-                Get Started
-              </Link>
+              
+              {activeSection === 'default' ? (
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
+                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                >
+                  Get Started
+                </Link>
+              ) : activeSection === 'services' ? (
+                <button
+                  onClick={scrollToServices}
+                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
+                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                >
+                  {currentContent.buttonText}
+                </button>
+              ) : (
+                <Link
+                  to={currentContent.link}
+                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
+                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                >
+                  {currentContent.buttonText}
+                </Link>
+              )}
             </div>
 
             {/* Navigation Buttons */}
@@ -199,7 +238,7 @@ const Hero = () => {
       </div>
 
       {/* Services Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-black">
+      <section id="services" className="py-20 bg-gradient-to-b from-gray-900 to-black">
         <div className="container mx-auto px-4">
           <h2 className="text-4xl font-bold text-center mb-4 text-white">Our Services</h2>
           <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
