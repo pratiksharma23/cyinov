@@ -169,14 +169,14 @@ const Trademark = () => {
       title: "Design Registration",
       description: "Registration for industrial designs and unique visual features",
       image: designRegistrationImg,
-      link: "/services/design-registration",
+      link: "/contact",
       actionText: "Register Now"
     },
     {
       title: "Design Objection",
       description: "Filing responses to objections raised by the Design Office",
       image: designObjectionImg,
-      link: "/services/design-objection",
+      link: "/contact",
       actionText: "Object Now"
     }
   ];
@@ -187,14 +187,14 @@ const Trademark = () => {
       title: "Copyright Registration",
       description: "Legal entitlement for original works of authorship",
       image: copyrightRegistrationImg,
-      link: "/services/copyright-registration",
+      link: "/contact",
       actionText: "Register Now"
     },
     {
       title: "Copyright Objection",
       description: "Filing responses to objections raised by the Copyright Office",
       image: copyrightObjectionImg,
-      link: "/services/copyright-objection",
+      link: "/contact",
       actionText: "Object Now"
     }
   ];
@@ -205,56 +205,56 @@ const Trademark = () => {
       title: "Trademark Registration",
       description: "Comprehensive trademark search and application filing under one class",
       image: tmRegistrationImg,
-      link: "/services/trademark-registration",
+      link: "/contact",
       actionText: "Register Now"
     },
     {
       title: "Trademark Objection",
       description: "Drafting and filing responses to objections raised by the Trademark Registry",
       image: tmObjectionImg,
-      link: "/services/trademark-objection",
+      link: "/contact",
       actionText: "Object Now"
     },
     {
       title: "Trademark Opposition",
       description: "Filing and defending trademark opposition proceedings",
       image: tmOppositionImg,
-      link: "/services/trademark-opposition",
+      link: "/contact",
       actionText: "Oppose Now"
     },
     {
       title: "Trademark Renewal",
       description: "Drafting and filing trademark renewal applications",
       image: tmRenewalImg,
-      link: "/services/trademark-renewal",
+      link: "/contact",
       actionText: "Renew Now"
     },
     {
       title: "Trademark Search",
       description: "Comprehensive trademark search to identify existing similar marks",
       image: tmSearchImg,
-      link: "/services/trademark-search",
+      link: "/contact",
       actionText: "Search Now"
     },
     {
       title: "Trademark Transfer",
       description: "Legally transferring trademark ownership to another party",
       image: tmTransferImg,
-      link: "/services/trademark-transfer",
+      link: "/contact",
       actionText: "Transfer Now"
     },
     {
       title: "Trademark Rectification",
       description: "Filing rectifications for wrongly registered or objected trademarks",
       image: tmRectificationImg,
-      link: "/services/trademark-rectification",
+      link: "/contact",
       actionText: "Rectify Now"
     },
     {
       title: "Trademark Hearing",
       description: "Legal representation before the Trademark Office in hearings",
       image: showcaseHearingImg,
-      link: "/services/trademark-hearing",
+      link: "/contact",
       actionText: "Register Now"
     }
   ];
@@ -418,7 +418,7 @@ const Trademark = () => {
                     ))}
                   </ul>
                   <motion.a
-                    href="/services/patent-registration"
+                    href="/contact"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="mt-2 inline-flex items-center px-5 py-2 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300 self-start"
@@ -601,7 +601,7 @@ const Trademark = () => {
                     and make a lasting impression on your target audience.
                   </p>
                   <motion.a
-                    href="/services/logo-designing"
+                    href="/contact"
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     className="mt-2 inline-flex items-center px-5 py-2 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300 self-start"
@@ -662,7 +662,7 @@ const Trademark = () => {
             Let us help you protect what matters most—your brand, innovations, and creative assets.
           </p>
           <motion.a
-            href="/services/trademark-registration"
+            href="/contact"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"

@@ -467,7 +467,7 @@ const HumanCapital = () => {
 
           <div className="mt-16 text-center">
             <a
-              href="#contact"
+              href="/contact"
               className="inline-flex items-center bg-blue-400 text-gray-900 font-bold py-3 px-8 rounded-full 
                        hover:bg-blue-500 transition-colors duration-300"
             >

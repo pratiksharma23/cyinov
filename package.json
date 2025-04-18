@@ -2,7 +2,7 @@
   "name": "cyinov",
   "version": "1.0.0",
   "main": "index.js",
-  "homepage": "https://pratiksharma.github.io/cyinov",
+  "homepage": "https://pratiksharma23.github.io/cyinov",
   "scripts": {
     "start": "webpack serve --mode development --open",
     "build": "webpack --mode production",
