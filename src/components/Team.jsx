@@ -1,16 +1,14 @@
 import React from 'react';
 import { FaLinkedin, FaTwitter, FaEnvelope } from 'react-icons/fa';
-import teamHero from '../assets/team.jpeg';
+import teamHero from '../assets/OurTeam.jpg';
 import team1 from '../assets/team1.jpg';
 import team2 from '../assets/team2.jpg';
 import team3 from '../assets/team3.jpg';
 import team4 from '../assets/team4.jpg';
-import team5 from '../assets/team5.jpg';
-import team6 from '../assets/team6.jpg';
 
 const TeamMember = ({ image, name, position, description, expertise, social }) => (
   <div className="bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-700">
-    <img src={image} alt={name} className="w-full h-64 object-cover" />
+    {/* <img src={image} alt={name} className="w-full h-64 object-cover" /> */}
     <div className="p-6">
       <h3 className="text-xl font-bold text-gray-100 mb-2">{name}</h3>
       <p className="text-blue-400 mb-4">{position}</p>
@@ -74,8 +72,8 @@ const Team = () => {
         "Regulatory Compliance & Litigation"
       ],
       social: {
-        linkedin: "https://linkedin.com/in/shauryanker-kaushik",
-        email: "shauryanker@cyinov.com"
+        linkedin: "https://www.linkedin.com/in/shauryanker",
+        email: "info@cyinov.com"
       }
     },
     {
@@ -90,8 +88,8 @@ const Team = () => {
         "Performance Management & Leadership Development"
       ],
       social: {
-        linkedin: "https://linkedin.com/in/ankur-hcm",
-        email: "ankur@cyinov.com"
+        linkedin: "https://www.linkedin.com/in/ankur-kaushik-65900112",
+        email: "info@cyinov.com"
       }
     },
     {
@@ -106,8 +104,8 @@ const Team = () => {
         "International Taxation & Transfer Pricing"
       ],
       social: {
-        linkedin: "https://linkedin.com/in/anuj-tax",
-        email: "anuj@cyinov.com"
+        linkedin: "https://www.linkedin.com/in/anuj-kaushik-08680a6a",
+        email: "info@cyinov.com"
       }
     },
     {
@@ -122,8 +120,8 @@ const Team = () => {
         "Product Positioning & Go-To-Market Planning"
       ],
       social: {
-        linkedin: "https://linkedin.com/in/rajeev-mpr",
-        email: "rajeev@cyinov.com"
+        linkedin: "https://www.linkedin.com/in/rajeev-kaushik-65813426",
+        email: "info@cyinov.com"
       }
     }
   ];
