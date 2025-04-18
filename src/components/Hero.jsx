@@ -8,10 +8,10 @@ import Testimonials from './Testimonials';
 
 // Import background images
 import heroBg from '../assets/hero-bg.jpg';
-import teamBg from '../assets/team.jpeg';
-import companyBg from '../assets/company.jpeg';
-import visionBg from '../assets/vision.jpeg';
-import servicesBg from '../assets/services.jpg';
+import teamBg from '../assets/OurTeam.jpg';
+import companyBg from '../assets/OurCompany.jpg';
+import visionBg from '../assets/OurVision.jpg';
+import servicesBg from '../assets/OurServices.jpg';
 import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';

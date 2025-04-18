@@ -4,13 +4,16 @@ import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode,
          FaHandshake, FaGlobe, FaStar, FaRocket, FaUserTie, FaClipboardCheck } from 'react-icons/fa';
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
-import aboutHero from '../assets/about-hero.jpeg';
-import missionImg from '../assets/vision.jpeg';
+import aboutHero from '../assets/About.jpg';
+import missionImg from '../assets/VisionMission.jpg';
 import valuesImg from '../assets/team.jpeg';
 import approachImg from '../assets/company.jpeg';
-import techImg from '../assets/market.jpg';
+import techImg from '../assets/TechIntegration.jpg';
 import industryImg from '../assets/legal.jpg';
 import whyUsImg from '../assets/tax.jpg';
+import qualityImg from '../assets/QualityAssurance.jpg';
+import clientSuccessImg from '../assets/ClientSuccessCommitment.jpg';
+import industryExpertiseImg from '../assets/IndustryExpertise.jpg';
 
 const AboutHero = () => {
   return (
@@ -379,7 +382,7 @@ const IndustryExpertise = () => {
           </div>
           <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img src={industryImg} alt="Industry Expertise" className="w-full h-[500px] object-cover" />
+              <img src={industryExpertiseImg} alt="Industry Expertise" className="w-full h-[500px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
             </div>
           </div>
@@ -404,7 +407,7 @@ const ClientSuccessCommitment = () => {
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12">
           <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img src={missionImg} alt="Client Success Commitment" className="w-full h-[400px] object-cover" />
+              <img src={clientSuccessImg} alt="Client Success Commitment" className="w-full h-[400px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-l from-blue-600/30 to-transparent"></div>
             </div>
           </div>
@@ -456,7 +459,7 @@ const QualityAssurance = () => {
           </div>
           <div className="lg:w-1/2">
             <div className="relative rounded-xl overflow-hidden shadow-2xl">
-              <img src={approachImg} alt="Quality Assurance" className="w-full h-[400px] object-cover" />
+              <img src={qualityImg} alt="Quality Assurance" className="w-full h-[400px] object-cover" />
               <div className="absolute inset-0 bg-gradient-to-r from-blue-600/30 to-transparent"></div>
             </div>
           </div>
