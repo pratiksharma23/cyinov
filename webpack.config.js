@@ -1,11 +1,11 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-  entry: './src/index.js',  output: {
+module.exports = {  entry: './src/index.js',
+  output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: process.env.NODE_ENV === 'production' ? './' : '/'
+    publicPath: process.env.NODE_ENV === 'production' ? '/cyinov/' : '/'
   },
   module: {
     rules: [
@@ -32,10 +32,10 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.jsx'],
-  },
-  plugins: [
+  },  plugins: [
     new HtmlWebpackPlugin({
       template: './index.html',
+      favicon: './public/favicon.ico'
     }),
   ],
   devServer: {
