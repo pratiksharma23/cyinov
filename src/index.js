@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter, HashRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
+import { ThemeProvider } from './contexts/ThemeContext';
 
 // Determine if we're running in production (GitHub Pages)
 const isProduction = process.env.NODE_ENV === 'production';
@@ -14,8 +15,10 @@ const Router = isProduction ? HashRouter : BrowserRouter;
 const root = createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <App />
+      </Router>
+    </ThemeProvider>
   </React.StrictMode>
 );

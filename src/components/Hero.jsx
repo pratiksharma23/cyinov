@@ -129,7 +129,6 @@ const Hero = () => {
   };
 
   const currentContent = getCurrentContent();
-
   return (
     <>
       <div className="relative h-screen">
@@ -143,9 +142,8 @@ const Hero = () => {
             backgroundPosition: 'center',
             zIndex: activeSection === 'default' ? 1 : 0
           }}
-        >
-          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90 
-            transition-opacity duration-700" />
+        >          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 dark:from-black/85 dark:via-black/75 dark:to-black/90 
+            transition-all duration-700" />
         </div>
 
         {/* Section Background Images */}
@@ -161,9 +159,8 @@ const Hero = () => {
               zIndex: content.id === activeSection ? 1 : 
                      content.id === prevSection ? 0 : -1
             }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/90 
-              transition-opacity duration-700" />
+          >            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 dark:from-black/85 dark:via-black/75 dark:to-black/90 
+              transition-all duration-700" />
           </div>
         ))}
 
@@ -171,31 +168,27 @@ const Hero = () => {
         <div className="relative h-full z-10">
           <div className="container mx-auto px-4 h-full flex flex-col justify-between py-16">
             {/* Main Hero Content */}
-            <div className="text-center mt-32">
-              <h1 className={`text-5xl md:text-6xl font-bold text-white mb-6 transition-all duration-700
+            <div className="text-center mt-32">              <h1 className={`text-5xl md:text-6xl font-bold text-white dark:text-white mb-6 transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.title}
-              </h1>
-              <p className={`text-xl md:text-2xl text-gray-200 mb-8 max-w-3xl mx-auto transition-all duration-700
+              </h1><p className={`text-xl md:text-2xl text-gray-300 dark:text-gray-200 mb-8 max-w-3xl mx-auto transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.description}
               </p>
               
-              {activeSection === 'default' ? (
-                <Link
+              {activeSection === 'default' ? (                <Link
                   to="/contact"
-                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
-                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                  className="inline-flex items-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-8 py-3 rounded-full 
+                    text-lg font-semibold hover:scale-105 transform 
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30"
                 >
                   Get Started
                 </Link>
-              ) : activeSection === 'services' ? (
-                <button
+              ) : activeSection === 'services' ? (                <button
                   onClick={scrollToServices}
-                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
-                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                  className="inline-flex items-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-8 py-3 rounded-full 
+                    text-lg font-semibold hover:scale-105 transform 
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30"
                 >
                   {currentContent.buttonText}
                 </button>
@@ -219,14 +212,19 @@ const Hero = () => {
                   onClick={() => handleSectionChange(content.id)}
                   className={`group p-4 rounded-lg transition-all duration-300 backdrop-blur-sm
                     ${content.id === activeSection 
-                      ? 'bg-indigo-900/50 border-b-2 border-indigo-400' 
-                      : 'bg-black/60 hover:bg-indigo-900/30'}`}
+                      ? 'dark:bg-indigo-900/50 dark:border-indigo-400 bg-indigo-600/20 border-indigo-500' 
+                      : 'dark:bg-black/60 dark:hover:bg-indigo-900/30 bg-black/20 hover:bg-indigo-600/10'} 
+                    border-b-2 ${content.id === activeSection ? '' : 'border-transparent'}`}
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <content.icon className={`text-2xl 
-                      ${content.id === activeSection ? 'text-indigo-300' : 'text-gray-300'}`} />
+                      ${content.id === activeSection 
+                        ? 'dark:text-indigo-300 text-indigo-500' 
+                        : 'dark:text-gray-300 text-gray-600'}`} />
                     <span className={`text-sm md:text-base font-medium 
-                      ${content.id === activeSection ? 'text-white' : 'text-gray-300'}`}>
+                      ${content.id === activeSection 
+                        ? 'dark:text-white text-gray-800' 
+                        : 'dark:text-gray-300 text-gray-600'}`}>
                       {content.buttonText}
                     </span>
                   </div>

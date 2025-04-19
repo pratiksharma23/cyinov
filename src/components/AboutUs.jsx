@@ -23,17 +23,16 @@ const AboutHero = () => {
         style={{
           backgroundImage: `url(${aboutHero})`,
         }}
-      ></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50"></div>
+      ></div>      <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 to-black/50 dark:from-black/90 dark:to-black/70"></div>
         <div className="relative h-full flex flex-col justify-center items-center text-gray-100 px-4 text-center">
         <div className="mb-4">
-          <h1 className="text-5xl md:text-6xl font-bold text-blue-400 mb-2 tracking-tight">
+          <h1 className="text-5xl md:text-6xl font-bold text-indigo-400 dark:text-blue-400 mb-2 tracking-tight">
             Cyinov Consulting
           </h1>
-          <h2 className="text-3xl md:text-3xl font-medium text-white leading-tight max-w-4xl">
+          <h2 className="text-3xl md:text-3xl font-medium text-gray-800 dark:text-white leading-tight max-w-4xl backdrop-blur-sm bg-white/30 dark:bg-black/30 px-4 py-2 rounded">
             Transforming Business Landscapes Through Strategic Excellence
           </h2>
-        </div>        <p className="text-xl md:text-lg mb-12 max-w-3xl">
+        </div>        <p className="text-xl md:text-lg mb-12 max-w-3xl backdrop-blur-sm bg-white/20 dark:bg-black/30 p-4 rounded">
           At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2023, we've established ourselves as a dynamic force in the consulting industry, combining innovative methodologies with deep industry expertise to deliver exceptional results for our clients.
         </p>
       </div>

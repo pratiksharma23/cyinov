@@ -3,12 +3,12 @@ import { Link } from 'react-router-dom';
 import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaArrowRight } from 'react-icons/fa';
 
 const ServiceCard = ({ icon: Icon, title, description, link }) => (
-  <Link to={link} className="block p-6 bg-white rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
-    <div className="text-blue-600 mb-4">
+  <Link to={link} className="block p-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300">
+    <div className="text-indigo-600 dark:text-indigo-400 mb-4">
       <Icon className="w-12 h-12" />
     </div>
-    <h3 className="text-xl font-bold text-gray-800 mb-3">{title}</h3>
-    <p className="text-gray-600">{description}</p>
+    <h3 className="text-xl font-bold text-gray-800 dark:text-white mb-3">{title}</h3>
+    <p className="text-gray-600 dark:text-gray-300">{description}</p>
   </Link>
 );
 
@@ -41,11 +41,11 @@ const Services = () => {
   ];
 
   return (
-    <div className="py-16 bg-gray-50">
+    <div className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-200">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center mb-16">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h1>
-          <p className="text-xl text-gray-600">
+          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4 transition-colors duration-200">Our Services</h1>
+          <p className="text-xl text-gray-600 dark:text-gray-300 transition-colors duration-200">
             Comprehensive business solutions to help your organization thrive
           </p>
         </div>
@@ -56,13 +56,13 @@ const Services = () => {
         </div>
 
         {/* CTA Section */}
-        <div className="max-w-4xl mx-auto text-center py-16 border-t border-gray-200">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+        <div className="max-w-4xl mx-auto text-center py-16 border-t border-gray-200 dark:border-gray-700 transition-all duration-200">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-6 transition-colors duration-200">
             Let's discuss about how we can help make your business better
           </h2>
           <Link
             to="/contact"
-            className="inline-flex items-center px-8 py-3 bg-blue-600 text-white font-semibold rounded-full hover:bg-blue-700 transition-colors duration-300"
+            className="inline-flex items-center px-8 py-3 bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-500 dark:hover:bg-indigo-400 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300"
           >
             Contact Us
             <FaArrowRight className="ml-2" />

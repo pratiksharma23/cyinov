@@ -2,6 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Theme styles */
+:root {
+  --bg-primary: #1f2937;
+  --bg-secondary: #111827;
+  --text-primary: #f3f4f6;
+  --text-secondary: #d1d5db;
+  --accent: #6366f1;
+  --accent-hover: #4f46e5;
+  --border-color: #374151;
+  --card-bg: #1e293b;
+  --header-bg: #111827;
+  --footer-bg: #111827;
+  --transition: all 0.3s ease;
+}
+
+/* Light theme variables */
+.light-theme {
+  --bg-primary: #f9fafb;
+  --bg-secondary: #f3f4f6;
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --accent: #4f46e5;
+  --accent-hover: #4338ca;
+  --border-color: #e5e7eb;
+  --card-bg: #ffffff;
+  --header-bg: #f9fafb;
+  --footer-bg: #f9fafb;
+}
+
+/* Apply theme variables */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: var(--transition);
+}
+
 /* Header styles */
 .header {
   @apply sticky top-0 bg-white shadow-md z-50;

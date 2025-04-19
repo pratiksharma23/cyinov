@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
-  <div className="border-b border-gray-700">
+  <div className="border-b border-gray-300 dark:border-gray-700">
     <button
-      className="w-full py-4 px-6 text-left flex justify-between items-center hover:bg-gray-800 transition-colors duration-200"
+      className="w-full py-4 px-6 text-left flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
       onClick={onClick}
       aria-expanded={isOpen}
     >
-      <span className="text-lg font-semibold text-gray-100">{question}</span>
-      <span className={`transform transition-transform duration-200 text-indigo-400 ${isOpen ? 'rotate-180' : ''}`}>
+      <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">{question}</span>
+      <span className={`transform transition-transform duration-200 text-indigo-600 dark:text-indigo-400 ${isOpen ? 'rotate-180' : ''}`}>
         ▼
       </span>
     </button>
@@ -17,15 +17,15 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
         isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
-      <p className="p-6 text-gray-300 whitespace-pre-wrap">{answer}</p>
+      <p className="p-6 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{answer}</p>
     </div>
   </div>
 );
 
 const FAQCategory = ({ title, items, openIndex, setOpenIndex, startIndex }) => (
   <div className="mb-8">
-    <h3 className="text-2xl font-bold text-indigo-300 mb-4">{title}</h3>
-    <div className="bg-gray-800 rounded-lg shadow-md shadow-black/20 overflow-hidden border border-gray-700">
+    <h3 className="text-2xl font-bold text-indigo-700 dark:text-indigo-300 mb-4">{title}</h3>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-300/50 dark:shadow-black/20 overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
       {items.map((item, index) => (
         <FAQItem
           key={index}
