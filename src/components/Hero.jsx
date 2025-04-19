@@ -162,42 +162,43 @@ const Hero = () => {
           >            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 dark:from-black/85 dark:via-black/75 dark:to-black/90 
               transition-all duration-700" />
           </div>
-        ))}
-
-        {/* Hero Content */}
+        ))}        {/* Hero Content */}
         <div className="relative h-full z-10">
-          <div className="container mx-auto px-4 h-full flex flex-col justify-between py-16">
+          <div className="container mx-auto px-4 sm:px-6 h-full flex flex-col justify-between py-12 md:py-16">
             {/* Main Hero Content */}
-            <div className="text-center mt-32">              <h1 className={`text-5xl md:text-6xl font-bold text-white dark:text-white mb-6 transition-all duration-700
+            <div className="text-center mt-20 sm:mt-24 md:mt-32">
+              <h1 className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white dark:text-white mb-4 sm:mb-6 transition-all duration-700 px-2
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.title}
-              </h1><p className={`text-xl md:text-2xl text-gray-300 dark:text-gray-200 mb-8 max-w-3xl mx-auto transition-all duration-700
+              </h1>
+              <p className={`text-lg xs:text-xl md:text-2xl text-gray-300 dark:text-gray-200 mb-6 sm:mb-8 max-w-3xl mx-auto transition-all duration-700 px-4
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.description}
               </p>
-              
-              {activeSection === 'default' ? (                <Link
+                {activeSection === 'default' ? (
+                <Link
                   to="/contact"
-                  className="inline-flex items-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-8 py-3 rounded-full 
-                    text-lg font-semibold hover:scale-105 transform 
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30"
+                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   Get Started
                 </Link>
-              ) : activeSection === 'services' ? (                <button
+              ) : activeSection === 'services' ? (
+                <button
                   onClick={scrollToServices}
-                  className="inline-flex items-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-8 py-3 rounded-full 
-                    text-lg font-semibold hover:scale-105 transform 
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30"
+                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   {currentContent.buttonText}
                 </button>
               ) : (
                 <Link
                   to={currentContent.link}
-                  className="inline-flex items-center bg-indigo-700 text-white px-8 py-3 rounded-full 
-                    text-lg font-semibold hover:bg-indigo-600 hover:scale-105 transform 
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30"
+                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
+                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                 >
                   {currentContent.buttonText}
                 </Link>
