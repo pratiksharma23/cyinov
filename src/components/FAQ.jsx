@@ -1,31 +1,34 @@
 import React, { useState } from 'react';
+import { HiChevronDown } from 'react-icons/hi';
 
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
-  <div className="border-b border-gray-300 dark:border-gray-700">
+  <div className="border-b border-neutral-200 dark:border-neutral-700 last:border-b-0">
     <button
-      className="w-full py-4 px-6 text-left flex justify-between items-center hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors duration-200"
+      className="w-full py-5 px-6 text-left flex justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800/50 transition-colors duration-250 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-md"
       onClick={onClick}
       aria-expanded={isOpen}
     >
-      <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">{question}</span>
-      <span className={`transform transition-transform duration-200 text-blue-600 dark:text-blue-400 ${isOpen ? 'rotate-180' : ''}`}>
-        ▼
-      </span>
+      <span className="text-base sm:text-lg font-medium text-neutral-900 dark:text-white">{question}</span>
+      <HiChevronDown 
+        className={`w-5 h-5 text-neutral-500 dark:text-neutral-400 transform transition-transform duration-250 ${
+          isOpen ? 'rotate-180' : ''
+        }`} 
+      />
     </button>
     <div
-      className={`overflow-hidden transition-all duration-300 ease-in-out ${
+      className={`overflow-hidden transition-all duration-300 ease-smooth ${
         isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
       }`}
     >
-      <p className="p-6 text-gray-700 dark:text-gray-300 whitespace-pre-wrap">{answer}</p>
+      <div className="p-6 pt-0 text-neutral-600 dark:text-neutral-300 text-sm sm:text-base whitespace-pre-wrap">{answer}</div>
     </div>
   </div>
 );
 
 const FAQCategory = ({ title, items, openIndex, setOpenIndex, startIndex }) => (
-  <div className="mb-8">
-    <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4">{title}</h3>
-    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-300/50 dark:shadow-black/20 overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
+  <div className="mb-10 sm:mb-12 animate-fade-in">
+    <h3 className="text-xl sm:text-2xl font-display font-medium text-neutral-900 dark:text-white mb-4">{title}</h3>
+    <div className="bg-white dark:bg-neutral-800 rounded-lg shadow-soft overflow-hidden border border-neutral-200 dark:border-neutral-700 transition-colors duration-300">
       {items.map((item, index) => (
         <FAQItem
           key={index}
@@ -176,12 +179,19 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-16 bg-gray-900">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-white">
-          Frequently Asked Questions
-        </h2>
-        <div className="max-w-4xl mx-auto">
+    <section className="section-padding bg-neutral-50 dark:bg-neutral-900">
+      <div className="container">
+        <div className="text-center mb-12 md:mb-16">
+          <span className="inline-block px-3 py-1 bg-primary-50 dark:bg-primary-900/30 text-primary-600 dark:text-primary-400 text-xs font-medium rounded-full mb-4 uppercase tracking-wider">Support</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-display font-medium text-neutral-900 dark:text-white mb-4">
+            Frequently Asked Questions
+          </h2>
+          <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
+            Find answers to common questions about our services and engagement process
+          </p>
+        </div>
+        
+        <div className="max-w-5xl mx-auto">
           {faqCategories.map((category, categoryIndex) => (
             <FAQCategory
               key={categoryIndex}

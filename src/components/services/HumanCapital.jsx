@@ -48,8 +48,8 @@ const TabContent = ({ category }) => {
       className="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700"
     >
       <div className="flex items-start mb-6">
-        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
-          <category.icon className="text-3xl text-blue-400" />
+        <div className="bg-primary-800/30 p-4 rounded-full mr-5">
+          <category.icon className="text-3xl text-primary-400" />
         </div>
         <div>
           <h3 className="text-2xl font-bold text-gray-100 mb-2">{category.title}</h3>
@@ -61,7 +61,7 @@ const TabContent = ({ category }) => {
         <ul className="space-y-6">
           {category.items.map((item, itemIndex) => (
             <li key={itemIndex} className="flex items-start">
-              <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+              <FaCheckCircle className="text-primary-400 mt-1 mr-3 flex-shrink-0" />
               <div>
                 {typeof item === 'string' && item.includes('–') ? (
                   <>
@@ -101,7 +101,7 @@ const TabsSection = ({ categories }) => {
 const ProcessStep = ({ number, title, items }) => (
   <div className="bg-gray-800 p-6 rounded-lg shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700">
     <div className="flex items-center mb-4">
-      <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-gray-900 text-xl font-bold mr-4">
+      <div className="w-12 h-12 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-xl font-bold mr-4">
         {number}
       </div>
       <h3 className="text-xl font-bold text-gray-100">{title}</h3>
@@ -109,7 +109,7 @@ const ProcessStep = ({ number, title, items }) => (
     <ul className="space-y-2">
       {items.map((item, index) => (
         <li key={index} className="flex items-start space-x-2">
-          <span className="text-blue-400 font-bold">•</span>
+          <span className="text-primary-400 font-bold">•</span>
           <span className="text-gray-300">{item}</span>
         </li>
       ))}
@@ -202,17 +202,17 @@ const HumanCapital = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-24 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 text-gray-100"
+        className="relative py-24 bg-gradient-to-r from-primary-800 via-primary-700 to-primary-800 text-gray-100"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-200">
               Transform Your Workforce & Market Strategy
             </h1>
-            <p className="text-xl mb-8 text-blue-200">
+            <p className="text-xl mb-8 text-primary-200">
               Comprehensive Human Capital Management and Market Research solutions to drive your business forward.
             </p>
-            <p className="text-lg text-blue-200">
+            <p className="text-lg text-primary-200">
               We offer a diverse range of services designed to optimize workforce management and enhance 
               employee engagement throughout the employee lifecycle.
             </p>
@@ -269,10 +269,10 @@ const HumanCapital = () => {
                 <div className="flex flex-col md:flex-row items-stretch justify-between">
                   {/* Start Point */}
                   <div className="flex flex-col items-center mb-12 md:mb-0 w-full md:w-[10%] md:flex md:flex-col md:justify-center">
-                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-blue-500/30">
+                    <div className="flex-shrink-0 w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-primary-500/30">
                       <span className="text-xl">📍</span>
                     </div>
-                    <div className="text-center mt-5 font-bold text-blue-400">Start</div>
+                    <div className="text-center mt-5 font-bold text-primary-400">Start</div>
                   </div>
                   
                   {/* Process Steps Container - Now with equal widths */}
@@ -280,7 +280,7 @@ const HumanCapital = () => {
                     {/* Assessment */}
                     <div className="flex flex-col items-center md:w-1/4 relative">
                       {/* Mobile view connector */}
-                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-blue-400 to-green-500 absolute -top-16"></div>
+                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-primary-400 to-green-500 absolute -top-16"></div>
                       
                       <div className="flex-shrink-0 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-green-500/30">
                         <span className="text-xl">🟢</span>
@@ -313,7 +313,7 @@ const HumanCapital = () => {
                       
                       {/* Hidden on mobile, visible on desktop */}
                       <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
-                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
                         </svg>
                       </div>
@@ -355,7 +355,7 @@ const HumanCapital = () => {
                       
                       {/* Hidden on mobile, visible on desktop */}
                       <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
-                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
                         </svg>
                       </div>
@@ -397,7 +397,7 @@ const HumanCapital = () => {
                       
                       {/* Hidden on mobile, visible on desktop */}
                       <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
-                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                        <svg className="w-6 h-6 text-primary-400" fill="currentColor" viewBox="0 0 20 20">
                           <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
                         </svg>
                       </div>
@@ -444,12 +444,12 @@ const HumanCapital = () => {
                   {/* End Point */}
                   <div className="flex flex-col items-center mt-16 md:mt-0 w-full md:w-[10%] relative md:flex md:flex-col md:justify-center">
                     {/* Mobile view connector */}
-                    <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-red-500 to-blue-500 absolute -top-16"></div>
+                    <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-red-500 to-primary-500 absolute -top-16"></div>
                     
-                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-blue-500/30">
+                    <div className="flex-shrink-0 w-16 h-16 bg-primary-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-primary-500/30">
                       <span className="text-xl">🏁</span>
                     </div>
-                    <div className="text-center mt-5 font-bold text-blue-400 text-sm">
+                    <div className="text-center mt-5 font-bold text-primary-400 text-sm">
                       Optimized Workforce
                     </div>
                   </div>

@@ -22,7 +22,7 @@ const ProcessStep = ({ number, title, description }) => (
     whileHover={{ scale: 1.02 }}
     className="flex flex-col items-center p-8 bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700"
   >
-    <div className="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
+    <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
       {number}
     </div>
     <h3 className="text-2xl font-bold text-gray-100 mb-3">{title}</h3>
@@ -43,8 +43,8 @@ const ServiceDetailPanel = ({ service }) => {
       className="bg-gray-800 rounded-lg shadow-lg p-6 lg:p-8 border border-gray-700"
     >
       <div className="flex items-start mb-6">
-        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
-          <service.icon className="text-3xl text-blue-400" />
+        <div className="bg-primary-800/30 p-4 rounded-full mr-5">
+          <service.icon className="text-3xl text-primary-400" />
         </div>
         <div>
           <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
@@ -57,7 +57,7 @@ const ServiceDetailPanel = ({ service }) => {
           <ul className="space-y-4">
             {service.items.map((item, itemIndex) => (
               <li key={itemIndex} className="flex items-start">
-                <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                <FaCheckCircle className="text-primary-400 mt-1 mr-3 flex-shrink-0" />
                 <span className="text-gray-300">{item}</span>
               </li>
             ))}
@@ -87,16 +87,16 @@ const ServiceNavItem = ({ service, isActive, onClick }) => {
       onClick={onClick}
       className={`flex items-center w-full text-left p-4 transition-all duration-300 rounded-lg mb-2 ${
         isActive 
-          ? 'bg-blue-700/20 border-l-4 border-blue-400' 
+          ? 'bg-primary-700/20 border-l-4 border-primary-400' 
           : 'bg-gray-800 hover:bg-gray-700/50'
       }`}
       whileHover={{ x: isActive ? 0 : 5 }}
     >
-      <service.icon className={`text-xl mr-3 ${isActive ? 'text-blue-400' : 'text-gray-400'}`} />
-      <span className={`font-medium ${isActive ? 'text-blue-400' : 'text-gray-300'}`}>
+      <service.icon className={`text-xl mr-3 ${isActive ? 'text-primary-400' : 'text-gray-400'}`} />
+      <span className={`font-medium ${isActive ? 'text-primary-400' : 'text-gray-300'}`}>
         {service.title}
       </span>
-      {isActive && <FaChevronRight className="ml-auto text-blue-400" />}
+      {isActive && <FaChevronRight className="ml-auto text-primary-400" />}
     </motion.button>
   );
 };
@@ -221,16 +221,16 @@ const TaxAdvisory = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-24 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 text-gray-100"
+        className="relative py-24 bg-gradient-to-r from-primary-800 via-primary-700 to-primary-800 text-gray-100"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Tax Advisory Services</h1>
-            <p className="text-xl mb-8 text-blue-200">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-200">Tax Advisory Services</h1>
+            <p className="text-xl mb-8 text-primary-200">
               With years of experience in taxation, compliance, and financial planning, 
               Cyinov Consulting has helped businesses navigate the complexities of taxation seamlessly.
             </p>
-            <p className="text-lg text-blue-200">
+            <p className="text-lg text-primary-200">
               We specialize in GST, corporate taxation, payroll processing, and international tax advisory. 
               Our mission is to provide businesses with hassle-free tax solutions that allow them to focus on growth and profitability.
             </p>
@@ -267,14 +267,14 @@ const TaxAdvisory = () => {
       <section className="py-20 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-6">Our Services</h2>
-          <h4 className="text-1xl md:text-1xl font-semibold text-center text-blue-300 mb-12">
+          <h4 className="text-1xl md:text-1xl font-semibold text-center text-primary-300 mb-12">
             Comprehensive tax advisory and compliance solutions tailored for your business
           </h4>
           
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Panel - Service Navigation */}
             <div className="w-full lg:w-1/3 bg-gray-800/50 p-5 rounded-lg shadow-lg">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-blue-400">Tax Services</h3>
+              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-primary-400">Tax Services</h3>
               <div className="space-y-1">
                 {services.map((service, index) => (
                   <ServiceNavItem 

@@ -5,7 +5,7 @@ module.exports = {  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
-    publicPath: process.env.NODE_ENV === 'production' ? '/cyinov/' : '/'
+    publicPath: '/'
   },
   module: {
     rules: [
