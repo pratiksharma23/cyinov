@@ -121,7 +121,7 @@ const HumanCapital = () => {
   const categories = [
     {
       icon: FaUserTie,
-      title: "Recruitment and Talent Acquisition",
+      title: "Talent Acquisition",
       description: "Attract and retain top talent with strategic hiring solutions",
       items: [
         "Streamlined Recruitment Processes – Leveraging technology and expertise to identify and hire the right candidates efficiently",
@@ -262,31 +262,27 @@ const HumanCapital = () => {
             <div className="max-w-6xl mx-auto bg-gray-800 rounded-xl p-8 border border-gray-700">
               {/* Horizontal Timeline */}
               <div className="relative">
-                {/* Timeline Connector Line */}
-                <div className="hidden md:block absolute top-20 left-0 right-0 h-1 bg-gray-600 z-0"></div>
+                {/* Timeline Connector Line - Improved positioning */}
+                {/*<div className="hidden md:block absolute top-20 left-[10%] right-[10%] h-1.5 bg-gradient-to-r from-blue-500 via-gray-600 to-blue-500 z-0"></div>*/}
                 
                 {/* Timeline Steps */}
-                <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="flex flex-col md:flex-row items-stretch justify-between">
                   {/* Start Point */}
-                  <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/12">
-                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                  <div className="flex flex-col items-center mb-12 md:mb-0 w-full md:w-[10%] md:flex md:flex-col md:justify-center">
+                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-blue-500/30">
                       <span className="text-xl">📍</span>
                     </div>
                     <div className="text-center mt-5 font-bold text-blue-400">Start</div>
                   </div>
                   
-                  {/* Arrow */}
-                  <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
-                    <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                    </svg>
-                  </div>
-                  
-                  {/* Process Steps Container */}
-                  <div className="flex flex-col md:flex-row items-center justify-between w-full md:w-10/12">
+                  {/* Process Steps Container - Now with equal widths */}
+                  <div className="flex flex-col md:flex-row items-stretch justify-between w-full md:w-[80%] space-y-16 md:space-y-0">
                     {/* Assessment */}
-                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
-                      <div className="flex-shrink-0 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                    <div className="flex flex-col items-center md:w-1/4 relative">
+                      {/* Mobile view connector */}
+                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-blue-400 to-green-500 absolute -top-16"></div>
+                      
+                      <div className="flex-shrink-0 w-16 h-16 bg-green-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-green-500/30">
                         <span className="text-xl">🟢</span>
                       </div>
                       <div className="text-center mt-5">
@@ -294,8 +290,8 @@ const HumanCapital = () => {
                         <p className="text-sm text-gray-400 mt-2">Understanding your workforce</p>
                       </div>
                       
-                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-700/70 rounded-lg mt-6 p-5 w-full mx-auto min-h-[240px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:shadow-green-500/10 hover:bg-gray-700/90 border border-gray-600 border-opacity-50">
+                        <ul className="space-y-3">
                           <li className="flex items-start">
                             <span className="text-xl mr-2">📊</span>
                             <span className="text-gray-300 text-sm">Workforce Analysis</span>
@@ -314,18 +310,21 @@ const HumanCapital = () => {
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    
-                    {/* Arrow */}
-                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
-                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                      </svg>
+                      
+                      {/* Hidden on mobile, visible on desktop */}
+                      <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
+                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                        </svg>
+                      </div>
                     </div>
                     
                     {/* Strategy */}
-                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
-                      <div className="flex-shrink-0 w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                    <div className="flex flex-col items-center md:w-1/4 relative">
+                      {/* Mobile view connector */}
+                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-green-500 to-yellow-500 absolute -top-16"></div>
+                      
+                      <div className="flex-shrink-0 w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-yellow-500/30">
                         <span className="text-xl">🟡</span>
                       </div>
                       <div className="text-center mt-5">
@@ -333,8 +332,8 @@ const HumanCapital = () => {
                         <p className="text-sm text-gray-400 mt-2">Developing a roadmap</p>
                       </div>
                       
-                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-700/70 rounded-lg mt-6 p-5 w-full mx-auto min-h-[240px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:shadow-yellow-500/10 hover:bg-gray-700/90 border border-gray-600 border-opacity-50">
+                        <ul className="space-y-3">
                           <li className="flex items-start">
                             <span className="text-xl mr-2">🏗️</span>
                             <span className="text-gray-300 text-sm">Solution Design</span>
@@ -353,18 +352,21 @@ const HumanCapital = () => {
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    
-                    {/* Arrow */}
-                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
-                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                      </svg>
+                      
+                      {/* Hidden on mobile, visible on desktop */}
+                      <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
+                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                        </svg>
+                      </div>
                     </div>
                     
                     {/* Implementation */}
-                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
-                      <div className="flex-shrink-0 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                    <div className="flex flex-col items-center md:w-1/4 relative">
+                      {/* Mobile view connector */}
+                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-yellow-500 to-orange-500 absolute -top-16"></div>
+                      
+                      <div className="flex-shrink-0 w-16 h-16 bg-orange-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-orange-500/30">
                         <span className="text-xl">🟠</span>
                       </div>
                       <div className="text-center mt-5">
@@ -372,8 +374,8 @@ const HumanCapital = () => {
                         <p className="text-sm text-gray-400 mt-2">Seamless execution</p>
                       </div>
                       
-                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-700/70 rounded-lg mt-6 p-5 w-full mx-auto min-h-[240px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:shadow-orange-500/10 hover:bg-gray-700/90 border border-gray-600 border-opacity-50">
+                        <ul className="space-y-3">
                           <li className="flex items-start">
                             <span className="text-xl mr-2">⚙️</span>
                             <span className="text-gray-300 text-sm">System Setup</span>
@@ -392,18 +394,21 @@ const HumanCapital = () => {
                           </li>
                         </ul>
                       </div>
-                    </div>
-                    
-                    {/* Arrow */}
-                    <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
-                      <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                        <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                      </svg>
+                      
+                      {/* Hidden on mobile, visible on desktop */}
+                      <div className="hidden md:block absolute top-20 right-0 transform translate-x-1/2">
+                        <svg className="w-6 h-6 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                        </svg>
+                      </div>
                     </div>
                     
                     {/* Optimization */}
-                    <div className="flex flex-col items-center mb-8 md:mb-0 w-full md:w-1/5">
-                      <div className="flex-shrink-0 w-16 h-16 bg-red-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                    <div className="flex flex-col items-center md:w-1/4 relative">
+                      {/* Mobile view connector */}
+                      <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-orange-500 to-red-500 absolute -top-16"></div>
+                      
+                      <div className="flex-shrink-0 w-16 h-16 bg-red-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-red-500/30">
                         <span className="text-xl">🔴</span>
                       </div>
                       <div className="text-center mt-5">
@@ -411,8 +416,8 @@ const HumanCapital = () => {
                         <p className="text-sm text-gray-400 mt-2">Continuous improvement</p>
                       </div>
                       
-                      <div className="bg-gray-700 rounded-lg mt-6 p-4 w-full md:max-w-[90%] mx-auto min-h-[180px]">
-                        <ul className="space-y-2">
+                      <div className="bg-gray-700/70 rounded-lg mt-6 p-5 w-full mx-auto min-h-[240px] flex flex-col justify-between transition-all duration-300 hover:shadow-md hover:shadow-red-500/10 hover:bg-gray-700/90 border border-gray-600 border-opacity-50">
+                        <ul className="space-y-3">
                           <li className="flex items-start">
                             <span className="text-xl mr-2">📡</span>
                             <span className="text-gray-300 text-sm">Performance Monitoring</span>
@@ -431,35 +436,23 @@ const HumanCapital = () => {
                           </li>
                         </ul>
                       </div>
+                      
+                      {/* Removed the arrow that was here */}
                     </div>
-                  </div>
-                  
-                  {/* Arrow */}
-                  <div className="hidden md:flex items-center justify-center w-full md:w-1/24">
-                    <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                      <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
-                    </svg>
                   </div>
                   
                   {/* End Point */}
-                  <div className="flex flex-col items-center w-full md:w-1/12">
-                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800">
+                  <div className="flex flex-col items-center mt-16 md:mt-0 w-full md:w-[10%] relative md:flex md:flex-col md:justify-center">
+                    {/* Mobile view connector */}
+                    <div className="flex md:hidden h-16 w-1 bg-gradient-to-b from-red-500 to-blue-500 absolute -top-16"></div>
+                    
+                    <div className="flex-shrink-0 w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center z-10 border-4 border-gray-800 shadow-lg shadow-blue-500/30">
                       <span className="text-xl">🏁</span>
                     </div>
-                    <div className="text-center mt-5 font-bold text-blue-400">
-                    Optimized Workforce & Business Growth
+                    <div className="text-center mt-5 font-bold text-blue-400 text-sm">
+                      Optimized Workforce
                     </div>
                   </div>
-                </div>
-                
-                {/* Arrow Indicators for Mobile */}
-                <div className="flex flex-col items-center md:hidden space-y-6 my-8">
-                  <div className="flex items-center justify-center w-full">
-                    <div className="w-1 h-12 bg-blue-400"></div>
-                  </div>
-                  <svg className="w-8 h-8 text-blue-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fillRule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clipRule="evenodd"></path>
-                  </svg>
                 </div>
               </div>
             </div>

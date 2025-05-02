@@ -16,7 +16,7 @@ const Breadcrumb = ({ paths }) => {
         <li className="flex items-center">
           <Link 
             to="/" 
-            className="text-indigo-400 hover:text-indigo-300 transition-colors"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
           >
             Home
           </Link>
@@ -31,7 +31,7 @@ const Breadcrumb = ({ paths }) => {
             ) : (
               <Link
                 to={path.url}
-                className="text-indigo-400 hover:text-indigo-300 transition-colors"
+                className="text-blue-400 hover:text-blue-300 transition-colors"
               >
                 {path.label}
               </Link>

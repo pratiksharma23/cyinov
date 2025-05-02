@@ -10,7 +10,7 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
   <div className="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
     <div className="p-6">
       <h3 className="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">{name}</h3>
-      <p className="text-indigo-600 dark:text-blue-400 mb-4">{position}</p>
+      <p className="text-blue-600 dark:text-blue-400 mb-4">{position}</p>
       <p className="text-gray-600 dark:text-gray-300 mb-4">{description}</p>
       
       <div className="mb-4">
@@ -26,7 +26,7 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
             href={social.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-blue-400 transition-colors"
+            className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
             aria-label={`${name}'s LinkedIn Profile`}
           >
             <FaLinkedin size={20} />
@@ -37,7 +37,7 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
             href={social.twitter}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-blue-300 transition-colors"
+            className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-300 transition-colors"
             aria-label={`${name}'s Twitter Profile`}
           >
             <FaTwitter size={20} />
@@ -45,7 +45,7 @@ const TeamMember = ({ image, name, position, description, expertise, social }) =
         )}        {social.email && (
           <a 
             href={`mailto:${social.email.replace('@', '[at]')}`}
-            className="text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-red-400 transition-colors"
+            className="text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-red-400 transition-colors"
             onClick={(e) => {
               e.preventDefault();
               window.location.href = `mailto:${social.email}`;

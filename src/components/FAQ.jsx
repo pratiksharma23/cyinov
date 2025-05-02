@@ -8,7 +8,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
       aria-expanded={isOpen}
     >
       <span className="text-lg font-semibold text-gray-800 dark:text-gray-100">{question}</span>
-      <span className={`transform transition-transform duration-200 text-indigo-600 dark:text-indigo-400 ${isOpen ? 'rotate-180' : ''}`}>
+      <span className={`transform transition-transform duration-200 text-blue-600 dark:text-blue-400 ${isOpen ? 'rotate-180' : ''}`}>
         ▼
       </span>
     </button>
@@ -24,7 +24,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
 
 const FAQCategory = ({ title, items, openIndex, setOpenIndex, startIndex }) => (
   <div className="mb-8">
-    <h3 className="text-2xl font-bold text-indigo-700 dark:text-indigo-300 mb-4">{title}</h3>
+    <h3 className="text-2xl font-bold text-blue-700 dark:text-blue-300 mb-4">{title}</h3>
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md shadow-gray-300/50 dark:shadow-black/20 overflow-hidden border border-gray-200 dark:border-gray-700 transition-colors duration-300">
       {items.map((item, index) => (
         <FAQItem

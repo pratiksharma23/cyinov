@@ -92,225 +92,288 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
 );
 
 // Service Card component for carousel items
-const ServiceCard = ({ title, description, image, link, actionText }) => (
+const ServiceCard = ({ title, description, image, link, actionText, icon: Icon }) => (
   <motion.div
     variants={fadeInUp}
     whileHover={{ scale: 1.05 }}
     className="p-3"
   >
-    <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700 h-full">
+    <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700 h-full transition-all duration-300 hover:shadow-xl hover:border-blue-400/50">
       <div className="relative h-48">
         <img 
           src={image} 
           alt={title} 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover transform transition-transform duration-300 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+        {Icon && (
+          <div className="absolute top-4 right-4 bg-blue-500/80 rounded-full p-2 shadow-lg">
+            <Icon className="text-white text-lg" />
+          </div>
+        )}
       </div>
       <div className="p-5">
         <h3 className="text-lg font-bold text-gray-100 mb-2">{title}</h3>
         <p className="text-gray-300 text-sm mb-4">{description}</p>
         <a 
           href={link || "#"} 
-          className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
+          className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300 group"
         >
-          {actionText || "Learn more"} <FaArrowRight className="ml-1" />
+          {actionText || "Learn more"} 
+          <FaArrowRight className="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
         </a>
       </div>
     </div>
   </motion.div>
 );
 
-// Service Carousel component for horizontal scrolling
-const ServiceCarousel = ({ services }) => {
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    responsive: [
-      {
-        breakpoint: 1024,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 640,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
-  };
-  return (
-    <div className="service-carousel">
-      <Slider {...settings}>
-        {services.map((service, index) => (
-          <ServiceCard 
-            key={index}
-            title={service.title}
-            description={service.description}
-            image={service.image}
-            link={service.link}
-            actionText={service.actionText}
+// A featured service card with more prominent styling
+const FeaturedServiceCard = ({ title, description, image, link, actionText, features }) => (
+  <motion.div
+    variants={fadeInUp}
+    whileHover={{ scale: 1.02 }}
+    className="col-span-1 md:col-span-2 mb-8"
+  >
+    <div className="bg-gradient-to-r from-blue-900/40 to-gray-800 rounded-xl shadow-lg overflow-hidden border border-blue-500/30 h-full relative">
+      <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+        Featured Service
+      </div>
+      <div className="flex flex-col md:flex-row h-full">
+        <div className="md:w-1/2 relative">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-64 md:h-full object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent to-gray-900/80 hidden md:block"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-gray-900/80 md:hidden"></div>
+        </div>
+        <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
+          <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
+          <p className="text-blue-200 mb-4">{description}</p>
+          
+          {features && features.length > 0 && (
+            <div className="mb-5">
+              <h4 className="text-white text-sm font-semibold mb-2">Service Highlights:</h4>
+              <ul className="space-y-2">
+                {features.map((feature, idx) => (
+                  <li key={idx} className="flex items-start">
+                    <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 mr-2" />
+                    <span className="text-gray-200 text-sm">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+          
+          <motion.a
+            href={link || "#"}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center px-5 py-2 mt-2 bg-blue-500 text-white font-semibold rounded-full hover:bg-blue-400 transition-colors duration-300 self-start"
+          >
+            {actionText || "Learn More"}
+            <FaArrowRight className="ml-2" />
+          </motion.a>
+        </div>
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Tab-based service selector component
+const ServiceTabs = ({ services, defaultTab = 0 }) => {
+  const [activeTab, setActiveTab] = React.useState(defaultTab);
+  
+  return (
+    <div className="mb-12">
+      <div className="flex flex-wrap mb-6 border-b border-gray-700">
+        {services.map((category, idx) => (
+          <button
+            key={idx}
+            onClick={() => setActiveTab(idx)}
+            className={`px-4 py-3 font-medium text-sm transition-colors duration-200 relative
+              ${activeTab === idx 
+                ? 'text-blue-400 border-blue-400' 
+                : 'text-gray-400 hover:text-gray-200 border-transparent'
+              } border-b-2 -mb-px`}
+          >
+            <div className="flex items-center">
+              {category.icon && <category.icon className="mr-2" />}
+              {category.name}
+            </div>
+          </button>
         ))}
-      </Slider>
+      </div>
+      
+      <div className="mt-6">
+        {services[activeTab].description && (
+          <p className="text-gray-300 mb-8">{services[activeTab].description}</p>
+        )}
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services[activeTab].items.map((service, idx) => (
+            <ServiceCard 
+              key={idx}
+              {...service}
+              icon={services[activeTab].itemIcon}
+            />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };
 
 const Trademark = () => {
-  // Design services that will be shown in the carousel
-  const designServices = [
+  // Reorganized and enhanced trademark services with categories
+  const allServices = [
     {
-      title: "Design Registration",
-      description: "Registration for industrial designs and unique visual features",
-      image: designRegistrationImg,
-      link: "/contact",
-      actionText: "Register Now"
+      name: "Trademark Services",
+      icon: FaTrademark,
+      description: "Secure exclusive rights to your brand identity with our comprehensive trademark services",
+      itemIcon: FaTrademark,
+      items: [
+        {
+          title: "Trademark Registration",
+          description: "Comprehensive trademark search and application filing under one class",
+          image: tmRegistrationImg,
+          link: "/services/trademark/trademark-registration",
+          actionText: "Register Now"
+        },
+        {
+          title: "Trademark Objection",
+          description: "Drafting and filing responses to objections raised by the Trademark Registry",
+          image: tmObjectionImg,
+          link: "/contact",
+          actionText: "Get Help Now"
+        },
+        {
+          title: "Trademark Opposition",
+          description: "Filing and defending trademark opposition proceedings",
+          image: tmOppositionImg,
+          link: "/contact",
+          actionText: "Protect Your Mark"
+        },
+        {
+          title: "Trademark Renewal",
+          description: "Drafting and filing trademark renewal applications",
+          image: tmRenewalImg,
+          link: "/contact",
+          actionText: "Renew Now"
+        },
+        {
+          title: "Trademark Search",
+          description: "Comprehensive trademark search to identify existing similar marks",
+          image: tmSearchImg,
+          link: "/contact",
+          actionText: "Search Now"
+        },
+        {
+          title: "Trademark Transfer",
+          description: "Legally transferring trademark ownership to another party",
+          image: tmTransferImg,
+          link: "/contact",
+          actionText: "Transfer Now"
+        }
+      ]
     },
     {
-      title: "Design Objection",
-      description: "Filing responses to objections raised by the Design Office",
-      image: designObjectionImg,
-      link: "/contact",
-      actionText: "Object Now"
+      name: "Patent Services",
+      icon: FaLightbulb,
+      description: "Protect your innovations and technical advancements with comprehensive patent solutions",
+      itemIcon: FaLightbulb,
+      items: [
+        {
+          title: "Patent Registration",
+          description: "Comprehensive patent search and application filing",
+          image: patentRegistrationImg,
+          link: "/contact",
+          actionText: "Protect Your Innovation"
+        }
+      ]
+    },
+    {
+      name: "Copyright Services",
+      icon: FaCopyright,
+      description: "Secure rights over your creative works with powerful copyright protection",
+      itemIcon: FaCopyright,
+      items: [
+        {
+          title: "Copyright Registration",
+          description: "Legal entitlement for original works of authorship",
+          image: copyrightRegistrationImg,
+          link: "/contact",
+          actionText: "Register Now"
+        },
+        {
+          title: "Copyright Objection",
+          description: "Filing responses to objections raised by the Copyright Office",
+          image: copyrightObjectionImg,
+          link: "/contact",
+          actionText: "Object Now"
+        }
+      ]
+    },
+    {
+      name: "Design & Branding",
+      icon: FaPaintBrush,
+      description: "Ensure exclusivity for your product designs and strengthen your brand identity",
+      itemIcon: FaPaintBrush,
+      items: [
+        {
+          title: "Design Registration",
+          description: "Registration for industrial designs and unique visual features",
+          image: designRegistrationImg,
+          link: "/contact",
+          actionText: "Register Now"
+        },
+        {
+          title: "Design Objection",
+          description: "Filing responses to objections raised by the Design Office",
+          image: designObjectionImg,
+          link: "/contact",
+          actionText: "Object Now"
+        },
+        {
+          title: "Logo Design",
+          description: "Professional logo design services to create a unique brand identity",
+          image: logoDesignImg,
+          link: "/contact",
+          actionText: "Design Now"
+        }
+      ]
     }
   ];
 
-  // Copyright services that will be shown in the carousel
-  const copyrightServices = [
-    {
-      title: "Copyright Registration",
-      description: "Legal entitlement for original works of authorship",
-      image: copyrightRegistrationImg,
-      link: "/contact",
-      actionText: "Register Now"
-    },
-    {
-      title: "Copyright Objection",
-      description: "Filing responses to objections raised by the Copyright Office",
-      image: copyrightObjectionImg,
-      link: "/contact",
-      actionText: "Object Now"
-    }
-  ];
-
-  // Trademark services that will be shown in the carousel
-  const trademarkServices = [
+  // Highlight specific top services
+  const featuredServices = [
     {
       title: "Trademark Registration",
-      description: "Comprehensive trademark search and application filing under one class",
+      description: "Secure your brand identity with our comprehensive trademark registration service.",
       image: tmRegistrationImg,
-      link: "/contact",
-      actionText: "Register Now"
-    },
-    {
-      title: "Trademark Objection",
-      description: "Drafting and filing responses to objections raised by the Trademark Registry",
-      image: tmObjectionImg,
-      link: "/contact",
-      actionText: "Object Now"
-    },
-    {
-      title: "Trademark Opposition",
-      description: "Filing and defending trademark opposition proceedings",
-      image: tmOppositionImg,
-      link: "/contact",
-      actionText: "Oppose Now"
-    },
-    {
-      title: "Trademark Renewal",
-      description: "Drafting and filing trademark renewal applications",
-      image: tmRenewalImg,
-      link: "/contact",
-      actionText: "Renew Now"
-    },
-    {
-      title: "Trademark Search",
-      description: "Comprehensive trademark search to identify existing similar marks",
-      image: tmSearchImg,
-      link: "/contact",
-      actionText: "Search Now"
-    },
-    {
-      title: "Trademark Transfer",
-      description: "Legally transferring trademark ownership to another party",
-      image: tmTransferImg,
-      link: "/contact",
-      actionText: "Transfer Now"
-    },
-    {
-      title: "Trademark Rectification",
-      description: "Filing rectifications for wrongly registered or objected trademarks",
-      image: tmRectificationImg,
-      link: "/contact",
-      actionText: "Rectify Now"
-    },
-    {
-      title: "Trademark Hearing",
-      description: "Legal representation before the Trademark Office in hearings",
-      image: showcaseHearingImg,
-      link: "/contact",
-      actionText: "Register Now"
-    }
-  ];
-
-  // Main service categories
-  const services = [
-    {
-      icon: FaTrademark,
-      title: "Trademark Services",
-      description: "Secure exclusive rights to your brand identity with our trademark services:",
-      items: [
-        "Trademark Registration – Comprehensive trademark search and application filing under one class",
-        "Expedited Trademark Registration – Fast-track trademark application filing for quick approval",
-        "Trademark Objection – Drafting and filing responses to objections raised by the Trademark Registry",
-        "Trademark Opposition – Filing and defending trademark opposition proceedings",
-        "Trademark Renewal – Drafting and filing trademark renewal applications",
-        "Trademark Infringement Notice – Issuing legal notices for unauthorized use of your trademark",
-        "Trademark Hearing – Legal representation before the Trademark Office in hearings",
-        "Trademark Rectification – Filing rectifications for wrongly registered or objected trademarks",
-        "Trademark Transfer – Legally transferring trademark ownership to another party",
-        "Trademark Certificate & Brand Monitoring – Securing trademark registration certificates and ongoing brand monitoring",
-        "Trademark Search & Monitoring Software – Advanced AI-driven platform to track trademark applications and infringements"
+      link: "/services/trademark/trademark-registration",
+      actionText: "Register Your Trademark",
+      features: [
+        "Comprehensive trademark search",
+        "Application filing under one class",
+        "Guidance throughout the registration process",
+        "Regular status updates",
+        "Response to examination reports"
       ]
     },
     {
-      icon: FaLightbulb,
-      title: "Patent Services",
-      description: "Protect your innovations and technical advancements:",
-      items: [
-        "Registration – Comprehensive patent search and filing of patent applications"
-      ]
-    },
-    {
-      icon: FaCopyright,
-      title: "Copyright Services",
-      description: "Secure rights over your creative works with copyright protection:",
-      items: [
-        "Copyright Registration – Legal entitlement for original works of authorship",
-        "Copyright Objection – Filing responses to objections raised by the Copyright Office"
-      ]
-    },
-    {
-      icon: FaPaintBrush,
-      title: "Design Protection Services",
-      description: "Ensure exclusivity for your product designs:",
-      items: [
-        "Design Registration – Registration for industrial designs and unique visual features",
-        "Design Objection – Filing responses to objections raised by the Design Office"
-      ]
-    },
-    {
-      icon: FaPencilRuler,
-      title: "Branding & Identity Solutions",
-      description: "Strengthen your brand's visual identity:",
-      items: [
-        "Logo Designing – Professional logo design services to create a unique brand identity"
+      title: "Intellectual Property Protection Package",
+      description: "Complete protection for your business with our bundled IP services.",
+      image: servicesImg,
+      link: "/contact",
+      actionText: "Get Complete Protection",
+      features: [
+        "Trademark registration",
+        "Copyright registration for business materials",
+        "Logo design consultation",
+        "IP audit and strategy planning",
+        "One year of brand monitoring"
       ]
     }
   ];
@@ -379,250 +442,31 @@ const Trademark = () => {
             ></path>
           </svg>
         </div>
-      </motion.div>      {/* Services Section */}
-      <section className="py-20 bg-gray-900">
+      </motion.div>      {/* Featured Services Section */}
+      <section className="py-16 bg-gray-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-12">Our Services</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-4">Our Featured Services</h2>
+          <p className="text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+            Comprehensive intellectual property protection solutions for your business needs
+          </p>
           
-          {/* Trademark Services Carousel */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
-              <FaTrademark className="text-xl text-blue-400 mr-3" />
-              Trademark Services
-            </h3>
-            <p className="text-gray-300 text-lg mb-8">
-              Secure exclusive rights to your brand identity with our comprehensive trademark services
-            </p>
-            <ServiceCarousel services={trademarkServices} />
+          <div className="grid grid-cols-1 gap-8">
+            {featuredServices.map((service, idx) => (
+              <FeaturedServiceCard key={idx} {...service} />
+            ))}
           </div>
-            {/* Patent Services Section with Image */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
-              <FaLightbulb className="text-xl text-blue-400 mr-3" />
-              Patent Services
-            </h3>              <motion.div 
-              variants={fadeInUp} className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700"
-            >              <div className="flex flex-col md:flex-row h-80">
-                {/* Left side - Text content */}
-                <div className="p-5 md:w-1/2 flex flex-col justify-center overflow-y-auto">
-                  <h4 className="text-lg font-bold text-gray-100 mb-3">Patent Registration</h4>
-                  <p className="text-gray-300 text-sm mb-4">
-                    Protect your innovations and technical advancements with our comprehensive patent services
-                  </p>
-                  <ul className="space-y-2 mb-4">
-                    {services[1].items.map((item, index) => (
-                      <li key={index} className="flex items-start space-x-2">
-                        <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
-                        <span className="text-gray-300 text-sm">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.a
-                    href="/contact"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="mt-2 inline-flex items-center px-5 py-2 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300 self-start"
-                  >
-                    Register Now
-                    <FaArrowRight className="ml-2" />
-                  </motion.a>
-                </div>
-                
-                {/* Right side - Image */}
-                <div className="md:w-1/2 relative h-48 md:h-auto">
-                  <img 
-                    src={patentRegistrationImg} 
-                    alt="Patent Registration" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent opacity-50 md:opacity-30"></div>
-                </div>
-              </div>
-            </motion.div>          </div>
+        </div>
+      </section>
 
-          {/* Copyright Services Section with Text on Left and Carousel on Right */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
-              <FaCopyright className="text-xl text-blue-400 mr-3" />
-              Copyright Services
-            </h3>
-            <motion.div 
-              variants={fadeInUp} 
-              className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700"
-            >              <div className="flex flex-col md:flex-row h-80">
-                {/* Left side - Text content */}
-                <div className="p-5 md:w-1/3 flex flex-col justify-center">
-                  <h4 className="text-lg font-bold text-gray-100 mb-3">Protect Your Creative Works</h4>
-                  <p className="text-gray-300 text-base mb-4">
-                    Copyright protection gives creators exclusive rights over their original works including 
-                    literary, musical, artistic, and certain other intellectual works.
-                  </p>
-                  <p className="text-gray-300 text-base mb-4">
-                    Our copyright services help creators secure their rights, respond to objections, 
-                    and enforce their copyright protections across all creative industries.
-                  </p>
-                </div>
-                
-                {/* Right side - Carousel (wider) */}
-                <div className="md:w-2/3 p-4 flex items-center">
-                  <div className="w-full">
-                    <Slider
-                      dots={true}
-                      infinite={false}
-                      speed={500}
-                      slidesToShow={2}
-                      slidesToScroll={1}
-                      arrows={true}
-                      className="copyright-carousel"
-                    >
-                      {copyrightServices.map((service, index) => (
-                        <div key={index} className="p-2">
-                          <div className="bg-gray-700 rounded-lg shadow-md overflow-hidden h-64">
-                            <div className="relative h-32">
-                              <img 
-                                src={service.image} 
-                                alt={service.title} 
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                            </div>
-                            <div className="p-4">
-                              <h3 className="text-base font-bold text-gray-100 mb-2">{service.title}</h3>
-                              <p className="text-gray-300 text-sm mb-2">{service.description}</p>
-                              <a 
-                                href={service.link || "#"} 
-                                className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
-                              >
-                                {service.actionText} <FaArrowRight className="ml-1 text-xs" />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </Slider>
-                  </div>
-                </div>
-              </div>            </motion.div>
-          </div>
+      {/* Services Tabs Section */}
+      <section className="py-16 bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-100 mb-4">Explore Our Services</h2>
+          <p className="text-gray-300 text-center mb-12 max-w-3xl mx-auto">
+            Browse our comprehensive range of intellectual property services
+          </p>
           
-          {/* Design Protection Services Section with Text on Left and Carousel on Right */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
-              <FaPaintBrush className="text-xl text-blue-400 mr-3" />
-              Design Protection Services
-            </h3>
-            <motion.div 
-              variants={fadeInUp} 
-              className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700"
-            >
-              <div className="flex flex-col md:flex-row h-80">
-                {/* Left side - Text content */}
-                <div className="p-5 md:w-1/3 flex flex-col justify-center">
-                  <h4 className="text-lg font-bold text-gray-100 mb-3">Protect Your Visual Innovations</h4>
-                  <p className="text-gray-300 text-base mb-4">
-                    Design protection secures the unique visual appearance of your products, 
-                    giving you exclusive rights to their aesthetic features.
-                  </p>
-                  <p className="text-gray-300 text-base mb-4">
-                    Our design protection services help creators and companies safeguard their 
-                    product designs from unauthorized copying and maintain market uniqueness.
-                  </p>
-                </div>
-                
-                {/* Right side - Carousel (wider) */}
-                <div className="md:w-2/3 p-4 flex items-center">
-                  <div className="w-full">
-                    <Slider
-                      dots={true}
-                      infinite={false}
-                      speed={500}
-                      slidesToShow={2}
-                      slidesToScroll={1}
-                      arrows={true}
-                      className="design-carousel"
-                    >
-                      {designServices.map((service, index) => (
-                        <div key={index} className="p-2">
-                          <div className="bg-gray-700 rounded-lg shadow-md overflow-hidden h-64">
-                            <div className="relative h-32">
-                              <img 
-                                src={service.image} 
-                                alt={service.title} 
-                                className="w-full h-full object-cover"
-                              />
-                              <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
-                            </div>
-                            <div className="p-4">
-                              <h3 className="text-base font-bold text-gray-100 mb-2">{service.title}</h3>
-                              <p className="text-gray-300 text-sm mb-2">{service.description}</p>
-                              <a 
-                                href={service.link || "#"} 
-                                className="inline-flex items-center text-sm text-blue-400 hover:text-blue-300"
-                              >
-                                {service.actionText} <FaArrowRight className="ml-1 text-xs" />
-                              </a>
-                            </div>
-                          </div>
-                        </div>
-                      ))}
-                    </Slider>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-            {/* Branding & Identity Solutions Section with Image */}
-          <div className="mb-16">
-            <h3 className="text-2xl font-bold text-gray-100 mb-8 flex items-center">
-              <FaPencilRuler className="text-xl text-blue-400 mr-3" />
-              Branding & Identity Solutions
-            </h3>
-            <motion.div 
-              variants={fadeInUp} 
-              className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700"
-            >
-              <div className="flex flex-col md:flex-row h-80">
-                {/* Left side - Text content */}
-                <div className="p-5 md:w-1/2 flex flex-col justify-center overflow-y-auto">
-                  <h4 className="text-lg font-bold text-gray-100 mb-3">Logo Designing</h4>
-                  <p className="text-gray-300 text-sm mb-4">
-                    Strengthen your brand's visual identity with our professional logo design services
-                  </p>
-                  <ul className="space-y-2 mb-4">
-                    {services[4].items.map((item, index) => (
-                      <li key={index} className="flex items-start space-x-2">
-                        <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
-                        <span className="text-gray-300 text-sm">{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <p className="text-gray-300 text-sm mb-4">
-                    Our expert designers create memorable, distinctive logos that capture your brand's essence
-                    and make a lasting impression on your target audience.
-                  </p>
-                  <motion.a
-                    href="/contact"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="mt-2 inline-flex items-center px-5 py-2 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300 self-start"
-                  >
-                    Design Now
-                    <FaArrowRight className="ml-2" />
-                  </motion.a>
-                </div>
-                
-                {/* Right side - Image */}
-                <div className="md:w-1/2 relative h-48 md:h-auto">
-                  <img 
-                    src={logoDesignImg} 
-                    alt="Logo Design" 
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-900 to-transparent opacity-50 md:opacity-30"></div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+          <ServiceTabs services={allServices} />
         </div>
       </section>
 

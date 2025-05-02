@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaBars, FaTimes, FaTrademark } from 'react-icons/fa';
 import { FiSun, FiMoon } from 'react-icons/fi';
@@ -9,6 +9,28 @@ const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  
+  // Reference to the dropdown container
+  const servicesDropdownRef = useRef(null);
+
+  // Effect to handle clicks outside the dropdown
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (servicesDropdownRef.current && !servicesDropdownRef.current.contains(event.target)) {
+        setIsServicesOpen(false);
+      }
+    }
+
+    // Add event listener when dropdown is open
+    if (isServicesOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    // Clean up event listener
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isServicesOpen]);
 
   const services = [
     {
@@ -60,14 +82,14 @@ const Header = () => {
               {isDark ? (
                 <FiSun className="text-yellow-500 text-xl" />
               ) : (
-                <FiMoon className="text-indigo-600 dark:text-blue-400 text-xl" />
+                <FiMoon className="text-blue-600 dark:text-blue-400 text-xl" />
               )}
             </button>
           </div>
           */}
           <div className="flex items-center">
             <button
-              className="md:hidden text-gray-200 hover:text-indigo-400 p-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 rounded-md"
+              className="md:hidden text-gray-200 hover:text-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -85,7 +107,7 @@ const Header = () => {
                 {isDark ? (
                   <FiSun className="text-yellow-500 text-xl" />
                 ) : (
-                  <FiMoon className="text-indigo-600 dark:text-blue-400 text-xl" />
+                  <FiMoon className="text-blue-600 dark:text-blue-400 text-xl" />
                 )}
               </button>
             </div>
@@ -93,22 +115,22 @@ const Header = () => {
             <div className="flex flex-col md:flex-row md:items-center w-full md:w-auto">
               <Link 
                 to="/" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-indigo-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
               </Link>
               <Link 
                 to="/about" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-indigo-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 About
               </Link>
-              <div className="relative w-full md:w-auto">
+              <div className="relative w-full md:w-auto" ref={servicesDropdownRef}>
                 <button
                   onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="flex justify-between items-center w-full px-4 py-3 md:py-2 text-left text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-indigo-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                  className="flex justify-between items-center w-full px-4 py-3 md:py-2 text-left text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                   aria-expanded={isServicesOpen}
                 >
                   Services
@@ -121,7 +143,7 @@ const Header = () => {
                       <li key={index}>
                         <Link 
                           to={service.link} 
-                          className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                          className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                           onClick={() => {setIsServicesOpen(false); setIsMenuOpen(false);}}
                         >
                           {service.title}
@@ -133,8 +155,16 @@ const Header = () => {
               </div>
               
               <Link 
+                to="/why-choose-us" 
+                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Why Choose Us
+              </Link>
+              
+              <Link 
                 to="/team" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-indigo-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Team
@@ -142,7 +172,7 @@ const Header = () => {
               
               <Link 
                 to="/faq" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-indigo-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-indigo-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
+                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 FAQ
@@ -150,7 +180,7 @@ const Header = () => {
               
               <Link 
                 to="/contact" 
-                className="block px-4 py-3 md:py-2 mt-2 md:mt-0 mx-4 md:mx-0 text-center md:text-left text-white bg-indigo-600 dark:bg-indigo-700 rounded hover:bg-indigo-700 dark:hover:bg-indigo-800 transition-colors"
+                className="block px-4 py-3 md:py-2 mt-2 md:mt-0 mx-4 md:mx-0 text-center md:text-left text-white bg-blue-600 dark:bg-blue-700 rounded hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact

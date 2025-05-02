@@ -47,17 +47,17 @@ const Testimonials = () => {
               <img
                 src={testimonials[currentSlide].image}
                 alt={testimonials[currentSlide].name}
-                className="w-24 h-24 rounded-full object-cover border-2 border-indigo-500 dark:border-blue-400"
+                className="w-24 h-24 rounded-full object-cover border-2 border-blue-500 dark:border-blue-400"
               />
             </div>            <div className="text-center">
-              <FaQuoteLeft className="mx-auto text-4xl text-indigo-600 dark:text-blue-400 mb-6" />
+              <FaQuoteLeft className="mx-auto text-4xl text-blue-600 dark:text-blue-400 mb-6" />
               <p className="text-xl text-gray-700 dark:text-gray-300 mb-6">
                 {testimonials[currentSlide].text}
               </p>
               <h3 className="text-xl font-semibold text-gray-800 dark:text-gray-100">
                 {testimonials[currentSlide].name}
               </h3>
-              <p className="text-indigo-600 dark:text-blue-400">
+              <p className="text-blue-600 dark:text-blue-400">
                 {testimonials[currentSlide].position}
               </p>
             </div>

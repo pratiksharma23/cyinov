@@ -15,6 +15,7 @@ import FAQ from './components/FAQ';
 import Contact from './components/Contact';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsOfService from './components/TermsOfService';
+import WhyChooseUs from './components/WhyChooseUs';
 
 function App() {
   return (
@@ -26,8 +27,10 @@ function App() {
         <Route path="/faq" element={<FAQ />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/services" element={<Services />} />
+        <Route path="/why-choose-us" element={<WhyChooseUs />} />
         <Route path="/services/legal-compliance" element={<LegalCompliance />} />
-        <Route path="/services/tax-advisory" element={<TaxAdvisory />} />        <Route path="/services/market-research" element={<MarketResearch />} />
+        <Route path="/services/tax-advisory" element={<TaxAdvisory />} />        
+        <Route path="/services/market-research" element={<MarketResearch />} />
         <Route path="/services/human-capital" element={<HumanCapital />} />
         <Route path="/services/trademark" element={<Trademark />} />
         <Route path="/services/trademark/trademark-registration" element={<TrademarkRegistration />} />

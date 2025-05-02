@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { HiOutlineScale, HiOutlineChartBar } from 'react-icons/hi';
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri';
 import { BsPeople, BsBuilding, BsEye } from 'react-icons/bs';
-import { FaArrowRight } from 'react-icons/fa';
+import { FaArrowRight, FaCogs, FaGlobe } from 'react-icons/fa';
 import Testimonials from './Testimonials';
 
 // Import background images
@@ -16,6 +16,7 @@ import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';
 import humanCapitalBg from '../assets/hcm.jpg';
+import industryExpertiseImg from '../assets/IndustryExpertise.jpg';
 
 const defaultHeroContent = {
   id: 'default',
@@ -24,6 +25,13 @@ const defaultHeroContent = {
   background: heroBg,
   buttonText: "Explore Our Services"
 };
+
+const standards = [
+  "ISO-aligned Processes",
+  "Industry-specific Frameworks",
+  "Global Compliance Standards",
+  "Sustainable Business Practices"
+];
 
 const heroContent = [
   {
@@ -178,27 +186,27 @@ const Hero = () => {
                 {activeSection === 'default' ? (
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
                     text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   Get Started
                 </Link>
               ) : activeSection === 'services' ? (
                 <button
                   onClick={scrollToServices}
-                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
                     text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {currentContent.buttonText}
                 </button>
               ) : (
                 <Link
                   to={currentContent.link}
-                  className="inline-flex items-center justify-center bg-indigo-700 hover:bg-indigo-600 dark:bg-indigo-600 dark:hover:bg-indigo-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
+                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
                     text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-indigo-500/30 dark:hover:shadow-indigo-400/30 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                 >
                   {currentContent.buttonText}
                 </Link>
@@ -213,14 +221,14 @@ const Hero = () => {
                   onClick={() => handleSectionChange(content.id)}
                   className={`group p-4 rounded-lg transition-all duration-300 backdrop-blur-sm
                     ${content.id === activeSection 
-                      ? 'dark:bg-indigo-900/50 dark:border-indigo-400 bg-indigo-600/20 border-indigo-500' 
-                      : 'dark:bg-black/60 dark:hover:bg-indigo-900/30 bg-black/20 hover:bg-indigo-600/10'} 
+                      ? 'dark:bg-blue-900/50 dark:border-blue-400 bg-blue-600/20 border-blue-500' 
+                      : 'dark:bg-black/60 dark:hover:bg-blue-900/30 bg-black/20 hover:bg-blue-600/10'} 
                     border-b-2 ${content.id === activeSection ? '' : 'border-transparent'}`}
                 >
                   <div className="flex items-center justify-center space-x-3">
                     <content.icon className={`text-2xl 
                       ${content.id === activeSection 
-                        ? 'dark:text-indigo-300 text-indigo-500' 
+                        ? 'dark:text-blue-300 text-blue-500' 
                         : 'dark:text-gray-300 text-gray-600'}`} />
                     <span className={`text-sm md:text-base font-medium 
                       ${content.id === activeSection 
@@ -261,13 +269,13 @@ const Hero = () => {
                 >
                   <div className="absolute inset-0 bg-gradient-to-t 
                     from-black/90 via-black/75 to-black/45 
-                    group-hover:from-indigo-900/90 group-hover:via-indigo-900/70 group-hover:to-black/50 
+                    group-hover:from-blue-900/90 group-hover:via-blue-900/70 group-hover:to-black/50 
                     transition-all duration-300" />
 
                   <div className="absolute inset-0 p-8 flex flex-col justify-end">
                     <div className="mb-6 transform transition-transform duration-300 
                       group-hover:scale-110 group-hover:translate-y-[-10px]">
-                      <service.icon className="text-5xl text-indigo-300 group-hover:text-indigo-200" />
+                      <service.icon className="text-5xl text-blue-300 group-hover:text-blue-200" />
                     </div>
                     
                     <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md
@@ -280,9 +288,9 @@ const Hero = () => {
                       {service.description}
                     </p>
                     
-                    <div className="flex items-center text-indigo-300 font-semibold 
+                    <div className="flex items-center text-blue-300 font-semibold 
                       opacity-0 transform translate-y-4 transition-all duration-300
-                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:text-indigo-200">
+                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:text-blue-200">
                       <span className="mr-2">Learn More</span>
                       <FaArrowRight className="transition-transform duration-300 
                         group-hover:translate-x-2" />
@@ -294,8 +302,85 @@ const Hero = () => {
           </div>
         </div>
       </section>
+      
+      {/* Industry Expertise Section */}
+      <section className="py-20 bg-grey">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <h2 className="text-4xl font-bold text-gray-100 mb-8">Industry Expertise</h2>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  "Manufacturing and Industrial",
+                  "Technology and Software",
+                  "Healthcare and Pharmaceuticals",
+                  "Retail and E-commerce",
+                  "Financial Services",
+                  "Real Estate and Infrastructure",
+                  "Education and Training"
+                ].map((industry, index) => (
+                  <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:bg-gray-700">
+                    <div className="text-blue-400 mb-2">
+                      <FaCogs className="w-6 h-6" />
+                    </div>
+                    <h3 className="font-semibold text-gray-100">{industry}</h3>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="lg:w-1/2">
+              <div className="relative rounded-xl overflow-hidden shadow-2xl">
+                <img src={industryExpertiseImg} alt="Industry Expertise" className="w-full h-[500px] object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-black/60"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      <Testimonials />
+      {/* Global Best Practices */}
+              <section className="py-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-12">
+                <div className="container mx-auto px-4">
+                  <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">Global Best Practices</h2>
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {standards.map((standard, index) => (
+                      <div key={index} className="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg">
+                        <FaGlobe className="w-8 h-8 text-blue-500 dark:text-blue-400 flex-shrink-0" />
+                        <span className="text-lg text-gray-800 dark:text-gray-200">{standard}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+      
+      {/* Call to Action Section */}
+      <section className="py-24 bg-gradient-to-r from-blue-900 to-blue-900">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
+          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
+            Partner with Cyinov Consulting and unlock your organization's full potential with our comprehensive business solutions tailored to your unique needs.
+          </p>
+          <div className="flex flex-col sm:flex-row justify-center gap-4">
+            <Link 
+              to="/contact" 
+              className="inline-flex items-center justify-center bg-white text-blue-800 px-8 py-4 rounded-full 
+                font-bold text-lg hover:bg-blue-100 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
+            >
+              Schedule a Consultation
+              <FaArrowRight className="ml-2" />
+            </Link>
+            <Link 
+              to="/services" 
+              className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full 
+                font-bold text-lg hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
+            >
+              Explore Our Services
+            </Link>
+          </div>
+        </div>
+      </section>
+      
+      {/* <Testimonials /> */}
     </>
   );
 };
