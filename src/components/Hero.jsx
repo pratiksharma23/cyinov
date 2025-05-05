@@ -10,13 +10,13 @@ import Testimonials from './Testimonials';
 import heroBg from '../assets/hero-bg.jpg';
 import teamBg from '../assets/OurTeam.jpg';
 import companyBg from '../assets/OurCompany.jpg';
-import visionBg from '../assets/OurVision.jpg';
-import servicesBg from '../assets/OurServices.jpg';
+import visionBg from '../assets/OurVision.png';
+import servicesBg from '../assets/OurServices.png';
 import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';
 import humanCapitalBg from '../assets/hcm.jpg';
-import industryExpertiseImg from '../assets/IndustryExpertise.jpg';
+import industryExpertiseImg from '../assets/IndustryExpertise.png';
 
 // Default hero content
 const defaultHeroContent = {

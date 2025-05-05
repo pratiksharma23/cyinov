@@ -5,8 +5,8 @@ import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode,
 import CountUp from 'react-countup';
 import { motion } from 'framer-motion';
 import aboutHero from '../assets/About.jpg';
-import missionImg from '../assets/VisionMission.jpg';
-import valuesImg from '../assets/team.jpeg';
+import missionImg from '../assets/OurVision.png';
+import valuesImg from '../assets/CoreValues.png';
 
 const AboutHero = () => {
   return (
@@ -164,7 +164,7 @@ const CoreValues = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           <div className="order-2 lg:order-1 relative">
             <div className="rounded-lg overflow-hidden shadow-soft">
-              <img src={valuesImg} alt="Our Core Values" className="w-full h-[400px] object-cover" />
+              <img src={valuesImg} alt="Our Core Values" className="w-full h-full object-cover" />
               <div className="absolute inset-0 rounded-lg bg-gradient-to-l from-primary-600/20 to-transparent"></div>
             </div>
           </div>

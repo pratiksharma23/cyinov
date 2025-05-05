@@ -1,11 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaLinkedin, FaTwitter, FaEnvelope, FaQuoteLeft } from 'react-icons/fa';
-import teamHero from '../assets/team-hero.jpg';
-import team1 from '../assets/team1.jpg';
-import team2 from '../assets/team2.jpg';
-import team3 from '../assets/team3.jpg';
-import team4 from '../assets/team4.jpg';
 
 // Animation variants
 const fadeInUp = {
@@ -126,7 +121,7 @@ const Team = () => {
   // Updated team members with more detailed info and testimony quotes
   const teamMembers = [
     {
-      image: team1,
+      image: null,
       name: "Shauryanker Kaushik",
       position: "Founder & Head - Legal & Regulatory Compliance",
       description: "An accomplished Advocate at the Supreme Court of India and a renowned Trademark Attorney, Shauryanker specializes in intellectual property law, cybersecurity law, and regulatory compliance. With vast experience in litigation, IP portfolio management, and strategic brand protection.",
@@ -144,8 +139,8 @@ const Team = () => {
       testimonyQuote: "Our mission is to provide clients with cutting-edge legal solutions that protect their business interests in an increasingly complex regulatory environment."
     },
     {
-      image: team2,
-      name: "Ankur",
+      image: null,
+      name: "Ankur Kaushik",
       position: "Head - Human Capital Management",
       description: "Ankur is a seasoned Human Capital Management expert with a strong background in workforce planning, talent acquisition, and HR compliance. With years of experience in corporate HR strategy, he specializes in building high-performance teams and optimizing organizational structures.",
       expertise: [
@@ -161,8 +156,8 @@ const Team = () => {
       testimonyQuote: "The right team isn't just about skills—it's about creating a culture where innovation and excellence thrive naturally."
     },
     {
-      image: team3,
-      name: "Anuj",
+      image: null,
+      name: "Anuj Kapoor",
       position: "Head - Tax Advisory",
       description: "Anuj is a highly skilled tax consultant with extensive experience in corporate taxation, indirect taxes, and financial compliance. His deep understanding of national and international tax regulations allows him to craft effective tax strategies that minimize liabilities and ensure compliance.",
       expertise: [
@@ -177,8 +172,8 @@ const Team = () => {
       }
     },
     {
-      image: team4,
-      name: "Rajeev",
+      image: null,
+      name: "Rajeev Kaushik",
       position: "Head - Market & Product Research",
       description: "With over two decades of experience in market and product research, Rajeev specializes in data-driven business insights that empower organizations to make informed decisions. He has worked with diverse industries, analyzing trends, customer behaviors, and competitive landscapes.",
       expertise: [

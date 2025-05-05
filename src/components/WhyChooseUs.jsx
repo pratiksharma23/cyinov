@@ -2,11 +2,11 @@ import React from 'react';
 import { FaCheckCircle, FaCogs, FaUsers, FaChartLine, FaLaptopCode, 
          FaHandshake, FaStar, FaRocket, FaUserTie, FaClipboardCheck } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import approachImg from '../assets/company.jpeg';
-import techImg from '../assets/TechIntegration.jpg';
-import clientSuccessImg from '../assets/ClientSuccessCommitment.jpg';
-import qualityImg from '../assets/QualityAssurance.jpg';
-import whyUsImg from '../assets/tax.jpg';
+import approachImg from '../assets/OurApproach.png';
+import techImg from '../assets/TechIntegration.png';
+import clientSuccessImg from '../assets/OurCommitment.png';
+import qualityImg from '../assets/QualityAssurance.png';
+import whyUsImg from '../assets/FutureReady.png';
 
 const WhyChooseUs = () => {
   const reasons = [

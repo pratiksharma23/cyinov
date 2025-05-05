@@ -9,6 +9,7 @@ import {
   FaCheckCircle,
   FaArrowRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -361,7 +362,7 @@ const MarketResearch = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8">Ready to Get Started?</h2>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"

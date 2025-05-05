@@ -10,6 +10,7 @@ import {
   FaArrowRight,
   FaChevronRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -25,8 +26,8 @@ const ProcessStep = ({ number, title, description }) => (
     <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
       {number}
     </div>
-    <h3 className="text-2xl font-bold text-gray-100 mb-3">{title}</h3>
-    <p className="text-gray-300 text-center">{description}</p>
+    <h3 className="text-xl text-center md:text-2xl font-bold text-gray-100 mb-3">{title}</h3>
+    <p className="text-sm md:text-base text-gray-300 text-center">{description}</p>
   </motion.div>
 );
 
@@ -140,7 +141,7 @@ const TaxAdvisory = () => {
       ],
       actionButton: {
         text: "Learn More",
-        link: "/contact"
+        link: getRoutePath("/contact")
       }
     },
     {
@@ -157,7 +158,7 @@ const TaxAdvisory = () => {
       ],
       actionButton: {
         text: "Get GST Support",
-        link: "/contact"
+        link: getRoutePath("/contact")
       }
     },
     {
@@ -176,7 +177,7 @@ const TaxAdvisory = () => {
       ],
       actionButton: {
         text: "Outsource Payroll",
-        link: "/contact"
+        link: getRoutePath("/contact")
       }
     },
     {
@@ -192,7 +193,7 @@ const TaxAdvisory = () => {
       ],
       actionButton: {
         text: "Corporate Support",
-        link: "/contact"
+        link: getRoutePath("/contact")
       }
     },
     {
@@ -209,7 +210,7 @@ const TaxAdvisory = () => {
       ],
       actionButton: {
         text: "Tax Filing Support",
-        link: "/contact"
+        link: getRoutePath("/contact")
       }
     }
   ];
@@ -328,7 +329,7 @@ const TaxAdvisory = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8">Ready to Get Started?</h2>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"

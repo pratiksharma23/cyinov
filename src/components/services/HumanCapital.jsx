@@ -11,6 +11,7 @@ import {
   FaChartBar,
   FaCheckCircle
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 // Tab Navigation Component
 const TabNavigation = ({ categories, activeTab, setActiveTab }) => {
@@ -104,7 +105,7 @@ const ProcessStep = ({ number, title, items }) => (
       <div className="w-12 h-12 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-xl font-bold mr-4">
         {number}
       </div>
-      <h3 className="text-xl font-bold text-gray-100">{title}</h3>
+      <h3 className="text-lg md:text-lg font-bold text-gray-100">{title}</h3>
     </div>
     <ul className="space-y-2">
       {items.map((item, index) => (
@@ -460,7 +461,7 @@ const HumanCapital = () => {
 
           <div className="mt-16 text-center">
             <a
-              href="/contact"
+              href={getRoutePath("/contact")}
               className="inline-flex items-center bg-blue-400 text-gray-900 font-bold py-3 px-8 rounded-full 
                        hover:bg-blue-500 transition-colors duration-300"
             >

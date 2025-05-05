@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import testimonial1 from '../assets/testimonial1.jpg';
-import testimonial2 from '../assets/testimonial2.jpg';
-import testimonial3 from '../assets/testimonial3.jpg';
 import { FaQuoteLeft } from 'react-icons/fa';
 import { HiOutlineChevronLeft, HiOutlineChevronRight } from 'react-icons/hi';
 
@@ -14,21 +11,21 @@ const Testimonials = () => {
       id: 1,
       name: "Rajesh Sharma",
       position: "Director, Infotech Solutions Pvt. Ltd.",
-      image: testimonial1,
+      image: null,
       text: "Cyinov Consulting transformed our business operations. Their market research insights were invaluable in helping us expand into new markets."
     },
     {
       id: 2,
       name: "Vikram Patel",
       position: "CFO, Ashoka Enterprises",
-      image: testimonial2,
+      image: null,
       text: "The tax advisory services provided by Cyinov helped us optimize our financial structure and achieve significant savings."
     },
     {
       id: 3,
       name: "Sunil Mehta",
       position: "Head of HR, Orbit Technologies",
-      image: testimonial3,
+      image: null,
       text: "Their human capital management solutions helped us build a stronger, more efficient team. Highly recommended!"
     }
   ];

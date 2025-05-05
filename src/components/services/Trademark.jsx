@@ -1,4 +1,4 @@
-                                                                   import React from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
@@ -16,6 +16,7 @@ import {
   FaCheckCircle,
   FaArrowRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 // Import service images
 import tmRegistrationImg from '../../assets/tmregistration.jpg';
@@ -48,7 +49,7 @@ const ProcessStep = ({ number, title, description }) => (
     <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
       {number}
     </div>
-    <h3 className="text-2xl font-bold text-gray-100 mb-3">{title}</h3>
+    <h3 className="text-2xl text-center font-bold text-gray-100 mb-3">{title}</h3>
     <p className="text-gray-300 text-center">{description}</p>
   </motion.div>
 );
@@ -238,42 +239,42 @@ const Trademark = () => {
           title: "Trademark Registration",
           description: "Comprehensive trademark search and application filing under one class",
           image: tmRegistrationImg,
-          link: "/services/trademark/trademark-registration",
+          link: getRoutePath("/services/trademark/trademark-registration"),
           actionText: "Register Now"
         },
         {
           title: "Trademark Objection",
           description: "Drafting and filing responses to objections raised by the Trademark Registry",
           image: tmObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Get Help Now"
         },
         {
           title: "Trademark Opposition",
           description: "Filing and defending trademark opposition proceedings",
           image: tmOppositionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Protect Your Mark"
         },
         {
           title: "Trademark Renewal",
           description: "Drafting and filing trademark renewal applications",
           image: tmRenewalImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Renew Now"
         },
         {
           title: "Trademark Search",
           description: "Comprehensive trademark search to identify existing similar marks",
           image: tmSearchImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Search Now"
         },
         {
           title: "Trademark Transfer",
           description: "Legally transferring trademark ownership to another party",
           image: tmTransferImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Transfer Now"
         }
       ]
@@ -288,7 +289,7 @@ const Trademark = () => {
           title: "Patent Registration",
           description: "Comprehensive patent search and application filing",
           image: patentRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Protect Your Innovation"
         }
       ]
@@ -303,14 +304,14 @@ const Trademark = () => {
           title: "Copyright Registration",
           description: "Legal entitlement for original works of authorship",
           image: copyrightRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Register Now"
         },
         {
           title: "Copyright Objection",
           description: "Filing responses to objections raised by the Copyright Office",
           image: copyrightObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Object Now"
         }
       ]
@@ -325,21 +326,21 @@ const Trademark = () => {
           title: "Design Registration",
           description: "Registration for industrial designs and unique visual features",
           image: designRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Register Now"
         },
         {
           title: "Design Objection",
           description: "Filing responses to objections raised by the Design Office",
           image: designObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Object Now"
         },
         {
           title: "Logo Design",
           description: "Professional logo design services to create a unique brand identity",
           image: logoDesignImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Design Now"
         }
       ]
@@ -352,7 +353,7 @@ const Trademark = () => {
       title: "Trademark Registration",
       description: "Secure your brand identity with our comprehensive trademark registration service.",
       image: tmRegistrationImg,
-      link: "/services/trademark/trademark-registration",
+      link: getRoutePath("/services/trademark/trademark-registration"),
       actionText: "Register Your Trademark",
       features: [
         "Comprehensive trademark search",
@@ -366,7 +367,7 @@ const Trademark = () => {
       title: "Intellectual Property Protection Package",
       description: "Complete protection for your business with our bundled IP services.",
       image: servicesImg,
-      link: "/contact",
+      link: getRoutePath("/contact"),
       actionText: "Get Complete Protection",
       features: [
         "Trademark registration",
@@ -506,7 +507,7 @@ const Trademark = () => {
             Let us help you protect what matters most—your brand, innovations, and creative assets.
           </p>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"
