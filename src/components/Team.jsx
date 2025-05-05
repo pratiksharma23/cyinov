@@ -157,7 +157,7 @@ const Team = () => {
     },
     {
       image: null,
-      name: "Anuj Kapoor",
+      name: "Anuj Kaushik",
       position: "Head - Tax Advisory",
       description: "Anuj is a highly skilled tax consultant with extensive experience in corporate taxation, indirect taxes, and financial compliance. His deep understanding of national and international tax regulations allows him to craft effective tax strategies that minimize liabilities and ensure compliance.",
       expertise: [
