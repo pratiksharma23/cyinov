@@ -1,68 +1,128 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import { FaFacebook, FaLinkedin, FaInstagram } from 'react-icons/fa';
 
 const Footer = () => {
-  return (    <footer className="bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white py-8 sm:py-10 md:py-12 transition-colors duration-300">
-      <div className="container mx-auto px-4 sm:px-6">
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8">
-          <div className="col-span-2 sm:col-span-1">
-            <h3 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-gray-800 dark:text-white transition-colors duration-200">Cyinov</h3>
-            <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors duration-200">Empowering businesses with innovative solutions</p>
+  return (
+    <footer className="bg-neutral-50 dark:bg-neutral-900 text-neutral-800 dark:text-neutral-200 py-12 sm:py-16 border-t border-neutral-200 dark:border-neutral-800 transition-colors duration-300">
+      <div className="container">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 sm:gap-12">
+          {/* Company Information */}
+          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
+            <h3 className="text-lg font-display font-medium text-neutral-900 dark:text-white mb-4">Cyinov</h3>
+            <p className="text-sm text-neutral-600 dark:text-neutral-400 max-w-md mb-6">
+              Empowering businesses with innovative solutions and strategic excellence to navigate the complexities of the modern business landscape.
+            </p>
+            <div className="flex space-x-3">
+              <SocialLink href="https://www.facebook.com/profile.php?id=61574960935041" aria-label="Facebook">
+                <FaFacebook className="w-4 h-4" />
+              </SocialLink>
+              <SocialLink href="https://www.linkedin.com/company/cyinovconsulting" aria-label="LinkedIn">
+                <FaLinkedin className="w-4 h-4" />
+              </SocialLink>
+              <SocialLink href="https://www.instagram.com/cyinovconsulting" aria-label="Instagram">
+                <FaInstagram className="w-4 h-4" />
+              </SocialLink>
+            </div>
           </div>
-            <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 dark:text-white transition-colors duration-200">Quick Links</h4>
-            <ul className="space-y-1 sm:space-y-2">
-              <li><Link to="/" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Home</Link></li>
-              <li><Link to="/about" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">About Us</Link></li>
-              <li><Link to="/services" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Services</Link></li>
-              <li><Link to="/team" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Our Team</Link></li>
-              <li><Link to="/faq" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">FAQ</Link></li>
-              <li><Link to="/contact" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Contact</Link></li>
+          
+          {/* Quick Links */}
+          <div>
+            <FooterHeading>Quick Links</FooterHeading>
+            <ul className="space-y-2.5">
+              {[
+                { name: 'Home', path: '/' },
+                { name: 'About Us', path: '/about' },
+                { name: 'Services', path: '/services' },
+                { name: 'Our Team', path: '/team' },
+                { name: 'FAQ', path: '/faq' },
+                { name: 'Contact', path: '/contact' }
+              ].map((link, index) => (
+                <FooterLink key={index} to={link.path}>{link.name}</FooterLink>
+              ))}
             </ul>
           </div>
-            <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 dark:text-white transition-colors duration-200">Services</h4>
-            <ul className="space-y-1 sm:space-y-2">
-              <li><Link to="/services/legal-compliance" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Legal Compliance</Link></li>
-              <li><Link to="/services/tax-advisory" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Tax Advisory</Link></li>
-              <li><Link to="/services/market-research" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Market Research</Link></li>
-              <li><Link to="/services/human-capital" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Human Capital</Link></li>
-              <li><Link to="/services/trademark" className="text-sm sm:text-base inline-block py-1 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors">Trademark</Link></li>
+          
+          {/* Services */}
+          <div>
+            <FooterHeading>Services</FooterHeading>
+            <ul className="space-y-2.5">
+              {[
+                { name: 'Legal Compliance', path: '/services/legal-compliance' },
+                { name: 'Tax Advisory', path: '/services/tax-advisory' },
+                { name: 'Market Research', path: '/services/market-research' },
+                { name: 'Human Capital', path: '/services/human-capital' },
+                { name: 'Trademark', path: '/services/trademark' }
+              ].map((service, index) => (
+                <FooterLink key={index} to={service.path}>{service.name}</FooterLink>
+              ))}
             </ul>
           </div>
-            <div>
-            <h4 className="text-base sm:text-lg font-semibold mb-3 sm:mb-4 text-gray-800 dark:text-white transition-colors duration-200">Connect With Us</h4>
-            <div className="flex space-x-3 sm:space-x-4">
-              <a href="https://www.facebook.com/profile.php?id=61574960935041" 
-                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full"
-                 aria-label="Facebook">
-                <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a href="https://www.linkedin.com/company/cyinovconsulting" 
-                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full" 
-                 aria-label="LinkedIn">
-                <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
-              <a href="https://www.instagram.com/cyinovconsulting" 
-                 className="text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors p-2 hover:bg-gray-200 dark:hover:bg-gray-800 rounded-full"
-                 aria-label="Instagram">
-                <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6" />
-              </a>
+          
+          {/* Contact */}
+          <div>
+            <FooterHeading>Contact Us</FooterHeading>
+            <div className="space-y-3">
+              <p className="text-sm text-neutral-600 dark:text-neutral-400">
+                Have questions or need assistance with your business needs?
+              </p>
+              <Link 
+                to="/contact" 
+                className="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium shadow-sm hover:shadow-md transition-all duration-250"
+              >
+                Get in Touch
+              </Link>
             </div>
           </div>
         </div>
-        <div className="border-t border-gray-300 dark:border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-gray-600 dark:text-gray-400 transition-colors duration-200">
-          <p className="mb-2 text-sm sm:text-base text-gray-600 dark:text-gray-400 transition-colors duration-200">&copy; {new Date().getFullYear()} Cyinov. All rights reserved.</p>
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mt-2">
-            <Link to="/privacy-policy" className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors py-1 px-2">Privacy Policy</Link>
-            <span className="text-gray-400 dark:text-gray-600 hidden sm:inline">|</span>
-            <Link to="/terms-of-service" className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-white transition-colors py-1 px-2">Terms of Service</Link>
+        
+        {/* Copyright and Legal */}
+        <div className="border-t border-neutral-200 dark:border-neutral-800 mt-10 sm:mt-14 pt-8 text-center">
+          <p className="mb-4 text-sm text-neutral-500 dark:text-neutral-500">
+            &copy; {new Date().getFullYear()} Cyinov. All rights reserved.
+          </p>
+          <div className="flex flex-wrap justify-center gap-6 mt-2">
+            <Link to="/privacy-policy" className="text-xs text-neutral-500 dark:text-neutral-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              Privacy Policy
+            </Link>
+            <Link to="/terms-of-service" className="text-xs text-neutral-500 dark:text-neutral-500 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+              Terms of Service
+            </Link>
           </div>
         </div>
       </div>
     </footer>
   );
 };
+
+// Reusable Footer Components
+const FooterHeading = ({ children }) => (
+  <h4 className="text-base font-display font-medium text-neutral-900 dark:text-white mb-4">
+    {children}
+  </h4>
+);
+
+const FooterLink = ({ to, children }) => (
+  <li>
+    <Link 
+      to={to} 
+      className="inline-block text-sm text-neutral-600 dark:text-neutral-400 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-250"
+    >
+      {children}
+    </Link>
+  </li>
+);
+
+const SocialLink = ({ href, children, ...props }) => (
+  <a 
+    href={href}
+    className="flex items-center justify-center w-8 h-8 bg-white dark:bg-neutral-800 text-primary-600 dark:text-primary-400 rounded-full shadow-subtle hover:shadow-soft hover:translate-y-[-2px] transition-all duration-250"
+    target="_blank"
+    rel="noopener noreferrer"
+    {...props}
+  >
+    {children}
+  </a>
+);
 
 export default Footer;

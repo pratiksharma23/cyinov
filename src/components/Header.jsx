@@ -1,17 +1,47 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaBars, FaTimes, FaTrademark } from 'react-icons/fa';
-import { FiSun, FiMoon } from 'react-icons/fi';
+import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaTrademark } from 'react-icons/fa';
+import { FiSun, FiMoon, FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 import logo from '../assets/logo.png';
 import { useTheme } from '../contexts/ThemeContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isServicesOpen, setIsServicesOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const { isDark, toggleTheme } = useTheme();
   
-  // Reference to the dropdown container
+  // Reference to the dropdown container and mobile menu
   const servicesDropdownRef = useRef(null);
+  const mobileMenuRef = useRef(null);
+
+  // Effect to handle scrolling with debounce for performance
+  useEffect(() => {
+    let timeoutId = null;
+    const handleScroll = () => {
+      // Clear the timeout if it has already been set
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      
+      // Set a timeout to update the state after 50ms of no scrolling
+      timeoutId = setTimeout(() => {
+        if (window.scrollY > 20) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      }, 50);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, []);
 
   // Effect to handle clicks outside the dropdown
   useEffect(() => {
@@ -31,6 +61,44 @@ const Header = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [isServicesOpen]);
+  
+  // Effect to handle mobile menu overlay body scroll lock
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+  
+  // Effect to close mobile menu on route change
+  useEffect(() => {
+    return () => {
+      setIsMenuOpen(false);
+    };
+  }, []);
+
+  // Handle escape key for accessibility
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        if (isServicesOpen) {
+          setIsServicesOpen(false);
+        } else if (isMenuOpen) {
+          setIsMenuOpen(false);
+        }
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isServicesOpen, isMenuOpen]);
 
   const services = [
     {
@@ -47,7 +115,7 @@ const Header = () => {
     },
     {
       icon: FaChartLine,
-      title: "Market & Product Research",
+      title: "Market Research",
       description: "In-depth market analysis and research solutions",
       link: "/services/market-research"
     },
@@ -64,146 +132,209 @@ const Header = () => {
       link: "/services/trademark"
     }
   ];
+  
   return (
-    <header className="bg-gray-500 dark:bg-gray-900 shadow-lg shadow-gray-900/20 transition-colors duration-300">
-      <nav className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center">
-            <img src={logo} alt="Cyinov Logo" className="h-12 sm:h-16 md:h-20 w-auto" />
+    <header 
+      className={`fixed w-full top-0 z-header transition-all duration-300 safe-top ${
+        isScrolled 
+        ? 'bg-white/90 backdrop-blur-medium shadow-soft dark:bg-neutral-900/90' 
+        : 'bg-white/20 backdrop-blur-subtle dark:bg-neutral-900/20'
+      }`}
+      aria-label="Site header"
+    >
+      <nav className="container mx-auto px-4 xs:px-5 sm:px-6 lg:px-8 h-18 sm:h-22 flex items-center justify-between">
+        {/* Logo */}
+        <Link 
+          to="/" 
+          className="flex items-center relative z-20 -ml-2" 
+          aria-label="Cyinov home page"
+        >
+          <div className="p-2 flex items-center focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-lg outline-none">
+            <img 
+              src={logo} 
+              alt="Cyinov Logo" 
+              className="h-10 sm:h-12 w-auto" 
+              width="320" 
+              height="80" 
+            />
+          </div>
+        </Link>
+        
+        {/* Mobile menu button with improved touch target */}
+        <button
+          className="mobile-nav-toggle group"
+          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-menu"
+        >
+          <div className="w-10 h-10 flex items-center justify-center rounded-full bg-surface-100/80 dark:bg-surface-800/60 backdrop-blur-subtle group-hover:bg-surface-200 dark:group-hover:bg-surface-700 transition-colors">
+            {isMenuOpen ? (
+              <FiX className="text-2xl text-neutral-700 dark:text-neutral-200" />
+            ) : (
+              <FiMenu className="text-2xl text-neutral-700 dark:text-neutral-200" />
+            )}
+          </div>
+        </button>
+        
+        {/* Desktop navigation */}
+        <div className="hidden md:flex items-center space-x-1 lg:space-x-2">
+          <NavLink to="/">Home</NavLink>
+          <NavLink to="/about">About</NavLink>
+          
+          {/* Services dropdown - desktop */}
+          <div className="relative" ref={servicesDropdownRef}>
+            <button
+              onClick={() => setIsServicesOpen(!isServicesOpen)}
+              onKeyDown={(e) => e.key === 'Enter' && setIsServicesOpen(!isServicesOpen)}
+              className="flex items-center px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+              aria-expanded={isServicesOpen}
+              aria-haspopup="true"
+            >
+              <span>Services</span>
+              <FiChevronDown 
+                className={`ml-1.5 w-4 h-4 transition-transform duration-200 ${isServicesOpen ? 'rotate-180' : ''}`} 
+              />
+            </button>
+            
+            {/* Desktop dropdown menu with improved animation */}
+            <div 
+              className={`absolute left-0 top-full mt-1 w-64 rounded-lg overflow-hidden bg-white dark:bg-neutral-800 shadow-medium border border-neutral-200/80 dark:border-neutral-700/50 transition-all duration-200 origin-top-left
+                ${isServicesOpen 
+                  ? 'opacity-100 scale-100 translate-y-0' 
+                  : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
+              aria-hidden={!isServicesOpen}
+              role="menu"
+            >
+              <ul className="py-1">
+                {services.map((service, index) => (
+                  <li key={index} role="none">
+                    <Link 
+                      to={service.link} 
+                      className="flex items-center px-4 py-2.5 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors outline-none focus-visible:bg-neutral-100 focus-visible:dark:bg-neutral-700 focus-visible:text-primary-600 focus-visible:dark:text-primary-400"
+                      onClick={() => setIsServicesOpen(false)}
+                      role="menuitem"
+                    >
+                      <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mr-3 flex-shrink-0">
+                        <service.icon className="text-primary-600 dark:text-primary-400" />
+                      </div>
+                      <div>
+                        <div className="font-medium">{service.title}</div>
+                        <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5 line-clamp-1">{service.description}</div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+          
+          <NavLink to="/why-choose-us">Why Choose Us</NavLink>
+          <NavLink to="/team">Team</NavLink>
+          <NavLink to="/faq">FAQ</NavLink>
+          
+          {/* Contact button */}
+          <Link 
+            to="/contact" 
+            className="ml-2 px-4 py-2 text-sm font-medium bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-soft hover:shadow-medium transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-2"
+          >
+            Contact
           </Link>
           
-          {/* Desktop Theme Toggle 
-          <div className="hidden md:flex items-center mr-4">
-            <button
-              onClick={toggleTheme}
-              aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 bg-opacity-50 dark:bg-opacity-50 transition-colors hover:bg-gray-300 dark:hover:bg-gray-600"
-            >
-              {isDark ? (
-                <FiSun className="text-yellow-500 text-xl" />
-              ) : (
-                <FiMoon className="text-blue-600 dark:text-blue-400 text-xl" />
-              )}
-            </button>
-          </div>
-          */}
-          <div className="flex items-center">
-            <button
-              className="md:hidden text-gray-200 hover:text-blue-400 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-md"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
-            >
-              {isMenuOpen ? <FaTimes className="text-2xl" /> : <FaBars className="text-2xl" />}
-            </button>
-          </div>
-          
-          <div className={`transition-all duration-300 ease-in-out absolute md:relative top-full left-0 w-full md:w-auto bg-gray-500 dark:bg-gray-900 md:bg-transparent md:dark:bg-transparent z-50 shadow-xl md:shadow-none ${isMenuOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-5 pointer-events-none md:opacity-100 md:translate-y-0 md:pointer-events-auto'} md:flex items-center gap-4 lg:gap-6`}>            <div className="flex items-center justify-between md:hidden p-4 mb-2 border-b border-gray-200 dark:border-gray-700">
-              <span className="text-gray-700 dark:text-gray-200 font-medium">Theme</span>
+          {/* Theme toggle - desktop */}
+          <button
+            onClick={toggleTheme}
+            aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
+            className="ml-2 p-2.5 rounded-full bg-surface-100 dark:bg-surface-800 hover:bg-surface-200 dark:hover:bg-surface-700 text-neutral-700 dark:text-neutral-200 transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+          >
+            {isDark ? (
+              <FiSun className="w-5 h-5 text-amber-400" />
+            ) : (
+              <FiMoon className="w-5 h-5 text-primary-600" />
+            )}
+          </button>
+        </div>
+        
+        {/* Mobile navigation overlay */}
+        <div 
+          ref={mobileMenuRef}
+          id="mobile-menu"
+          className={`fixed inset-0 z-10 bg-white dark:bg-neutral-900 transition-all duration-300 md:hidden ${
+            isMenuOpen 
+              ? 'opacity-100 translate-x-0' 
+              : 'opacity-0 translate-x-full pointer-events-none'
+          }`}
+          aria-hidden={!isMenuOpen}
+        >
+          {/* Mobile menu content */}
+          <div className="h-full flex flex-col pt-20 pb-6 px-6 overflow-y-auto">
+            {/* Theme toggle - mobile */}
+            <div className="flex items-center justify-between py-4 mb-4 border-b border-neutral-200 dark:border-neutral-800">
+              <span className="text-neutral-700 dark:text-neutral-300 font-medium">Theme</span>
               <button
                 onClick={toggleTheme}
                 aria-label={isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-                className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 bg-opacity-50 dark:bg-opacity-50 transition-colors hover:bg-gray-300 dark:hover:bg-gray-600"
+                className="p-2.5 rounded-full bg-neutral-100 dark:bg-neutral-800 text-neutral-700 dark:text-neutral-200 outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
               >
                 {isDark ? (
-                  <FiSun className="text-yellow-500 text-xl" />
+                  <FiSun className="w-5 h-5 text-amber-400" />
                 ) : (
-                  <FiMoon className="text-blue-600 dark:text-blue-400 text-xl" />
+                  <FiMoon className="w-5 h-5 text-primary-600" />
                 )}
               </button>
             </div>
             
-            <div className="flex flex-col md:flex-row md:items-center w-full md:w-auto">
-              <Link 
-                to="/" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/about" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <div className="relative w-full md:w-auto" ref={servicesDropdownRef}>
-                <button
-                  onClick={() => setIsServicesOpen(!isServicesOpen)}
-                  className="flex justify-between items-center w-full px-4 py-3 md:py-2 text-left text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                  aria-expanded={isServicesOpen}
-                >
+            {/* Navigation links */}
+            <nav className="flex flex-col space-y-1.5">
+              <MobileNavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</MobileNavLink>
+              <MobileNavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
+              
+              {/* Mobile services section */}
+              <div className="py-2">
+                <div className="mb-2 px-4 text-xs font-medium text-neutral-500 dark:text-neutral-400 uppercase tracking-wider">
                   Services
-                  <svg className={`w-4 h-4 ml-1 transform transition-transform ${isServicesOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-                  </svg>
-                </button>                <div className={`${isServicesOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0 md:opacity-0'} md:absolute overflow-hidden transition-all duration-300 ease-in-out md:mt-2 w-full md:w-64 bg-white dark:bg-gray-800 md:shadow-lg md:rounded-lg md:border border-gray-200 dark:border-gray-700`}>
-                  <ul className="py-2">
-                    {services.map((service, index) => (
-                      <li key={index}>
-                        <Link 
-                          to={service.link} 
-                          className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                          onClick={() => {setIsServicesOpen(false); setIsMenuOpen(false);}}
-                        >
-                          {service.title}
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
                 </div>
+                <ul className="space-y-1">
+                  {services.map((service, index) => (
+                    <li key={index}>
+                      <Link 
+                        to={service.link} 
+                        className="flex items-center px-4 py-3 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mr-3">
+                          <service.icon className="text-primary-600 dark:text-primary-400" />
+                        </div>
+                        <div>
+                          <div className="font-medium">{service.title}</div>
+                          <div className="text-xs text-neutral-500 dark:text-neutral-400 mt-0.5">{service.description}</div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
               </div>
               
-              <Link 
-                to="/why-choose-us" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              <MobileNavLink to="/why-choose-us" onClick={() => setIsMenuOpen(false)}>
                 Why Choose Us
-              </Link>
-              
-              <Link 
-                to="/team" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              </MobileNavLink>
+              <MobileNavLink to="/team" onClick={() => setIsMenuOpen(false)}>
                 Team
-              </Link>
-              
-              <Link 
-                to="/faq" 
-                className="block px-4 py-3 md:py-2 text-base md:text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 hover:bg-gray-100 md:hover:bg-transparent dark:hover:text-blue-400 dark:hover:bg-gray-700 md:dark:hover:bg-transparent transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
+              </MobileNavLink>
+              <MobileNavLink to="/faq" onClick={() => setIsMenuOpen(false)}>
                 FAQ
-              </Link>
-              
+              </MobileNavLink>
+            </nav>
+            
+            {/* Mobile contact button */}
+            <div className="mt-auto pt-6">
               <Link 
                 to="/contact" 
-                className="block px-4 py-3 md:py-2 mt-2 md:mt-0 mx-4 md:mx-0 text-center md:text-left text-white bg-blue-600 dark:bg-blue-700 rounded hover:bg-blue-700 dark:hover:bg-blue-800 transition-colors"
+                className="flex items-center justify-center w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-soft hover:shadow-medium transition-all"
                 onClick={() => setIsMenuOpen(false)}
               >
-                Contact
+                Contact Us
               </Link>
-            </div>
-            
-            {/* Horizontal Theme Toggle Switch */}
-            <div className="ml-4 flex items-center">
-              <div 
-                className="relative inline-flex h-6 w-12 cursor-pointer rounded-full bg-gray-300 dark:bg-gray-600 transition-colors duration-300"
-                onClick={toggleTheme}
-              >
-                <span className="sr-only">{isDark ? 'Switch to light theme' : 'Switch to dark theme'}</span>
-                {/* Toggle Icons */}
-                <span className="absolute inset-0 flex items-center justify-between px-1 pointer-events-none">
-                  <FiMoon className={`text-gray-800 text-xs ${isDark ? 'opacity-100' : 'opacity-50'}`} />
-                  <FiSun className={`text-yellow-300 text-xs ${!isDark ? 'opacity-100' : 'opacity-50'}`} />
-                </span>
-                {/* Toggle Handle */}
-                <span 
-                  className={`absolute left-0 inline-block h-5 w-5 top-0.5 transform transition-transform duration-300 rounded-full bg-white shadow-md ${isDark ? 'translate-x-0.5' : 'translate-x-6'}`}
-                ></span>
-              </div>
             </div>
           </div>
         </div>
@@ -211,5 +342,26 @@ const Header = () => {
     </header>
   );
 };
+
+// Desktop NavLink component
+const NavLink = ({ to, children }) => (
+  <Link 
+    to={to} 
+    className="px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+  >
+    {children}
+  </Link>
+);
+
+// Mobile NavLink component
+const MobileNavLink = ({ to, children, onClick }) => (
+  <Link 
+    to={to} 
+    className="flex items-center px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+    onClick={onClick}
+  >
+    {children}
+  </Link>
+);
 
 export default Header;

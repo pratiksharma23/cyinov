@@ -16,6 +16,7 @@ import {
   FaCheckCircle,
   FaArrowRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 // Import service images
 import tmRegistrationImg from '../../assets/tmregistration.jpg';
@@ -45,10 +46,10 @@ const ProcessStep = ({ number, title, description }) => (
     whileHover={{ scale: 1.02 }}
     className="flex flex-col items-center p-8 bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-700"
   >
-    <div className="w-16 h-16 bg-blue-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
+    <div className="w-16 h-16 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-2xl font-bold mb-6">
       {number}
     </div>
-    <h3 className="text-2xl font-bold text-gray-100 mb-3">{title}</h3>
+    <h3 className="text-2xl text-center font-bold text-gray-100 mb-3">{title}</h3>
     <p className="text-gray-300 text-center">{description}</p>
   </motion.div>
 );
@@ -59,7 +60,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
     whileHover={{ scale: 1.02 }}
     className="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-700"
   >
-    <Icon className="text-2xl text-blue-400 mb-3" />
+    <Icon className="text-2xl text-primary-400 mb-3" />
     <h3 className="text-xl font-bold text-gray-100 mb-2">{title}</h3>
     <p className="text-gray-300 text-sm mb-4">{description}</p>
     {sections ? (
@@ -70,7 +71,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
             <ul className="space-y-2">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start space-x-2">
-                  <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
+                  <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 text-sm" />
                   <span className="text-gray-300 text-sm">{item}</span>
                 </li>
               ))}
@@ -82,7 +83,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
       <ul className="space-y-2">
         {items.map((item, index) => (
           <li key={index} className="flex items-start space-x-2">
-            <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
+            <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 text-sm" />
             <span className="text-gray-300 text-sm">{item}</span>
           </li>
         ))}
@@ -98,7 +99,7 @@ const ServiceCard = ({ title, description, image, link, actionText, icon: Icon }
     whileHover={{ scale: 1.05 }}
     className="p-3"
   >
-    <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700 h-full transition-all duration-300 hover:shadow-xl hover:border-blue-400/50">
+    <div className="bg-gray-800 rounded-lg shadow-md overflow-hidden border border-gray-700 h-full transition-all duration-300 hover:shadow-xl hover:border-primary-400/50">
       <div className="relative h-48">
         <img 
           src={image} 
@@ -107,7 +108,7 @@ const ServiceCard = ({ title, description, image, link, actionText, icon: Icon }
         />
         <div className="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
         {Icon && (
-          <div className="absolute top-4 right-4 bg-blue-500/80 rounded-full p-2 shadow-lg">
+        <div className="absolute top-4 right-4 bg-primary-500/80 rounded-full p-2 shadow-lg">
             <Icon className="text-white text-lg" />
           </div>
         )}
@@ -134,8 +135,8 @@ const FeaturedServiceCard = ({ title, description, image, link, actionText, feat
     whileHover={{ scale: 1.02 }}
     className="col-span-1 md:col-span-2 mb-8"
   >
-    <div className="bg-gradient-to-r from-blue-900/40 to-gray-800 rounded-xl shadow-lg overflow-hidden border border-blue-500/30 h-full relative">
-      <div className="absolute top-4 right-4 bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-medium">
+    <div className="bg-gradient-to-r from-primary-900/40 to-gray-800 rounded-xl shadow-lg overflow-hidden border border-primary-500/30 h-full relative">
+      <div className="absolute top-4 right-4 bg-primary-500 text-white px-3 py-1 rounded-full text-sm font-medium">
         Featured Service
       </div>
       <div className="flex flex-col md:flex-row h-full">
@@ -150,7 +151,7 @@ const FeaturedServiceCard = ({ title, description, image, link, actionText, feat
         </div>
         <div className="md:w-1/2 p-6 md:p-8 flex flex-col justify-center">
           <h3 className="text-2xl font-bold text-white mb-3">{title}</h3>
-          <p className="text-blue-200 mb-4">{description}</p>
+          <p className="text-primary-200 mb-4">{description}</p>
           
           {features && features.length > 0 && (
             <div className="mb-5">
@@ -158,7 +159,7 @@ const FeaturedServiceCard = ({ title, description, image, link, actionText, feat
               <ul className="space-y-2">
                 {features.map((feature, idx) => (
                   <li key={idx} className="flex items-start">
-                    <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 mr-2" />
+                    <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 mr-2" />
                     <span className="text-gray-200 text-sm">{feature}</span>
                   </li>
                 ))}
@@ -194,7 +195,7 @@ const ServiceTabs = ({ services, defaultTab = 0 }) => {
             onClick={() => setActiveTab(idx)}
             className={`px-4 py-3 font-medium text-sm transition-colors duration-200 relative
               ${activeTab === idx 
-                ? 'text-blue-400 border-blue-400' 
+                ? 'text-primary-400 border-primary-400' 
                 : 'text-gray-400 hover:text-gray-200 border-transparent'
               } border-b-2 -mb-px`}
           >
@@ -238,42 +239,42 @@ const Trademark = () => {
           title: "Trademark Registration",
           description: "Comprehensive trademark search and application filing under one class",
           image: tmRegistrationImg,
-          link: "/services/trademark/trademark-registration",
+          link: getRoutePath("/services/trademark/trademark-registration"),
           actionText: "Register Now"
         },
         {
           title: "Trademark Objection",
           description: "Drafting and filing responses to objections raised by the Trademark Registry",
           image: tmObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Get Help Now"
         },
         {
           title: "Trademark Opposition",
           description: "Filing and defending trademark opposition proceedings",
           image: tmOppositionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Protect Your Mark"
         },
         {
           title: "Trademark Renewal",
           description: "Drafting and filing trademark renewal applications",
           image: tmRenewalImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Renew Now"
         },
         {
           title: "Trademark Search",
           description: "Comprehensive trademark search to identify existing similar marks",
           image: tmSearchImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Search Now"
         },
         {
           title: "Trademark Transfer",
           description: "Legally transferring trademark ownership to another party",
           image: tmTransferImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Transfer Now"
         }
       ]
@@ -288,7 +289,7 @@ const Trademark = () => {
           title: "Patent Registration",
           description: "Comprehensive patent search and application filing",
           image: patentRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Protect Your Innovation"
         }
       ]
@@ -303,14 +304,14 @@ const Trademark = () => {
           title: "Copyright Registration",
           description: "Legal entitlement for original works of authorship",
           image: copyrightRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Register Now"
         },
         {
           title: "Copyright Objection",
           description: "Filing responses to objections raised by the Copyright Office",
           image: copyrightObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Object Now"
         }
       ]
@@ -325,21 +326,21 @@ const Trademark = () => {
           title: "Design Registration",
           description: "Registration for industrial designs and unique visual features",
           image: designRegistrationImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Register Now"
         },
         {
           title: "Design Objection",
           description: "Filing responses to objections raised by the Design Office",
           image: designObjectionImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Object Now"
         },
         {
           title: "Logo Design",
           description: "Professional logo design services to create a unique brand identity",
           image: logoDesignImg,
-          link: "/contact",
+          link: getRoutePath("/contact"),
           actionText: "Design Now"
         }
       ]
@@ -352,7 +353,7 @@ const Trademark = () => {
       title: "Trademark Registration",
       description: "Secure your brand identity with our comprehensive trademark registration service.",
       image: tmRegistrationImg,
-      link: "/services/trademark/trademark-registration",
+      link: getRoutePath("/services/trademark/trademark-registration"),
       actionText: "Register Your Trademark",
       features: [
         "Comprehensive trademark search",
@@ -366,7 +367,7 @@ const Trademark = () => {
       title: "Intellectual Property Protection Package",
       description: "Complete protection for your business with our bundled IP services.",
       image: servicesImg,
-      link: "/contact",
+      link: getRoutePath("/contact"),
       actionText: "Get Complete Protection",
       features: [
         "Trademark registration",
@@ -404,15 +405,15 @@ const Trademark = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-24 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 text-gray-100"
+        className="relative py-24 bg-gradient-to-r from-primary-800 via-primary-700 to-primary-800 text-gray-100"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Trademark & Intellectual Property Services</h1>
-            <p className="text-xl mb-8 text-blue-200">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-200">Trademark & Intellectual Property Services</h1>
+            <p className="text-xl mb-8 text-primary-200">
               Protecting Your Brand, Innovations, and Creative Works with Expert Legal Solutions
             </p>
-            <p className="text-lg text-blue-200">
+            <p className="text-lg text-primary-200">
               A strong intellectual property (IP) strategy is essential for securing your brand identity and business assets. We offer end-to-end solutions for trademark, patent, copyright, and design protection—ensuring legal security, competitive advantage, and brand integrity. From registration to enforcement, our expert team is here to safeguard your intellectual property rights.
             </p>
           </div>
@@ -506,7 +507,7 @@ const Trademark = () => {
             Let us help you protect what matters most—your brand, innovations, and creative assets.
           </p>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"

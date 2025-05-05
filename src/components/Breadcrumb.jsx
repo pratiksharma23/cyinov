@@ -11,27 +11,27 @@ const Breadcrumb = ({ paths }) => {
   }
 
   return (
-    <nav aria-label="Breadcrumb" className="py-4">
-      <ol className="flex items-center flex-wrap">
+    <nav aria-label="Breadcrumb" className="py-4 mb-2">
+      <ol className="flex items-center flex-wrap text-sm">
         <li className="flex items-center">
           <Link 
             to="/" 
-            className="text-blue-400 hover:text-blue-300 transition-colors"
+            className="text-neutral-500 hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400 transition-colors font-medium"
           >
             Home
           </Link>
         </li>
         {paths.map((path, index) => (
           <li key={index} className="flex items-center">
-            <FaChevronRight className="mx-2 text-gray-500 text-sm" />
+            <FaChevronRight className="mx-2 text-neutral-400 dark:text-neutral-500 text-xs" />
             {index === paths.length - 1 ? (
-              <span className="text-gray-300" aria-current="page">
+              <span className="text-neutral-800 dark:text-neutral-200 font-medium" aria-current="page">
                 {path.label}
               </span>
             ) : (
               <Link
                 to={path.url}
-                className="text-blue-400 hover:text-blue-300 transition-colors"
+                className="text-neutral-500 hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400 transition-colors font-medium"
               >
                 {path.label}
               </Link>

@@ -1,23 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { HiOutlineScale, HiOutlineChartBar } from 'react-icons/hi';
 import { RiMoneyRupeeCircleLine } from 'react-icons/ri';
 import { BsPeople, BsBuilding, BsEye } from 'react-icons/bs';
-import { FaArrowRight, FaCogs, FaGlobe } from 'react-icons/fa';
+import { FaArrowRight, FaCogs, FaGlobe, FaRegLightbulb } from 'react-icons/fa';
 import Testimonials from './Testimonials';
 
 // Import background images
 import heroBg from '../assets/hero-bg.jpg';
 import teamBg from '../assets/OurTeam.jpg';
 import companyBg from '../assets/OurCompany.jpg';
-import visionBg from '../assets/OurVision.jpg';
-import servicesBg from '../assets/OurServices.jpg';
+import visionBg from '../assets/OurVision.png';
+import servicesBg from '../assets/OurServices.png';
 import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';
 import humanCapitalBg from '../assets/hcm.jpg';
-import industryExpertiseImg from '../assets/IndustryExpertise.jpg';
+import industryExpertiseImg from '../assets/IndustryExpertise.png';
 
+// Default hero content
 const defaultHeroContent = {
   id: 'default',
   title: "Welcome to Cyinov Consulting",
@@ -26,6 +27,7 @@ const defaultHeroContent = {
   buttonText: "Explore Our Services"
 };
 
+// Global standards list
 const standards = [
   "ISO-aligned Processes",
   "Industry-specific Frameworks",
@@ -33,6 +35,7 @@ const standards = [
   "Sustainable Business Practices"
 ];
 
+// Hero content sections
 const heroContent = [
   {
     id: 'company',
@@ -73,10 +76,14 @@ const heroContent = [
 ];
 
 const Hero = () => {
+  // State management with performance optimizations
   const [activeSection, setActiveSection] = useState('default');
   const [isTransitioning, setIsTransitioning] = useState(false);
   const [prevSection, setPrevSection] = useState('default');
-
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef(null);
+  
+  // Service definitions
   const services = [
     {
       icon: HiOutlineScale,
@@ -94,7 +101,7 @@ const Hero = () => {
     },
     {
       icon: HiOutlineChartBar,
-      title: "Market & Product Research",
+      title: "Market Research",
       description: "In-depth market analysis and research solutions",
       link: "/services/market-research",
       bgImage: marketBg
@@ -108,39 +115,59 @@ const Hero = () => {
     }
   ];
 
-  // Function to handle scrolling to services section
+  // Initialize animations after component mount
+  useEffect(() => {
+    setIsVisible(true);
+    
+    // Preload background images for smoother transitions
+    heroContent.forEach(content => {
+      const img = new Image();
+      img.src = content.background;
+    });
+    
+    return () => setIsVisible(false);
+  }, []);
+
+  // Smooth scroll to services section
   const scrollToServices = () => {
     const servicesSection = document.getElementById('services');
     if (servicesSection) {
-      servicesSection.scrollIntoView({ behavior: 'smooth' });
+      servicesSection.scrollIntoView({ 
+        behavior: 'smooth',
+        block: 'start'
+      });
     }
   };
 
+  // Handle section changes with improved transition
   const handleSectionChange = (sectionId) => {
     if (sectionId !== activeSection) {
       setIsTransitioning(true);
       setPrevSection(activeSection);
       setActiveSection(sectionId);
-      setTimeout(() => setIsTransitioning(false), 500);
+      
+      // Reset transition state after animation completes
+      setTimeout(() => setIsTransitioning(false), 600);
     }
   };
 
-  const handleButtonClick = () => {
-    if (activeSection === 'services') {
-      scrollToServices();
-    }
-  };
-
+  // Get current content based on active section
   const getCurrentContent = () => {
     if (activeSection === 'default') return defaultHeroContent;
     return heroContent.find(content => content.id === activeSection) || defaultHeroContent;
   };
 
   const currentContent = getCurrentContent();
+  
   return (
     <>
-      <div className="relative h-screen">
-        {/* Default Background Image */}
+      {/* Corzo-style Hero Section with full height */}
+      <section 
+        ref={heroRef}
+        className="relative hero-section"
+        aria-label="Hero section"
+      >
+        {/* Default Background Image with optimized loading */}
         <div
           className={`absolute inset-0 transition-opacity duration-700 ease-in-out
             ${activeSection === 'default' ? 'opacity-100' : 'opacity-0'}`}
@@ -150,15 +177,17 @@ const Hero = () => {
             backgroundPosition: 'center',
             zIndex: activeSection === 'default' ? 1 : 0
           }}
-        >          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 dark:from-black/85 dark:via-black/75 dark:to-black/90 
-            transition-all duration-700" />
+          aria-hidden={activeSection !== 'default'}
+        >
+          {/* Gradient overlay with improved mobile contrast - using Corzo's darker overlay */}
+          <div className="hero-overlay" />
         </div>
 
-        {/* Section Background Images */}
+        {/* Section Background Images with improved transitions */}
         {heroContent.map((content) => (
           <div
             key={content.id}
-            className={`absolute inset-0 transition-opacity duration-700 ease-in-out
+            className={`absolute inset-0 transition-opacity duration-700 ease-out
               ${content.id === activeSection ? 'opacity-100' : 'opacity-0'}`}
             style={{
               backgroundImage: `url(${content.background})`,
@@ -167,149 +196,121 @@ const Hero = () => {
               zIndex: content.id === activeSection ? 1 : 
                      content.id === prevSection ? 0 : -1
             }}
-          >            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/80 dark:from-black/85 dark:via-black/75 dark:to-black/90 
-              transition-all duration-700" />
+            aria-hidden={content.id !== activeSection}
+          >
+            {/* Gradient overlay - using Corzo's darker overlay */}
+            <div className="hero-overlay" />
           </div>
-        ))}        {/* Hero Content */}
-        <div className="relative h-full z-10">
-          <div className="container mx-auto px-4 sm:px-6 h-full flex flex-col justify-between py-12 md:py-16">
-            {/* Main Hero Content */}
-            <div className="text-center mt-20 sm:mt-24 md:mt-32">
-              <h1 className={`text-3xl xs:text-4xl sm:text-5xl md:text-6xl font-bold text-white dark:text-white mb-4 sm:mb-6 transition-all duration-700 px-2
+        ))}        
+
+        {/* Hero Content - using Corzo-style centered approach */}
+        <div className="relative min-h-[80vh] z-10 pb-8 flex items-end">
+          <div className="container mx-auto">
+            {/* Main Hero Content - improved animation and accessibility */}
+            <div className={`flex flex-col items-center text-center transition-opacity duration-1000 ease-out mb-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
+              {/* Title using Corzo-style typography */}
+              <h1 className={`hero-title transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.title}
               </h1>
-              <p className={`text-lg xs:text-xl md:text-2xl text-gray-300 dark:text-gray-200 mb-6 sm:mb-8 max-w-3xl mx-auto transition-all duration-700 px-4
+              
+              {/* Description with Corzo styling */}
+              <p className={`hero-subtitle transition-all duration-700
                 ${isTransitioning ? 'opacity-0 transform translate-y-4' : 'opacity-100 transform translate-y-0'}`}>
                 {currentContent.description}
               </p>
-                {activeSection === 'default' ? (
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
-                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  Get Started
-                </Link>
-              ) : activeSection === 'services' ? (
-                <button
-                  onClick={scrollToServices}
-                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
-                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  {currentContent.buttonText}
-                </button>
-              ) : (
-                <Link
-                  to={currentContent.link}
-                  className="inline-flex items-center justify-center bg-blue-700 hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-500 text-white px-6 sm:px-8 py-2.5 sm:py-3 rounded-full 
-                    text-base sm:text-lg font-semibold hover:scale-105 transform w-auto min-w-[160px]
-                    transition-all duration-300 hover:shadow-lg hover:shadow-blue-500/30 dark:hover:shadow-blue-400/30 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                >
-                  {currentContent.buttonText}
-                </Link>
-              )}
             </div>
 
-            {/* Navigation Buttons */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-auto">
-              {heroContent.map((content) => (
-                <button
-                  key={content.id}
-                  onClick={() => handleSectionChange(content.id)}
-                  className={`group p-4 rounded-lg transition-all duration-300 backdrop-blur-sm
-                    ${content.id === activeSection 
-                      ? 'dark:bg-blue-900/50 dark:border-blue-400 bg-blue-600/20 border-blue-500' 
-                      : 'dark:bg-black/60 dark:hover:bg-blue-900/30 bg-black/20 hover:bg-blue-600/10'} 
-                    border-b-2 ${content.id === activeSection ? '' : 'border-transparent'}`}
-                >
-                  <div className="flex items-center justify-center space-x-3">
-                    <content.icon className={`text-2xl 
+            {/* Corzo-style Numbered Navigation - bottom aligned */}
+            <div className="w-full">
+              <div className="grid grid-cols-4 gap-3 md:gap-6 w-full">
+                {heroContent.map((content, index) => (
+                  <button
+                    key={content.id}
+                    onClick={() => handleSectionChange(content.id)}
+                    className={`flex flex-col items-center justify-center text-center px-4 py-3 border border-white/20 rounded-md backdrop-blur-subtle transition-all duration-300
                       ${content.id === activeSection 
-                        ? 'dark:text-blue-300 text-blue-500' 
-                        : 'dark:text-gray-300 text-gray-600'}`} />
-                    <span className={`text-sm md:text-base font-medium 
-                      ${content.id === activeSection 
-                        ? 'dark:text-white text-gray-800' 
-                        : 'dark:text-gray-300 text-gray-600'}`}>
-                      {content.buttonText}
-                    </span>
-                  </div>
-                </button>
-              ))}
+                        ? 'bg-primary-600/90 border-primary-500' 
+                        : 'bg-neutral-900/30 hover:bg-white/10'}`}
+                    aria-label={`View ${content.buttonText} section`}
+                    aria-pressed={content.id === activeSection}
+                  >
+                    <span className="text-white font-medium">{content.buttonText}</span>
+                  </button>
+                ))}
+              </div>
+              
+              {/* Moved CTA button to the bottom */}
+              <div className="mt-6 text-center">
+                {activeSection === 'default' ? (
+                  <Link
+                    to="/contact"
+                    className="btn btn-lg bg-blue-600 hover:bg-blue-700 text-white shadow-medium hover:shadow-lg group focus-visible:ring-blue-500"
+                    aria-label="Get Started with Cyinov Consulting"
+                  >
+                    <span>Get Started</span>
+                    <FaArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                ) : activeSection === 'services' ? (
+                  <button
+                    onClick={scrollToServices}
+                    className="btn btn-lg bg-blue-600 hover:bg-blue-700 text-white shadow-medium hover:shadow-lg group focus-visible:ring-blue-500"
+                    aria-label={`View ${currentContent.buttonText}`}
+                  >
+                    <span>{currentContent.buttonText}</span>
+                    <FaArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                ) : (
+                  <Link
+                    to={currentContent.link}
+                    className="btn btn-lg bg-blue-600 hover:bg-blue-700 text-white shadow-medium hover:shadow-lg group focus-visible:ring-blue-500"
+                    aria-label={`Learn about ${currentContent.buttonText}`}
+                  >
+                    <span>{currentContent.buttonText}</span>
+                    <FaArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Services Section */}
-      <section id="services" className="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-4 text-white">Our Services</h2>
-          <p className="text-gray-300 text-center mb-12 max-w-2xl mx-auto">
-            Comprehensive business solutions tailored to your needs
-          </p>
+      {/* Services Section - improved spacing and card layout */}
+      <section id="services" className="section-padding bg-surface-50 dark:bg-neutral-900">
+        <div className="container">
+          {/* Section header */}
+          <div className="text-center mb-12 md:mb-16">
+            <span className="badge badge-primary uppercase tracking-wider mb-4">Our Expertise</span>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-display font-medium text-neutral-900 dark:text-white mb-4 tracking-tight">Our Services</h2>
+            <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto text-balance">
+              Comprehensive business solutions tailored to your needs
+            </p>
+          </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {/* Services grid - improved mobile layout */}
+          <div className="services-grid">
             {services.map((service, index) => (
-              <Link 
-                key={index} 
-                to={service.link} 
-                className="group relative overflow-hidden rounded-xl border border-gray-800"
-              >
-                <div 
-                  className="relative h-[400px] w-full overflow-hidden rounded-xl"
-                  style={{
-                    backgroundImage: `url(${service.bgImage})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center'
-                  }}
-                >
-                  <div className="absolute inset-0 bg-gradient-to-t 
-                    from-black/90 via-black/75 to-black/45 
-                    group-hover:from-blue-900/90 group-hover:via-blue-900/70 group-hover:to-black/50 
-                    transition-all duration-300" />
-
-                  <div className="absolute inset-0 p-8 flex flex-col justify-end">
-                    <div className="mb-6 transform transition-transform duration-300 
-                      group-hover:scale-110 group-hover:translate-y-[-10px]">
-                      <service.icon className="text-5xl text-blue-300 group-hover:text-blue-200" />
-                    </div>
-                    
-                    <h3 className="text-2xl font-bold mb-4 text-white drop-shadow-md
-                      transform transition-all duration-300 group-hover:translate-y-[-10px]">
-                      {service.title}
-                    </h3>
-                    
-                    <p className="text-gray-300 mb-6 transform transition-all duration-300 
-                      group-hover:translate-y-[-10px] text-base leading-relaxed drop-shadow-md">
-                      {service.description}
-                    </p>
-                    
-                    <div className="flex items-center text-blue-300 font-semibold 
-                      opacity-0 transform translate-y-4 transition-all duration-300
-                      group-hover:opacity-100 group-hover:translate-y-0 group-hover:text-blue-200">
-                      <span className="mr-2">Learn More</span>
-                      <FaArrowRight className="transition-transform duration-300 
-                        group-hover:translate-x-2" />
-                    </div>
-                  </div>
-                </div>
-              </Link>
+              <ServiceCard key={index} service={service} index={index} />
             ))}
           </div>
         </div>
       </section>
       
-      {/* Industry Expertise Section */}
-      <section className="py-20 bg-grey">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2">
-              <h2 className="text-4xl font-bold text-gray-100 mb-8">Industry Expertise</h2>
-              <div className="grid grid-cols-2 gap-4">
+      {/* Industry Expertise Section - improved responsive layout */}
+      <section className="section-padding bg-white dark:bg-surface-800">
+        <div className="container">
+          <div className="grid md:grid-cols-5 gap-8 md:gap-10 lg:gap-12 items-center">
+            {/* Content area - 3/5 width on desktop */}
+            <div className="md:col-span-3">
+              <span className="badge badge-primary uppercase tracking-wider mb-4">Expertise</span>
+              <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-display font-medium text-neutral-900 dark:text-white mb-6 tracking-tight">Industry Expertise</h2>
+              <p className="text-neutral-600 dark:text-neutral-400 mb-8">
+                Our specialized knowledge spans across various industries, allowing us to provide targeted insights and solutions that address your specific sector challenges.
+              </p>
+              
+              {/* Industry grid - improved hover effects */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {[
                   "Manufacturing and Industrial",
                   "Technology and Software",
@@ -319,69 +320,157 @@ const Hero = () => {
                   "Real Estate and Infrastructure",
                   "Education and Training"
                 ].map((industry, index) => (
-                  <div key={index} className="bg-gray-800 p-4 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 hover:bg-gray-700">
-                    <div className="text-blue-400 mb-2">
-                      <FaCogs className="w-6 h-6" />
+                  <div 
+                    key={index} 
+                    className="flex items-start p-4 bg-neutral-50 dark:bg-neutral-800/50 rounded-lg shadow-subtle hover:shadow-medium transition-all duration-250 hover:-translate-y-1 hover:bg-white dark:hover:bg-neutral-800/80 group"
+                  >
+                    <div className="mr-3 text-primary-500 dark:text-primary-400 transition-all duration-250">
+                      <FaCogs className="w-5 h-5" />
                     </div>
-                    <h3 className="font-semibold text-gray-100">{industry}</h3>
+                    <span className="text-sm text-neutral-800 dark:text-neutral-200 font-medium">{industry}</span>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="lg:w-1/2">
-              <div className="relative rounded-xl overflow-hidden shadow-2xl">
-                <img src={industryExpertiseImg} alt="Industry Expertise" className="w-full h-[500px] object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/30 to-black/60"></div>
+            
+            {/* Image area - 2/5 width on desktop */}
+            <div className="relative md:col-span-2">
+              <div className="aspect-w-16 aspect-h-9 md:aspect-w-9 md:aspect-h-12 rounded-xl overflow-hidden shadow-medium">
+                <img 
+                  src={industryExpertiseImg} 
+                  alt="Industry Expertise at Cyinov" 
+                  className="w-full h-full object-cover" 
+                  loading="lazy" 
+                  width="600"
+                  height="800"
+                />
+                <div className="absolute inset-0 bg-gradient-to-tr from-neutral-900/60 to-transparent"></div>
+              </div>
+              
+              {/* Floating info card - improved animation */}
+              <div className="absolute bottom-0 left-0 right-0 p-4 xs:p-6 md:p-8 animate-fade-in-up">
+                <div className="bg-white/90 dark:bg-neutral-800/90 backdrop-blur-medium p-4 md:p-6 rounded-lg shadow-medium border border-neutral-200/30 dark:border-neutral-700/30">
+                  <h3 className="text-lg md:text-xl font-display font-medium text-neutral-900 dark:text-white mb-2">Specialized Knowledge</h3>
+                  <p className="text-neutral-600 dark:text-neutral-400 text-sm">Our experts bring industry-specific insights to every project, ensuring solutions aligned with your sector's unique needs.</p>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Global Best Practices */}
-              <section className="py-16 bg-white dark:bg-gray-800 rounded-lg shadow-lg mt-12">
-                <div className="container mx-auto px-4">
-                  <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-gray-100 mb-12">Global Best Practices</h2>
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    {standards.map((standard, index) => (
-                      <div key={index} className="flex items-center space-x-4 bg-gray-100 dark:bg-gray-700 p-6 rounded-lg">
-                        <FaGlobe className="w-8 h-8 text-blue-500 dark:text-blue-400 flex-shrink-0" />
-                        <span className="text-lg text-gray-800 dark:text-gray-200">{standard}</span>
-                      </div>
-                    ))}
-                  </div>
+      {/* Global Best Practices - improved card design */}
+      <section className="section-padding bg-surface-50 dark:bg-neutral-900">
+        <div className="container">
+          {/* Section header */}
+          <div className="text-center mb-12 md:mb-16">
+            <span className="badge badge-primary uppercase tracking-wider mb-4">Standards</span>
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-display font-medium text-neutral-900 dark:text-white mb-4 tracking-tight">Global Best Practices</h2>
+            <p className="text-neutral-600 dark:text-neutral-400 max-w-xl mx-auto">
+              We adhere to international standards to ensure quality and consistency
+            </p>
+          </div>
+          
+          {/* Standards grid */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+            {standards.map((standard, index) => (
+              <div 
+                key={index} 
+                className="flex flex-col items-center p-6 bg-white dark:bg-neutral-800 rounded-xl shadow-soft hover:-translate-y-1 hover:shadow-medium transition-all duration-300 group card-hoverable"
+              >
+                <div className="mb-5 p-4 bg-primary-50 dark:bg-primary-900/20 rounded-full transform group-hover:scale-110 transition-transform duration-300">
+                  <FaGlobe className="w-6 h-6 text-primary-600 dark:text-primary-400" />
                 </div>
-              </section>
-      
-      {/* Call to Action Section */}
-      <section className="py-24 bg-gradient-to-r from-blue-900 to-blue-900">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Ready to Transform Your Business?</h2>
-          <p className="text-xl text-blue-100 mb-10 max-w-3xl mx-auto">
-            Partner with Cyinov Consulting and unlock your organization's full potential with our comprehensive business solutions tailored to your unique needs.
-          </p>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link 
-              to="/contact" 
-              className="inline-flex items-center justify-center bg-white text-blue-800 px-8 py-4 rounded-full 
-                font-bold text-lg hover:bg-blue-100 transition-all duration-300 transform hover:scale-105 hover:shadow-lg"
-            >
-              Schedule a Consultation
-              <FaArrowRight className="ml-2" />
-            </Link>
-            <Link 
-              to="/services" 
-              className="inline-flex items-center justify-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full 
-                font-bold text-lg hover:bg-white/10 transition-all duration-300 transform hover:scale-105"
-            >
-              Explore Our Services
-            </Link>
+                <span className="text-neutral-900 dark:text-neutral-200 text-lg text-center font-medium">{standard}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
       
-      {/* <Testimonials /> */}
+      {/* Call to Action Section - improved layout and accessibility */}
+      <section className="section-padding bg-primary-600 dark:bg-primary-700 text-white">
+        <div className="container">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-2xl xs:text-3xl sm:text-4xl md:text-5xl font-display font-medium text-white mb-6 tracking-tight">Ready to Transform Your Business?</h2>
+            <p className="text-lg text-white/90 mb-10 max-w-2xl mx-auto text-balance">
+              Partner with Cyinov Consulting and unlock your organization's full potential with our comprehensive business solutions tailored to your unique needs.
+            </p>
+            
+            {/* Responsive button layout */}
+            <div className="flex flex-col xs:flex-row justify-center gap-4 xs:gap-6">
+              <Link 
+                to="/contact" 
+                className="btn btn-lg bg-white text-blue-600 hover:bg-neutral-50 shadow-soft hover:shadow-medium group focus-visible:ring-white"
+                aria-label="Schedule a consultation with Cyinov"
+              >
+                <span>Schedule a Consultation</span>
+                <FaArrowRight className="ml-2 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+              <Link 
+                to="/services" 
+                className="btn btn-lg bg-transparent border border-white/80 text-white hover:bg-white/10 transition-all focus-visible:ring-white"
+                aria-label="Explore Cyinov's services"
+              >
+                <span>Explore Our Services</span>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </>
+  );
+};
+
+// Corzo-style Service Card Component with numbered sections
+const ServiceCard = ({ service, index }) => {
+  // Add staggered animation delay based on index
+  const animationDelay = `${index * 0.1}s`;
+  
+  return (
+    <Link 
+      to={service.link} 
+      className="service-card-with-image group card-hoverable"
+      aria-label={`Learn about ${service.title}`}
+      style={{ animationDelay }}
+    >
+      {/* Image section with Corzo-style aspect ratio */}
+      <div className="service-card-image">
+        {/* Image with lazy loading */}
+        <img 
+          src={service.bgImage} 
+          alt={`${service.title} service`}
+          loading="lazy"
+          width="400"
+          height="500"
+        />
+        
+        {/* Gradient overlay */}
+        <div className="service-card-image-overlay" />
+      </div>
+      
+      {/* Corzo-style Content section */}
+      <div className="service-card-content">
+        {/* Numbered section like Corzo */}
+        <div className="service-card-number">0{index + 1}</div>
+        
+        {/* Title with Corzo styling */}
+        <h3 className="service-card-title">
+          {service.title}
+        </h3>
+        
+        {/* Description with Corzo styling */}
+        <p className="service-card-description">
+          {service.description}
+        </p>
+        
+        {/* Learn more link with Corzo styling */}
+        <div className="service-card-link">
+          <span>Learn More</span>
+          <FaArrowRight className="w-4 h-4" />
+        </div>
+      </div>
+    </Link>
   );
 };
 

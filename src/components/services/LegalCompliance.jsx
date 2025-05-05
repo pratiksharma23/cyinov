@@ -17,6 +17,7 @@ import {
   FaArrowRight,
   FaChevronRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -29,7 +30,7 @@ const ServiceCategory = ({ icon: Icon, title, description, sections, actionButto
     whileHover={{ scale: 1.02 }}
     className="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-700"
   >
-    <Icon className="text-2xl text-blue-400 mb-3" />
+    <Icon className="text-2xl text-primary-400 mb-3" />
     <h3 className="text-xl font-bold text-gray-100 mb-2">{title}</h3>
     <p className="text-gray-300 text-sm mb-4">{description}</p>
     <div className="space-y-4">
@@ -38,7 +39,7 @@ const ServiceCategory = ({ icon: Icon, title, description, sections, actionButto
           <ul className="space-y-2">
             {section.items.map((item, itemIndex) => (
               <li key={itemIndex} className="flex items-start space-x-2">
-                <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
+                <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 text-sm" />
                 <span className="text-gray-300 text-sm">
                   {typeof item === 'object' ? (
                     <>
@@ -78,8 +79,8 @@ const ServiceDetailPanel = ({ service }) => {
       className="bg-gray-800 rounded-lg shadow-lg p-6 lg:p-8 border border-gray-700"
     >
       <div className="flex items-start mb-6">
-        <div className="bg-blue-800/30 p-4 rounded-full mr-5">
-          <service.icon className="text-3xl text-blue-400" />
+        <div className="bg-primary-800/30 p-4 rounded-full mr-5">
+          <service.icon className="text-3xl text-primary-400" />
         </div>
         <div>
           <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
@@ -90,11 +91,11 @@ const ServiceDetailPanel = ({ service }) => {
       <div className="space-y-6 mt-8">
         {service.sections && service.sections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="bg-gray-900/50 rounded-lg p-5">
-            {section.title && <h4 className="font-semibold text-xl text-blue-300 mb-4">{section.title}</h4>}
+            {section.title && <h4 className="font-semibold text-xl text-primary-300 mb-4">{section.title}</h4>}
             <ul className="space-y-4">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start">
-                  <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                  <FaCheckCircle className="text-primary-400 mt-1 mr-3 flex-shrink-0" />
                   <div>
                     {typeof item === 'object' ? (
                       <>
@@ -134,16 +135,16 @@ const ServiceNavItem = ({ service, isActive, onClick }) => {
       onClick={onClick}
       className={`flex items-center w-full text-left p-4 transition-all duration-300 rounded-lg mb-2 ${
         isActive 
-          ? 'bg-blue-700/20 border-l-4 border-blue-400' 
+          ? 'bg-primary-700/20 border-l-4 border-primary-400' 
           : 'bg-gray-800 hover:bg-gray-700/50'
       }`}
       whileHover={{ x: isActive ? 0 : 5 }}
     >
-      <service.icon className={`text-xl mr-3 ${isActive ? 'text-blue-400' : 'text-gray-400'}`} />
-      <span className={`font-medium ${isActive ? 'text-blue-400' : 'text-gray-300'}`}>
+      <service.icon className={`text-xl mr-3 ${isActive ? 'text-primary-400' : 'text-gray-400'}`} />
+      <span className={`font-medium ${isActive ? 'text-primary-400' : 'text-gray-300'}`}>
         {service.title}
       </span>
-      {isActive && <FaChevronRight className="ml-auto text-blue-400" />}
+      {isActive && <FaChevronRight className="ml-auto text-primary-400" />}
     </motion.button>
   );
 };
@@ -165,7 +166,7 @@ const LegalCompliance = () => {
       }],
       actionButton: {
         text: "Register Trademark",
-        link: "/services/trademark"
+        link: getRoutePath("/services/trademark")
       }
     },
     {
@@ -270,12 +271,12 @@ const LegalCompliance = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-24 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 text-gray-100"
+        className="relative py-24 bg-gradient-to-r from-primary-800 via-primary-700 to-primary-800 text-gray-100"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Legal & Regulatory Compliances</h1>
-            <p className="text-xl text-blue-200">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-200">Legal & Regulatory Compliances</h1>
+            <p className="text-xl text-primary-200">
               Comprehensive legal solutions for businesses and individuals. Navigate complex legal landscapes with confidence.
             </p>
           </div>
@@ -312,7 +313,7 @@ const LegalCompliance = () => {
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Left Panel - Service Navigation */}
             <div className="w-full lg:w-1/3 bg-gray-900/50 p-5 rounded-lg">
-              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-blue-400">Our Services</h3>
+              <h3 className="text-xl font-bold text-gray-100 mb-6 pl-4 border-l-4 border-primary-400">Our Services</h3>
               <div className="space-y-1">
                 {services.map((service, index) => (
                   <ServiceNavItem 
@@ -343,7 +344,7 @@ const LegalCompliance = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8">Ready to Get Started?</h2>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"

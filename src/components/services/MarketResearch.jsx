@@ -9,6 +9,7 @@ import {
   FaCheckCircle,
   FaArrowRight
 } from 'react-icons/fa';
+import { getRoutePath } from '../../utils/routing';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 20 },
@@ -21,7 +22,7 @@ const ProcessStep = ({ number, title, description }) => (
     whileHover={{ scale: 1.02 }}
     className="flex flex-col items-center p-6 bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-700"
   >
-    <div className="w-12 h-12 bg-blue-400 rounded-full flex items-center justify-center text-gray-900 text-xl font-bold mb-4">
+    <div className="w-12 h-12 bg-primary-400 rounded-full flex items-center justify-center text-gray-900 text-xl font-bold mb-4">
       {number}
     </div>
     <h3 className="text-xl font-bold text-gray-100 mb-2">{title}</h3>
@@ -35,7 +36,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
     whileHover={{ scale: 1.02 }}
     className="bg-gray-800 rounded-lg shadow-md p-6 hover:shadow-lg transition-all duration-300 border border-gray-700"
   >
-    <Icon className="text-2xl text-blue-400 mb-3" />
+    <Icon className="text-2xl text-primary-400 mb-3" />
     <h3 className="text-xl font-bold text-gray-100 mb-2">{title}</h3>
     <p className="text-gray-300 text-sm mb-4">{description}</p>
     {sections ? (
@@ -46,7 +47,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
             <ul className="space-y-2">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start space-x-2">
-                  <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
+                  <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 text-sm" />
                   <span className="text-gray-300 text-sm">
                     {typeof item === 'object' ? (
                       <>
@@ -66,7 +67,7 @@ const ServiceCategory = ({ icon: Icon, title, description, items, sections }) =>
       <ul className="space-y-2">
         {items.map((item, index) => (
           <li key={index} className="flex items-start space-x-2">
-            <FaCheckCircle className="text-blue-400 mt-1 flex-shrink-0 text-sm" />
+            <FaCheckCircle className="text-primary-400 mt-1 flex-shrink-0 text-sm" />
             <span className="text-gray-300 text-sm">{item}</span>
           </li>
         ))}
@@ -109,7 +110,7 @@ const TabContent = ({ service }) => {
       className="bg-gray-800 rounded-lg shadow-lg p-8 border border-gray-700"
     >
       <div className="flex items-start mb-6">
-        <service.icon className="text-3xl text-blue-400 mr-4" />
+        <service.icon className="text-3xl text-primary-400 mr-4" />
         <div>
           <h3 className="text-2xl font-bold text-gray-100 mb-2">{service.title}</h3>
           <p className="text-gray-300">{service.description}</p>
@@ -119,11 +120,11 @@ const TabContent = ({ service }) => {
       <div className="grid md:grid-cols-2 gap-8 mt-8">
         {service.sections.map((section, sectionIndex) => (
           <div key={sectionIndex} className="bg-gray-900 rounded-lg p-6">
-            <h4 className="font-semibold text-xl text-blue-300 mb-4">{section.title}</h4>
+            <h4 className="font-semibold text-xl text-primary-300 mb-4">{section.title}</h4>
             <ul className="space-y-4">
               {section.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start">
-                  <FaCheckCircle className="text-blue-400 mt-1 mr-3 flex-shrink-0" />
+                  <FaCheckCircle className="text-primary-400 mt-1 mr-3 flex-shrink-0" />
                   <div>
                     <div className="font-medium text-gray-100">{item.title}</div>
                     <div className="text-gray-400 text-sm">{item.description}</div>
@@ -289,12 +290,12 @@ const MarketResearch = () => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative py-24 bg-gradient-to-r from-blue-800 via-blue-700 to-blue-800 text-gray-100"
+        className="relative py-24 bg-gradient-to-r from-primary-800 via-primary-700 to-primary-800 text-gray-100"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">Market & Product Research Services</h1>
-            <p className="text-xl text-blue-200">
+            <h1 className="text-4xl md:text-5xl font-bold mb-6 text-primary-200">Market & Product Research Services</h1>
+            <p className="text-xl text-primary-200">
               Data-driven insights to power your business decisions. Understand your market, customers, and competition with precision.
             </p>
           </div>
@@ -361,7 +362,7 @@ const MarketResearch = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-100 mb-8">Ready to Get Started?</h2>
           <motion.a
-            href="/contact"
+            href={getRoutePath("/contact")}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center px-8 py-3 bg-blue-400 text-gray-900 font-semibold rounded-full hover:bg-blue-500 transition-colors duration-300"
