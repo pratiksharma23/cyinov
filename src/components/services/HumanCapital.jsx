@@ -287,7 +287,7 @@ const HumanCapital = () => {
                         <span className="text-xl">🟢</span>
                       </div>
                       <div className="text-center mt-5">
-                        <h3 className="font-bold text-gray-100">Assessment</h3>
+                        <h3 className="text-xl font-bold text-gray-100">Assessment</h3>
                         <p className="text-sm text-gray-400 mt-2">Understanding your workforce</p>
                       </div>
                       
@@ -329,7 +329,7 @@ const HumanCapital = () => {
                         <span className="text-xl">🟡</span>
                       </div>
                       <div className="text-center mt-5">
-                        <h3 className="font-bold text-gray-100">Strategy</h3>
+                        <h3 className="text-xl font-bold text-gray-100">Strategy</h3>
                         <p className="text-sm text-gray-400 mt-2">Developing a roadmap</p>
                       </div>
                       
@@ -371,7 +371,7 @@ const HumanCapital = () => {
                         <span className="text-xl">🟠</span>
                       </div>
                       <div className="text-center mt-5">
-                        <h3 className="font-bold text-gray-100">Implementation</h3>
+                        <h3 className="text-xl font-bold text-gray-100">Implementation</h3>
                         <p className="text-sm text-gray-400 mt-2">Seamless execution</p>
                       </div>
                       
@@ -413,7 +413,7 @@ const HumanCapital = () => {
                         <span className="text-xl">🔴</span>
                       </div>
                       <div className="text-center mt-5">
-                        <h3 className="font-bold text-gray-100">Optimization</h3>
+                        <h3 className="text-xl font-bold text-gray-100">Optimization</h3>
                         <p className="text-sm text-gray-400 mt-2">Continuous improvement</p>
                       </div>
                       

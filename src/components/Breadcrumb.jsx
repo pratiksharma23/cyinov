@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { FaChevronRight } from 'react-icons/fa';
+import { FaChevronRight, FaHome } from 'react-icons/fa';
 
 const Breadcrumb = ({ paths }) => {
   const location = useLocation();
@@ -18,7 +18,7 @@ const Breadcrumb = ({ paths }) => {
             to="/" 
             className="text-neutral-500 hover:text-primary-600 dark:text-neutral-400 dark:hover:text-primary-400 transition-colors font-medium"
           >
-            Home
+            <FaHome />
           </Link>
         </li>
         {paths.map((path, index) => (
