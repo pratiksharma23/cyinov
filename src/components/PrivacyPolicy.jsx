@@ -72,7 +72,7 @@ const PrivacyPolicy = () => {
           <section className="mb-6">
             <h2 className="text-2xl font-display font-medium text-neutral-900 dark:text-white mb-4">5. Contact Us</h2>
             <p className="text-neutral-700 dark:text-neutral-300">
-              If you have any questions about this privacy policy or our privacy practices, please contact us at <a href="mailto:privacy@cyinov.com" className="text-primary-600 dark:text-primary-400 hover:underline">privacy@cyinov.com</a> or by mail at: Cyinov, 123 Business Street, Tech City, TC 12345, Country.
+              If you have any questions about this privacy policy or our privacy practices, please contact us at <a href="mailto:info@cyinov.com" className="text-primary-600 dark:text-primary-400 hover:underline">info@cyinov.com</a>.
             </p>
           </section>
         </div>

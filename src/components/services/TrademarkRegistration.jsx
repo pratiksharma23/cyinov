@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { FaTrademark, FaArrowRight, FaTimes } from 'react-icons/fa';
-import pricingImage from '../../assets/tm_pricing.png';
+import pricingImage from '../../assets/tmpricing.png';
 
 const TrademarkRegistration = () => {
   const [formData, setFormData] = useState({

@@ -28,6 +28,7 @@ import tmTransferImg from '../../assets/tmtransfer.jpg';
 import tmRectificationImg from '../../assets/tmrectification.jpg';
 import showcaseHearingImg from '../../assets/showcausehearing.jpg';
 import servicesImg from '../../assets/services.jpg';
+import ipProtectionImg from '../../assets/ipprotection.jpg';
 import patentRegistrationImg from '../../assets/patentregistration.jpg';
 import copyrightRegistrationImg from '../../assets/copyrightregistration.jpg';
 import copyrightObjectionImg from '../../assets/copyrightobjection.jpg';
@@ -366,7 +367,7 @@ const Trademark = () => {
     {
       title: "Intellectual Property Protection Package",
       description: "Complete protection for your business with our bundled IP services.",
-      image: servicesImg,
+      image: ipProtectionImg,
       link: getRoutePath("/contact"),
       actionText: "Get Complete Protection",
       features: [

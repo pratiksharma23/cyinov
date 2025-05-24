@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FaBalanceScale, FaCalculator, FaChartLine, FaUsers, FaTrademark } from 'react-icons/fa';
 import { FiSun, FiMoon, FiMenu, FiX, FiChevronDown } from 'react-icons/fi';
 import logo from '../assets/logo.png';
@@ -148,6 +148,7 @@ const Header = () => {
           to="/" 
           className="flex items-center relative z-20 -ml-2" 
           aria-label="Cyinov home page"
+          onClick={() => window.scrollTo(0, 0)}
         >
           <div className="p-2 flex items-center focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2 rounded-lg outline-none">
             <img 
@@ -212,7 +213,10 @@ const Header = () => {
                     <Link 
                       to={service.link} 
                       className="flex items-center px-4 py-2.5 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:text-primary-600 dark:hover:text-primary-400 transition-colors outline-none focus-visible:bg-neutral-100 focus-visible:dark:bg-neutral-700 focus-visible:text-primary-600 focus-visible:dark:text-primary-400"
-                      onClick={() => setIsServicesOpen(false)}
+                      onClick={() => {
+                        setIsServicesOpen(false);
+                        window.scrollTo(0, 0);
+                      }}
                       role="menuitem"
                     >
                       <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mr-3 flex-shrink-0">
@@ -286,8 +290,14 @@ const Header = () => {
             
             {/* Navigation links */}
             <nav className="flex flex-col space-y-1.5">
-              <MobileNavLink to="/" onClick={() => setIsMenuOpen(false)}>Home</MobileNavLink>
-              <MobileNavLink to="/about" onClick={() => setIsMenuOpen(false)}>About</MobileNavLink>
+              <MobileNavLink to="/" onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}>Home</MobileNavLink>
+              <MobileNavLink to="/about" onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}>About</MobileNavLink>
               
               {/* Mobile services section */}
               <div className="py-2">
@@ -300,7 +310,10 @@ const Header = () => {
                       <Link 
                         to={service.link} 
                         className="flex items-center px-4 py-3 text-sm text-neutral-700 dark:text-neutral-200 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-                        onClick={() => setIsMenuOpen(false)}
+                        onClick={() => {
+                          setIsMenuOpen(false);
+                          window.scrollTo(0, 0);
+                        }}
                       >
                         <div className="w-8 h-8 rounded-full bg-primary-50 dark:bg-primary-900/20 flex items-center justify-center mr-3">
                           <service.icon className="text-primary-600 dark:text-primary-400" />
@@ -315,13 +328,22 @@ const Header = () => {
                 </ul>
               </div>
               
-              <MobileNavLink to="/why-choose-us" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink to="/why-choose-us" onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}>
                 Why Choose Us
               </MobileNavLink>
-              <MobileNavLink to="/team" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink to="/team" onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}>
                 Team
               </MobileNavLink>
-              <MobileNavLink to="/faq" onClick={() => setIsMenuOpen(false)}>
+              <MobileNavLink to="/faq" onClick={() => {
+                setIsMenuOpen(false);
+                window.scrollTo(0, 0);
+              }}>
                 FAQ
               </MobileNavLink>
             </nav>
@@ -331,7 +353,10 @@ const Header = () => {
               <Link 
                 to="/contact" 
                 className="flex items-center justify-center w-full py-3 px-4 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg shadow-soft hover:shadow-medium transition-all"
-                onClick={() => setIsMenuOpen(false)}
+                onClick={() => {
+                  setIsMenuOpen(false);
+                  window.scrollTo(0, 0);
+                }}
               >
                 Contact Us
               </Link>
@@ -344,24 +369,33 @@ const Header = () => {
 };
 
 // Desktop NavLink component
-const NavLink = ({ to, children }) => (
-  <Link 
-    to={to} 
-    className="px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-  >
-    {children}
-  </Link>
-);
+const NavLink = ({ to, children }) => {
+  const scrollToTop = () => {
+    window.scrollTo(0, 0);
+  };
+  
+  return (
+    <Link 
+      to={to} 
+      className="px-3 py-2 text-sm font-medium text-neutral-700 dark:text-neutral-200 hover:text-primary-600 dark:hover:text-primary-400 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+      onClick={scrollToTop}
+    >
+      {children}
+    </Link>
+  );
+};
 
 // Mobile NavLink component
-const MobileNavLink = ({ to, children, onClick }) => (
-  <Link 
-    to={to} 
-    className="flex items-center px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
-    onClick={onClick}
-  >
-    {children}
-  </Link>
-);
+const MobileNavLink = ({ to, children, onClick }) => {
+  return (
+    <Link 
+      to={to} 
+      className="flex items-center px-4 py-3 text-sm font-medium text-neutral-800 dark:text-neutral-100 hover:bg-neutral-100 dark:hover:bg-neutral-800 rounded-lg transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary-500 focus-visible:ring-offset-2"
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+};
 
 export default Header;

@@ -73,7 +73,7 @@ const TermsOfService = () => {
           <section className="mb-6">
             <h2 className="text-2xl font-display font-medium text-neutral-900 dark:text-white mb-4">5. Contact Us</h2>
             <p className="text-neutral-700 dark:text-neutral-300">
-              In order to resolve a complaint regarding the website or to receive further information regarding use of the website, please contact us at <a href="mailto:legal@cyinov.com" className="text-primary-600 dark:text-primary-400 hover:underline">legal@cyinov.com</a> or by mail at: Cyinov, 123 Business Street, Tech City, TC 12345, Country.
+              In order to resolve a complaint regarding the website or to receive further information regarding use of the website, please contact us at <a href="mailto:info@cyinov.com" className="text-primary-600 dark:text-primary-400 hover:underline">info@cyinov.com</a>.
             </p>
           </section>
         </div>

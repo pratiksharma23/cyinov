@@ -23,7 +23,7 @@ const AboutHero = () => {
             Transforming Business Landscapes Through Strategic Excellence
           </h1>
           <p className="text-lg text-white/80 max-w-3xl backdrop-blur-sm bg-white/10 p-4 rounded-lg">
-            At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2023, we've established ourselves as a dynamic force in the consulting industry.
+            At Cyinov Consulting, we are dedicated to redefining business consulting by offering comprehensive solutions that bridge the gap between vision and execution. Founded in 2025, we've established ourselves as a dynamic force in the consulting industry.
           </p>
         </div>
       </div>

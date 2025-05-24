@@ -7,11 +7,10 @@ import { FaArrowRight, FaCogs, FaGlobe, FaRegLightbulb } from 'react-icons/fa';
 import Testimonials from './Testimonials';
 
 // Import background images
-import heroBg from '../assets/hero-bg.jpg';
 import teamBg from '../assets/OurTeam.jpg';
 import companyBg from '../assets/OurCompany.jpg';
-import visionBg from '../assets/OurVision.png';
-import servicesBg from '../assets/OurServices.png';
+import visionBg from '../assets/OurVision.jpg';
+import servicesBg from '../assets/OurServices.jpg';
 import marketBg from '../assets/market.jpg';
 import legalBg from '../assets/legal.jpg';
 import taxBg from '../assets/tax.jpg';
@@ -23,7 +22,7 @@ const defaultHeroContent = {
   id: 'default',
   title: "Welcome to Cyinov Consulting",
   description: "Empowering businesses with innovative solutions and strategic excellence",
-  background: heroBg,
+  background: companyBg,
   buttonText: "Explore Our Services"
 };
 
@@ -164,7 +163,7 @@ const Hero = () => {
       {/* Corzo-style Hero Section with full height */}
       <section 
         ref={heroRef}
-        className="relative hero-section"
+        className="relative hero-section flex flex-col"
         aria-label="Hero section"
       >
         {/* Default Background Image with optimized loading */}
@@ -203,8 +202,8 @@ const Hero = () => {
           </div>
         ))}        
 
-        {/* Hero Content - using Corzo-style centered approach */}
-        <div className="relative min-h-[80vh] z-10 pb-8 flex items-end">
+        {/* Hero Content - bottom aligned approach */}
+        <div className="relative min-h-[100vh] z-10 pb-8 flex flex-col justify-end">
           <div className="container mx-auto">
             {/* Main Hero Content - improved animation and accessibility */}
             <div className={`flex flex-col items-center text-center transition-opacity duration-1000 ease-out mb-8 ${isVisible ? 'opacity-100' : 'opacity-0'}`}>
